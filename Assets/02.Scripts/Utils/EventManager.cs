@@ -94,5 +94,6 @@ public class EventManager<T>
         {
             thisEvent?.Invoke(param);
         }
+        EventManager.TriggerEvent(eventName);
     }
 }
