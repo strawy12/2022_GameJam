@@ -47,6 +47,8 @@ public class ThrowedTower : MonoBehaviour
 
             _force = Mathf.Clamp(_force, 0f, _maxForce);
 
+            float angle = Mathf.Atan2(-_throwDir.y, -_throwDir.x) * Mathf.Rad2Deg - 90f;
+            _currentTower.ChangeAngle(angle);
             _throwLine.DrawGuideLine(_currentTower.Rigid, transform.position, -_throwDir * _force, 300);
         }
 

@@ -11,7 +11,7 @@ public class PlayerData
 
     public List<TowerStat> towerStatDataList;
     public int currentRound;
-
+    public int gold;
     public PlayerData(float soundVolume)
     {
         effectSoundVolume = soundVolume;
@@ -19,6 +19,7 @@ public class PlayerData
         isTutorial = false;
         towerStatDataList = new List<TowerStat>();
         currentRound = 0;
+        gold = 0;
 
     }
 }

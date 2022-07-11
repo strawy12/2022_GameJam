@@ -10,11 +10,14 @@ public class TowerStat
     public int level;
     public bool isLock;
 
+    public int needGold;
+
     public TowerStat(int num)
-    {
+    { 
         towerNum = num;
         damage = 1;
         level = 0;
         isLock = true;
+        needGold = 100;
     }
 }

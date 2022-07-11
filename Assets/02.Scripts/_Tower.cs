@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class _Tower : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     private bool _isThrow;
+
+    [SerializeField] private LayerMask _targetLayer;
 
     public void Init()
     {
@@ -34,6 +37,22 @@ public class _Tower : MonoBehaviour
     {
         if (_isThrow == false) return;
         float angle = Mathf.Atan2(_rigidBody.velocity.y, _rigidBody.velocity.x) * Mathf.Rad2Deg - 90f;
+        ChangeAngle(angle);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(((1<<collision.gameObject.layer)& _targetLayer) != 0)
+        {
+            _rigidBody.velocity = Vector3.zero;
+            _rigidBody.isKinematic = true;
+            _isThrow = false;
+            EventManager.TriggerEvent(Constant.END_THROW_TOWER);
+        }
+    }
+
+    internal void ChangeAngle(float angle)
+    {
         _spriteRenderer.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 }

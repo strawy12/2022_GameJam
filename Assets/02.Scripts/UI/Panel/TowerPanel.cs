@@ -10,6 +10,7 @@ public class TowerPanel : MonoBehaviour
     [SerializeField] private Text _nameText;
     [SerializeField] private Text _infoText;
     [SerializeField] private Text _explanationText;
+    [SerializeField] private UpgradeButton _upgradeBtn;
 
     private TowerData _currentData;
 
@@ -21,7 +22,20 @@ public class TowerPanel : MonoBehaviour
         _nameText.text = $"Lv.{_currentData.towerStat.level.ToString()}{_currentData.towerName}";
         _infoText.text = _currentData.towerSkillExplanation;
         _explanationText.text = $"Atk : {_currentData.towerStat.damage.ToString()} \n Weight : {_currentData.weight.ToString()}";
+        _upgradeBtn.text = $"°­È­/n{_currentData.towerStat.needGold} Gold";
 
+        SetUpgradeButton();
+        UIManager.Inst.AddTowerPanel(this);
         gameObject.SetActive(true);
+    }
+
+    public void UpgradeTower()
+    {
+
+    }
+
+    public void SetUpgradeButton()
+    {
+        _upgradeBtn.interactable = DataManager.Inst.CurrentPlayer.gold <= _currentData.towerStat.needGold;
     }
 }
