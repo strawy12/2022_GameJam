@@ -9,10 +9,16 @@ public class PlayerData
 
     public bool isTutorial;
 
+    public List<TowerStat> towerStatDataList;
+    public int currentRound;
+
     public PlayerData(float soundVolume)
     {
         effectSoundVolume = soundVolume;
         bgmSoundVolume = soundVolume;
         isTutorial = false;
+        towerStatDataList = new List<TowerStat>();
+        currentRound = 0;
+
     }
 }

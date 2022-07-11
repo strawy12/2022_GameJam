@@ -1,0 +1,32 @@
+﻿{
+    "effectSoundVolume": 0.5,
+    "bgmSoundVolume": 0.5,
+    "isTutorial": false,
+    "towerStatDataList": [
+        {
+            "towerNum": 1,
+            "damage": 1,
+            "level": 0,
+            "isLock": true
+        },
+        {
+            "towerNum": 2,
+            "damage": 1,
+            "level": 0,
+            "isLock": true
+        },
+        {
+            "towerNum": 3,
+            "damage": 1,
+            "level": 0,
+            "isLock": true
+        },
+        {
+            "towerNum": 4,
+            "damage": 1,
+            "level": 0,
+            "isLock": true
+        }
+    ],
+    "currentRound": 0
+}
