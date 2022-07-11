@@ -19,6 +19,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         new PoolManager(transform);
+        CreatePool();
     }
 
     private void CreatePool()

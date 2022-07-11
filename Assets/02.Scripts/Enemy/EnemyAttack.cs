@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public abstract class EnemyAttack : MonoBehaviour
 {
     protected EnemyAIBrain _enemyBrain;
-    protected Enemy _enemy;
+    protected EnemyAttack _enemy;
 
     public float attackDelay = 1;
 
@@ -17,7 +17,7 @@ public abstract class EnemyAttack : MonoBehaviour
     public UnityEvent AttackFeedback;
     protected virtual void Awake()
     {
-        _enemy = GetComponent<Enemy>();
+        _enemy = GetComponent<EnemyAttack>();
         _enemyBrain = GetComponent<EnemyAIBrain>();
     }
 
@@ -26,6 +26,7 @@ public abstract class EnemyAttack : MonoBehaviour
         _waitBeforeNextAttack = true;
         yield return new WaitForSeconds(attackDelay);
         _waitBeforeNextAttack = false;
+        EndOfAttackAnimation();
     }
 
     public void Reset()
@@ -35,13 +36,12 @@ public abstract class EnemyAttack : MonoBehaviour
 
     public void EndOfAttackAnimation()
     {
-
+        _enemyBrain.ActionData.attack = false;
     }
     public virtual void HitMotionPlay()
     {
 
     }
-
     public Transform GetTarget()
     {
         return _enemyBrain.target;

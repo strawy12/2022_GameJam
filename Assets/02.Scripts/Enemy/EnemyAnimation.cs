@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimation : MonoBehaviour
 {
+    public UnityEvent OnEndDieAnimation;
     protected readonly int _attackHashStr = Animator.StringToHash("Attack");
     protected readonly int _deathHashStr = Animator.StringToHash("Dead");
     protected readonly int _walkHashStr = Animator.StringToHash("Walk");
 
     protected Animator _agentAnimator;
     protected EnemyAIBrain _enemyAIBrain;
+
     protected virtual void Awake()
     {
         _enemyAIBrain = transform.parent.GetComponent<EnemyAIBrain>();
@@ -32,5 +36,8 @@ public class EnemyAnimation : MonoBehaviour
     {
         _agentAnimator.SetTrigger(_deathHashStr);
     }
-
+    public void EndDieAnimation()
+    {
+        OnEndDieAnimation?.Invoke();
+    }
 }

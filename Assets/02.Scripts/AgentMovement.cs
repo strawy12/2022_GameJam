@@ -6,7 +6,7 @@ public class AgentMovement : MonoBehaviour
 {
     private Rigidbody2D _rigidbody;
 
-    [Range(1, 10)]
+    [Range(0, 10)]
     public float maxSpeed = 5;
 
     [Range(0.1f, 100f)]
