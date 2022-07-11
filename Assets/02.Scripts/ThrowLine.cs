@@ -12,6 +12,11 @@ public class ThrowLine : MonoBehaviour
         _lineRenderer = GetComponent<LineRenderer>();
     }
 
+    public void ClearLine()
+    {
+        _lineRenderer.positionCount = 0;
+    }
+
     public void DrawGuideLine(Rigidbody2D rigid, Vector2 pos, Vector2 velocity, int steps)
     {
         Vector2[] posList = CalcDrawPoint(rigid, pos, velocity, steps);

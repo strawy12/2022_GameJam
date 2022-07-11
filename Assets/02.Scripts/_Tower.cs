@@ -10,5 +10,11 @@ public class _Tower : MonoBehaviour
     private Collider2D _collider;
     public Collider2D Collider => _collider;
 
-
+    public void Init()
+    {
+        if (_rigidBody == null)
+            _rigidBody = GetComponent<Rigidbody2D>();
+        if (_collider == null)
+            _collider = GetComponent<Collider2D>();
+    }
 }

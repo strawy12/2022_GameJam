@@ -4,27 +4,37 @@ using UnityEngine;
 
 public class ThrowedTower : MonoBehaviour
 {
+    [SerializeField] private float _reloadDelay;   
     [SerializeField] private float _maxForce;
     [SerializeField] private float _forceOffset;
-    [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private  _Tower _towerPref;
+    [SerializeField] private ThrowLine _throwLine = null;
     
-
     private float _force;
     private Camera _mainCam;
-    [SerializeField] private ThrowLine _throwLine = null;
 
     private Vector2 _throwDir;
     private bool _isPressed = false;
     private Vector2 _startMousePos;
 
+    private _Tower _currentTower;
+    private bool _isReloading;
+
     private void Awake()
     {
         _mainCam = Define.MainCam;
-        _rigidbody.isKinematic = true;
+
+        _currentTower = Instantiate(_towerPref, transform.position, Quaternion.identity);
+        _currentTower.Init();
+        _currentTower.Rigid.isKinematic = true;
+        _currentTower.gameObject.SetActive(true);
+
+        _isReloading = false;
     }
 
     private void Update()
     {
+        if (_isReloading) return;
         if (_isPressed)
         {
             Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
@@ -36,7 +46,7 @@ public class ThrowedTower : MonoBehaviour
 
             _force = Mathf.Clamp(_force, 0f, _maxForce);
 
-            _throwLine.DrawGuideLine(_rigidbody, transform.position, -_throwDir * _force, 300);
+            _throwLine.DrawGuideLine(_currentTower.Rigid, transform.position, -_throwDir * _force, 300);
         }
 
 
@@ -44,17 +54,39 @@ public class ThrowedTower : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (_isReloading) return;
+
         _isPressed = true;
-        _rigidbody.isKinematic = true;
+        _currentTower.Rigid.isKinematic = true;
         _startMousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnMouseUp()
     {
+        if (_isReloading) return;
+
         _isPressed = false;
-        _rigidbody.isKinematic = false;
-        _rigidbody.velocity = (-_throwDir * _force);
+        _currentTower.Collider.enabled = true;
+        _currentTower.Rigid.isKinematic = false;
+        _currentTower.Rigid.velocity = (-_throwDir * _force);
         _force = 0f;
+        _currentTower = null;
+        _isReloading = true;
+        _throwLine.ClearLine();
+        StartCoroutine(Release());
     }
 
+    private IEnumerator Release()
+    {
+        yield return new WaitForSeconds(_reloadDelay);
+
+        // 풀매니저 사용
+        _currentTower = Instantiate(_towerPref, transform.position, Quaternion.identity);
+        _currentTower.Init();
+        _currentTower.Collider.enabled = false;
+        _currentTower.Rigid.isKinematic = true;
+        _currentTower.gameObject.SetActive(true);
+
+        _isReloading = false;
+    }
 }
