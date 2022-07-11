@@ -1176,6 +1176,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f6ba811b46ac744bd6c837e8c0eb65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEndDieAnimation:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5619880941258787304}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2014082814451202186
 GameObject:
   m_ObjectHideFlags: 0
