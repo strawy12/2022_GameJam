@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : PoolableMono
+public abstract class Tower : PoolableMono
 {
-    public Animator anim;
-
     #region TowerData
     [SerializeField] protected TowerStatSO _towerStatData;
 
@@ -52,6 +50,7 @@ public class Tower : PoolableMono
 
     public virtual void DestroyTower()
     {
+        return;
         PoolManager.Instance.Push(this);
     }
 
@@ -70,7 +69,6 @@ public class Tower : PoolableMono
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
         {
             isStop = true;
-            Debug.Log(_rigidbody + name);
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             
             if (_towerStatData.towerType == ETowerType.PassiveType)
@@ -78,7 +76,7 @@ public class Tower : PoolableMono
                 UseSkill();
             }
         }
-        else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !isStop)
         {
             
         }

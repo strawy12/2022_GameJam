@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class StoneTower : Tower
 {
-    private BoxCollider2D _exploreCol;
+    [SerializeField] private Animator anim;
+    [SerializeField] private BoxCollider2D _exploreCol;
 
     protected override void Awake()
     {
         base.Awake();
         anim.SetBool("isExplore", false);
-
-        _exploreCol = GetComponent<BoxCollider2D>();
     }
 
     IEnumerator ExPlosionStoneTower()
@@ -20,5 +19,10 @@ public class StoneTower : Tower
         yield return new WaitForSeconds(1f);
         
         DestroyTower();
+    }
+
+    public override void UseSkill()
+    {
+        StartCoroutine(ExPlosionStoneTower());
     }
 }

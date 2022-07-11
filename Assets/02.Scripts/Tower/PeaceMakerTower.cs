@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PeaceMakerTower : Tower
 {
-    private BoxCollider2D _peaceCol;
+    [SerializeField] private BoxCollider2D _peaceCol;
 
     protected override void Awake()
     {
         base.Awake();
-
-        _peaceCol = GetComponent<BoxCollider2D>();
     }
 
     IEnumerator PeaceMakerAbilityTower()
     {
+        Debug.Log("ภ฿ตส");
+
         GameManager.Inst.isPeaceMonster = true;
         yield return new WaitForSeconds(3f);
 
@@ -22,8 +22,9 @@ public class PeaceMakerTower : Tower
         DestroyTower();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public override void UseSkill()
     {
         StartCoroutine(PeaceMakerAbilityTower());
     }
+
 }

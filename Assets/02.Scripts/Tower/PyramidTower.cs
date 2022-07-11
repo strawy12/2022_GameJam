@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class PyramidTower : Tower
 {
-
-   private BoxCollider2D _attackCol;
+    [SerializeField] private EdgeCollider2D _attackCol;
 
     protected override void Awake()
     {
         base.Awake();
-        anim.SetBool("isExplore", false);
+        _attackCol.enabled = false;
+    }
 
-        _attackCol = GetComponent<BoxCollider2D>();
+    private void Update()
+    {
+        if(_attackCol.CompareTag("Enemy"))
+        {
+            // 몬스터한테 데미지주기, 속도 느리게하기
+        }
     }
 
     IEnumerator ExPlosionEffect()
     {
-        anim.SetBool("isExplore", true);
         yield return new WaitForSeconds(1f);
-        
+        _attackCol.enabled = true;
         DestroyTower();
+    }
+
+    public override void UseSkill()
+    {
+        StartCoroutine(ExPlosionEffect());
     }
 }
