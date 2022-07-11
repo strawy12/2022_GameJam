@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class EnemyAnimation : MonoBehaviour
 {
     public UnityEvent OnEndDieAnimation;
+    public UnityEvent OnActiveAttacck;
     protected readonly int _attackHashStr = Animator.StringToHash("Attack");
     protected readonly int _deathHashStr = Animator.StringToHash("Dead");
     protected readonly int _walkHashStr = Animator.StringToHash("Walk");
@@ -39,5 +40,9 @@ public class EnemyAnimation : MonoBehaviour
     public void EndDieAnimation()
     {
         OnEndDieAnimation?.Invoke();
+    }
+    public void ActiveAttack()
+    {
+        OnActiveAttacck?.Invoke();
     }
 }

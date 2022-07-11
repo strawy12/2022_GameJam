@@ -34,11 +34,6 @@ public class PoolManager
 
     public void Push(PoolableMono obj)
     {
-        Debug.Log(obj.name.Trim());
-        foreach(var key in _pools.Keys)
-        {
-            Debug.Log(key);
-        }
         _pools[obj.name.Trim()].Push(obj); 
     }
 }
