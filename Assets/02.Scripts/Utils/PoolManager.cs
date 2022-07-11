@@ -15,6 +15,7 @@ public class PoolManager
         _trmParent = trmParent;
         Instance = this;
     }
+
     public void CreatePool(PoolableMono prefab, int count = 10)
     {
         Pool<PoolableMono> pool = new Pool<PoolableMono>(prefab, _trmParent, count);

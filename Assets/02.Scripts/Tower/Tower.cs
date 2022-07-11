@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tower : PoolableMono
 {
+    public Animator anim;
+
     #region TowerData
     [SerializeField] protected TowerStatSO _towerStatData;
 
@@ -35,6 +37,7 @@ public class Tower : PoolableMono
     protected bool isStop = false;
     protected Transform baseTrm;
     protected Rigidbody2D _rigidbody;
+
     protected virtual void Awake()
     {
         baseTrm = transform.Find("baseTransform");
@@ -62,12 +65,18 @@ public class Tower : PoolableMono
         
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision) 
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
         {
             isStop = true;
+            Debug.Log(_rigidbody + name);
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            
+            if (_towerStatData.towerType == ETowerType.PassiveType)
+            {
+                UseSkill();
+            }
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {

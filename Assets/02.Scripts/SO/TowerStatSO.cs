@@ -10,6 +10,7 @@ public enum ETowerType
 }
 
 [CreateAssetMenu(menuName = "SO/Tower/Stats")]
+
 public class TowerStatSO : ScriptableObject
 {
     public int damage = 1;
