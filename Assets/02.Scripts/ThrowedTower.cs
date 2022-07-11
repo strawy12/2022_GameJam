@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -65,6 +66,8 @@ public class ThrowedTower : MonoBehaviour
     {
         if (_isReloading) return;
 
+        EventManager<Transform>.TriggerEvent(Constant.START_THROW_TOWER, _currentTower.transform);
+        _currentTower.StartThrow();
         _isPressed = false;
         _currentTower.Collider.enabled = true;
         _currentTower.Rigid.isKinematic = false;
@@ -73,6 +76,7 @@ public class ThrowedTower : MonoBehaviour
         _currentTower = null;
         _isReloading = true;
         _throwLine.ClearLine();
+
         StartCoroutine(Release());
     }
 

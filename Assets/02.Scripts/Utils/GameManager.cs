@@ -6,4 +6,6 @@ using static Define;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+
+
 }
