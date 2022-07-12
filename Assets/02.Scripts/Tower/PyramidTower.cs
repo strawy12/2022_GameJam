@@ -4,31 +4,28 @@ using UnityEngine;
 
 public class PyramidTower : Tower
 {
-    [SerializeField] private EdgeCollider2D _attackCol;
+    [SerializeField] private PyramidSwamp _swampObj;
 
     protected override void Awake()
     {
         base.Awake();
-        _attackCol.enabled = false;
-    }
-
-    private void Update()
-    {
-        if(_attackCol.CompareTag("Enemy"))
-        {
-            // 몬스터한테 데미지주기, 속도 느리게하기
-        }
     }
 
     IEnumerator ExPlosionEffect()
     {
+        _swampObj.Init(transform.position.x, transform.position.y - .9f);
+        Instantiate(_swampObj); // 게임매니저 풀로 피라미드Swamp늪생성
         yield return new WaitForSeconds(1f);
-        _attackCol.enabled = true;
         DestroyTower();
     }
 
     public override void UseSkill()
     {
         StartCoroutine(ExPlosionEffect());
+    }
+
+    private void OnMouseDown()
+    {
+        UseSkill();
     }
 }

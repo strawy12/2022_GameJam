@@ -17,6 +17,11 @@ public class ElfArrow : PoolableMono
         _targetDir = dir;
         _arrowForce = force;
 
+        float seta = Mathf.Atan2(_targetDir.y, _targetDir.x);
+        float rot = seta * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0, 0, rot);
+
         ShootingArrow();
     }
 
@@ -29,8 +34,6 @@ public class ElfArrow : PoolableMono
     {
         if (_arrowRigidbody == null)
             _arrowRigidbody = GetComponent<Rigidbody2D>();
-
-        Debug.Log(11);
     }
 
 }

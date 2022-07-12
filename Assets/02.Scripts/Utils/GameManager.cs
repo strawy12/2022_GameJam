@@ -6,8 +6,7 @@ using static Define;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-
-    public bool isPeaceMonster = false;
+    public bool isClick;
 
     [SerializeField] private float _cameraSpeed = 5f;
     [SerializeField] private float _duration = 0f;

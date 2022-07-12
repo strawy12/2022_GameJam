@@ -9,11 +9,8 @@ public class EnemyTest : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Inst.isPeaceMonster)
-        {
-
-            return;
-        }
+        //if (GameManager.Inst.isPeaceMonster)
+            //return;
 
         transform.Translate(Vector3.left * Time.deltaTime * moveSpeed);    
     }

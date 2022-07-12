@@ -686,60 +686,6 @@ MonoBehaviour:
   _shootDelay: 0.05
   _shootPosOffset: 0.5
   _shootForce: 100
---- !u!1 &719790628
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 719790630}
-  - component: {fileID: 719790629}
-  m_Layer: 0
-  m_Name: PyramidSkill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!68 &719790629
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719790628}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.690568, y: -0.495008}
-  - {x: 0.4643011, y: -0.4974794}
-  - {x: 2.5484447, y: -0.49016356}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
---- !u!4 &719790630
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719790628}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2031193715}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103283899 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 105542192999226449, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
@@ -814,11 +760,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.4
+      value: 7.29
       objectReference: {fileID: 0}
     - target: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.59
+      value: -1.68
       objectReference: {fileID: 0}
     - target: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1058,6 +1004,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.11413, y: 1.5012137}
   m_EdgeRadius: 0
+--- !u!1 &1480589903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1480589904}
+  m_Layer: 0
+  m_Name: swampPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1480589904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480589903}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.486, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2031193715}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1752377497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1083,11 +1059,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.79
+      value: 4.44
       objectReference: {fileID: 0}
     - target: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.55
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1273,7 +1249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerStatData: {fileID: 11400000, guid: eb0933b8e45c3814e995fc0e2ed18f98, type: 2}
-  _attackCol: {fileID: 719790629}
+  _swampObj: {fileID: 9173671696485567779, guid: 3e703bed807d0fe4db7d94b9afe9a9ab, type: 3}
 --- !u!4 &2031193715 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}

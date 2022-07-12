@@ -16,12 +16,10 @@ public class PeaceMakerTower : Tower
     {
         Debug.Log("ภ฿ตส");
 
-        GameManager.Inst.isPeaceMonster = true;
         _peaceCol.enabled = true;
         yield return new WaitForSeconds(3f);
 
         _peaceCol.enabled = false;
-        GameManager.Inst.isPeaceMonster = false;
         DestroyTower();
     }
 

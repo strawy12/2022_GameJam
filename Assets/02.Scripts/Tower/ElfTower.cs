@@ -11,6 +11,7 @@ public class ElfTower : Tower
     [SerializeField] private float _shootDelay;
     [SerializeField] private float _shootPosOffset;
     [SerializeField] private float _shootForce;
+
     protected override void Awake()
     {
         base.Awake();
@@ -33,10 +34,13 @@ public class ElfTower : Tower
         }
     }
 
-    [ContextMenu("스킬사용")]
     public override void UseSkill()
     {
         StartCoroutine(ElfTowerSkill());
     }
 
+    private void OnMouseDown()
+    {
+        UseSkill();
+    }
 }

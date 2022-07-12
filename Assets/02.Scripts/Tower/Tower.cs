@@ -75,6 +75,16 @@ public abstract class Tower : PoolableMono
             {
                 UseSkill();
             }
+            if (_towerStatData.towerType == ETowerType.ActiveType && GameManager.Inst.isClick)
+            {
+                //Debug.Log("ÀÌ³ðºÁ¶ó");
+                //UseSkill();
+                //GameManager.Inst.isClick = false;
+            }
+            if (_towerStatData.towerType == ETowerType.FixingType)
+            {
+                UseSkill();
+            }
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !isStop)
         {

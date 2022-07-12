@@ -28,6 +28,7 @@ public class FireTower : Tower
 
     IEnumerator ExPlosionFireTower()
     {
+        Debug.Log("몬스터닿음");
         // 범위 내 몬스터 죽이기
         return null;
     }
