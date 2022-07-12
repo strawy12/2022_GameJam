@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ThrowedTower : MonoBehaviour
 {
@@ -107,7 +108,7 @@ public class ThrowedTower : MonoBehaviour
 
     private Tower GetTower()
     {
-        if (_nextTowerList.Count == 0)
+        if (_nextTowerList.Count <= 4)
             SetTowerList();
 
         Tower tower = _nextTowerList[0];
@@ -130,21 +131,27 @@ public class ThrowedTower : MonoBehaviour
 
     private void SetTowerList()
     {
-        if (_nextTowerList.Count != 0) return;
-
-        _nextTowerList.Clear();
-
-        foreach(var data in DataManager.Inst.CurrentPlayer.towerDataList)
+        List<string> towerList = new List<string>();
+        foreach (var data in DataManager.Inst.CurrentPlayer.towerDataList)
         {
             if (data.isLock)
                 continue;
 
-            Tower tower = PoolManager.Instance.Pop(data.prefabName) as Tower;
-            _nextTowerList.Add(tower);
+            string towerName = data.prefabName;
+            towerList.Add(towerName);
         }
 
-        var rnd = new System.Random();
-        _nextTowerList = _nextTowerList.OrderBy(item => rnd.Next()).ToList();
-    }
+        while(_nextTowerList.Count < 7)
+        {
+            var rnd = new System.Random();
+            towerList = towerList.OrderBy(item => rnd.Next()).ToList();
 
+            for(int i = 0; i < towerList.Count; i++)
+            {
+                Tower tower = PoolManager.Instance.Pop(towerList[i]) as Tower;
+                _nextTowerList.Add(tower);
+            }
+        }
+
+    }
 }
