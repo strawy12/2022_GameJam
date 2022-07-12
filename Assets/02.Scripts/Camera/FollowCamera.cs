@@ -7,6 +7,8 @@ using DG.Tweening;
 public class FollowCamera : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera _virtualCam;
+    [SerializeField] private float _followDelay;
+
     private Camera _currentCam;
 
     private void Awake()
@@ -21,9 +23,16 @@ public class FollowCamera : MonoBehaviour
 
     public void StartFollow()
     {
+        StartCoroutine(FollowDelay());
+    }
+
+    private IEnumerator FollowDelay()
+    {
+        yield return new WaitForSeconds(_followDelay);
         _virtualCam.enabled = true;
         _currentCam.enabled = true;
     }
+
 
     public void EndFollow()
     {

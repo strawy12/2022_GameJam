@@ -75,6 +75,7 @@ public abstract class Tower : PoolableMono
     public virtual void StartThrow()
     {
         _isThrow = true;
+        transform.SetParent(null);
         _particle.Play();
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision)

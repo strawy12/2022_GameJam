@@ -52,6 +52,7 @@ public class GameManager : MonoSingleton<GameManager>
         _followCamera.StartFollow();
     }
 
+
     public void EndFollow()
     {
         _followCamera.EndFollow();
