@@ -6,7 +6,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
 {
     [SerializeField] private EnemyDataSO _enemyData;
     public EnemyDataSO EnemyData => _enemyData;
-
+    protected WaveController _waveController;
     protected bool _isDead = false;
     protected AgentMovement _agentMovement;
     protected EnemyAnimation _enemyAnimation;
@@ -45,6 +45,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         if (Health <= 0)
         {
             _isDead = true;
+            _waveController.KillWaveMonster();
             _agentMovement.StopImmediatelly();
             _agentMovement.enabled = false;
             OnDie?.Invoke();
@@ -57,6 +58,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     private bool _isActive = false;
     private void Awake()
     {
+        _waveController = GameObject.Find("WaveController").GetComponent<WaveController>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _agentMovement = GetComponent<AgentMovement>();
         _enemyAnimation = transform.GetComponentInChildren<EnemyAnimation>();

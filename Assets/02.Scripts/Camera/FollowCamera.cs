@@ -52,7 +52,8 @@ public class FollowCamera : MonoBehaviour
         seq.Append(mainCam.DOShakePosition(0.5f, 1.5f, 10));
         seq.AppendInterval(_endCameraStayTime);
         seq.Append(mainCam.transform.DOMove(originPos, 0.75f));
-
+        seq.AppendCallback(() => GameManager.Inst.gameState = GameManager.GameState.Game);
+        
     }
 
 
