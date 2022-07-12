@@ -35,7 +35,9 @@ public class GameManager : MonoSingleton<GameManager>
     private void CreatePool()
     {
         foreach (PoolingPair pair in _initList.list)
+        {
             PoolManager.Instance.CreatePool(pair.prefab, pair.poolCnt);
+        }
     }
 
     public void SetGold(int gold)
@@ -49,6 +51,7 @@ public class GameManager : MonoSingleton<GameManager>
         _followCamera.SetTarget(target);
         _followCamera.StartFollow();
     }
+
 
     public void EndFollow()
     {
