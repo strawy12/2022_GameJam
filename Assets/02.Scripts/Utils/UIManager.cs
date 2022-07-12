@@ -43,7 +43,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(Define.MainCam.transform.DOMoveX(-2.1f, 0.75f));
+        seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(-2.1f,0,-10f), 0.75f));
         seq.Append(_upgradeUI.rectTransform.DOAnchorPosX(0f, 0.5f));
     }
     public void GoGameScene()
@@ -52,6 +52,6 @@ public class UIManager : MonoSingleton<UIManager>
         Sequence seq = DOTween.Sequence();
 
         seq.Append(_upgradeUI.rectTransform.DOAnchorPosX(-_upgradeUI.rectTransform.rect.width, 0.5f));
-        seq.Append(Define.MainCam.transform.DOMoveX(13f, 0.75f));
+        seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(13f, 0, -10f), 0.75f));
     }
 }

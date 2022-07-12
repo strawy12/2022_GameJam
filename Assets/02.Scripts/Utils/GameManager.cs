@@ -14,12 +14,14 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private FollowCamera _followCamera;
 
     public MainCameraMove MainCameraMove => _mainCameraMove;
+    public FollowCamera FollowCamera => _followCamera;
     
     public enum GameState
     {
         Game,
         UI,
-        Throwing
+        Throwing,
+        ThrowReady
     }
 
     public GameState gameState;
@@ -57,4 +59,6 @@ public class GameManager : MonoSingleton<GameManager>
     {
         _followCamera.EndFollow();
     }
+
+    
 }

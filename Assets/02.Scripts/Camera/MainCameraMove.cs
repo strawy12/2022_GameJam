@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,5 +46,15 @@ public class MainCameraMove : MonoBehaviour
             time -= Time.deltaTime;
 
         }
+    }
+
+    public Tween MoveCameraPos(Vector3 pos, float duration)
+    {
+        return _mainCam.transform.DOMove(pos, duration);
+    }
+
+    public void SetCameraPos(Vector3 pos)
+    {
+        _mainCam.transform.position = pos;
     }
 }
