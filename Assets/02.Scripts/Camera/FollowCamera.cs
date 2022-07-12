@@ -30,6 +30,7 @@ public class FollowCamera : MonoBehaviour
     {
         Camera mainCam = Define.MainCam;
         Vector3 originPos = mainCam.transform.position ;
+        Debug.Log(originPos);
 
         mainCam.transform.position = _currentCam.transform.position + Vector3.down;
 

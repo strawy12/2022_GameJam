@@ -20,6 +20,7 @@ public class GenerateNextTowerPanel : MonoBehaviour
         {
             panel = Instantiate(_nextTowerPanelTemp, _nextTowerPanelTemp.transform.parent);
             panel.name = _nextTowerPanelTemp.name;
+            panel.gameObject.SetActive(true);
         }
 
     }

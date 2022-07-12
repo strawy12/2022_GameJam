@@ -21,6 +21,7 @@ public class TowerData : ItemData
         
     public TowerData(TowerData data) : base(data)
     {
+        prefabName = data.prefabName;
         damage = data.damage;
         weight = data.weight;
         isLock = data.isLock;

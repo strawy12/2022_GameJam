@@ -150,6 +150,7 @@ public class ThrowedTower : MonoBehaviour
             for(int i = 0; i < towerList.Count; i++)
             {
                 Tower tower = PoolManager.Instance.Pop(towerList[i]) as Tower;
+                tower.gameObject.SetActive(false);
                 _nextTowerList.Add(tower);
             }
         }
