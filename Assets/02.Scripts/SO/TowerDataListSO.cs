@@ -3,21 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class TowerData
+public class TowerData : ItemData
 {
-    public int towerNum;
-    public string towerName;
-    public Sprite towerSprite;
-
-    [HideInInspector]
-    public TowerStat towerStat;
-
+    public int damage = 1;
     public float weight = 1;
     public ETowerType towerType = ETowerType.PassiveType;
-    
-    [TextArea]
-    public string towerSkillExplanation;
-
 }
 
 [CreateAssetMenu(menuName = "SO/DataList/TowerDataList")]

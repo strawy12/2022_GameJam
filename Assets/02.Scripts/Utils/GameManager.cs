@@ -6,20 +6,26 @@ using static Define;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-
     [SerializeField] private PoolListSO _initList = null;
+    [SerializeField] private MainCameraMove _mainCameraMove;
 
-    [SerializeField] private float _cameraSpeed = 5f;
-    [SerializeField] private float _duration = 0f;
+    public MainCameraMove MainCameraMove => _mainCameraMove;
+    
+    public enum GameState
+    {
+        Game,
+        UI,
+        Throwing
+    }
 
-    [SerializeField] private Transform _cameraTransform;
-
-    private float _currentDir = 0f;
+    public GameState gameState;
 
     private void Awake()
     {
         new PoolManager(transform);
         CreatePool();
+
+        gameState = GameState.Game;
     }
 
     private void CreatePool()
@@ -29,37 +35,6 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
 
-    public void CameraMove(float dir)
-    {
-        if (dir > 0)
-        {
-            _cameraTransform.Translate(Vector3.right * Time.deltaTime * _cameraSpeed);
-            _currentDir = 1;
-        }
-        else if (dir < 0)
-        {
-            _cameraTransform.Translate(Vector3.left * Time.deltaTime * _cameraSpeed);
-            _currentDir = -1;
-        }
-        else
-        {
-            StartCoroutine(ReturnCoroutine());
-        }
-    }
-
-    private IEnumerator ReturnCoroutine()
-    {
-        float time = _duration;
-        float moveSpeed = _cameraSpeed;
-
-        while (time > 0)
-        {
-            _cameraTransform.Translate(Vector3.right * _currentDir * Time.deltaTime * moveSpeed);
-            moveSpeed = Mathf.Lerp(0f, moveSpeed, time / _duration);
-            yield return null;
-            time -= Time.deltaTime;
-
-        }
-    }
+    
 
 }

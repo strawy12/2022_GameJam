@@ -7,16 +7,16 @@ using DG.Tweening;
 public class UIManager : MonoSingleton<UIManager>
 {
 
-    private List<TowerPanel> _towerPanelList = new List<TowerPanel>();
+    private List<UpgradePanel> _upgradePanelList = new List<UpgradePanel>();
 
-    public void AddTowerPanel(TowerPanel panel)
+    public void AddUpgradePanel(UpgradePanel panel)
     {
-        _towerPanelList.Add(panel);
+        _upgradePanelList.Add(panel);
     }
 
     public void AddGoldEvent()
     {
-        _towerPanelList.ForEach(panel => panel.SetUpgradeButton());
+        _upgradePanelList.ForEach(panel => panel.SetUpgradeButton());
     }
 
 }

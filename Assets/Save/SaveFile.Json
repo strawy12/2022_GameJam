@@ -30,6 +30,13 @@
             "level": 0,
             "isLock": true,
             "needGold": 100
+        },
+        {
+            "towerNum": 5,
+            "damage": 1,
+            "level": 0,
+            "isLock": true,
+            "needGold": 100
         }
     ],
     "currentRound": 0,
