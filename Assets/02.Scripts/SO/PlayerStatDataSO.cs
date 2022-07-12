@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerStatData : ItemData
 {
-    public enum PlayerStat { DamageFactor, ThrowDelay, MaxHp }
+    public enum EPlayerStat { DamageFactor, Critical, MaxHp }
 
-    public PlayerStat statType;
+    public EPlayerStat statType;
     public float value;
 
     public PlayerStatData(PlayerStatData data) : base(data)

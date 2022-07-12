@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Constant;
 
 public class PlayerStatPanel : UpgradePanel 
 {
@@ -10,6 +11,25 @@ public class PlayerStatPanel : UpgradePanel
 
         PlayerStatData statData = _currentData as PlayerStatData;
 
-        _infoText.text = $"{statData.statType.ToString()} : {statData.value.ToString()}";
+        string infoText = "";
+
+        switch (statData.statType)
+        {
+            case PlayerStatData.EPlayerStat.DamageFactor:
+                infoText = $"Atk Factor : {statData.value.ToString()}";
+                break;
+            case PlayerStatData.EPlayerStat.Critical:
+                infoText = $"Critical Percent : {statData.value.ToString()}%";
+                break;
+            case PlayerStatData.EPlayerStat.MaxHp:
+                infoText = $"Max Hp : {statData.value.ToString()}";
+                break;
+        }
+
+        _infoText.text = infoText;
+    }
+
+    public override void UpgradeItem()
+    {
     }
 }

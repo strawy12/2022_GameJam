@@ -7,7 +7,7 @@
             "itemNum": 0,
             "itemName": "돌 타워",
             "itemSprite": {
-                "instanceID": 43820
+                "instanceID": 20842
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -23,7 +23,7 @@
             "itemNum": 1,
             "itemName": "파이어 타워",
             "itemSprite": {
-                "instanceID": 43822
+                "instanceID": 20844
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -39,7 +39,7 @@
             "itemNum": 2,
             "itemName": "평화의 영웅상",
             "itemSprite": {
-                "instanceID": 43824
+                "instanceID": 20846
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -71,7 +71,7 @@
             "itemNum": 4,
             "itemName": "피라미드",
             "itemSprite": {
-                "instanceID": 43826
+                "instanceID": 20848
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -93,21 +93,21 @@
             },
             "itemLevel": 0,
             "needGold": 10,
-            "itemExplanation": "",
+            "itemExplanation": "타워의 고유 공격력에 곱연산이 들어갑니다.",
             "statType": 0,
             "value": 1.0
         },
         {
             "itemNum": 1,
-            "itemName": "장전속도",
+            "itemName": "크리티컬 확률",
             "itemSprite": {
                 "instanceID": 0
             },
             "itemLevel": 0,
             "needGold": 10,
-            "itemExplanation": "",
+            "itemExplanation": "크리티컬 데미지는 +100%(2배) 로 고정합니다",
             "statType": 1,
-            "value": 3.0
+            "value": 0.0
         },
         {
             "itemNum": 2,
@@ -117,7 +117,7 @@
             },
             "itemLevel": 0,
             "needGold": 10,
-            "itemExplanation": "",
+            "itemExplanation": "체력 회복으로 올릴 수 있는 최대 체력입니다\n기본적으로는 이 스탯의 70%만 기본 지급 됩니다.",
             "statType": 2,
             "value": 100.0
         }

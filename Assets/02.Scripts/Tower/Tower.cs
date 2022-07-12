@@ -3,8 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using static Constant;
+
 public abstract class Tower : PoolableMono
 {
+    [SerializeField] private int _towerNum;
+
+
     protected TowerData _towerData;
 
     protected Transform _baseTrm;
@@ -36,7 +41,7 @@ public abstract class Tower : PoolableMono
         _collider ??= transform.Find("VisualSprite").GetComponent<Collider2D>();
         _rigidbody ??= GetComponent<Rigidbody2D>();
 
-        _towerData ??= DataManager.Inst.CurrentPlayer.towerDataList.Find(tower => tower.prefabName.Equals(name));
+        _towerData ??= DataManager.Inst.CurrentPlayer.GetTowerData(_towerNum);
     }
 
     private void Start()
@@ -111,9 +116,27 @@ public abstract class Tower : PoolableMono
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !_isStop)
         {
             IHittable hittable = collision.GetComponent<IHittable>();
-            hittable?.GetHit(_towerData.damage, gameObject);
+            float damage = (_towerData.damage * DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.DamageFactor));
+
+            if (IsCritical())
+                damage *= CRITICAL_DAMAGE_FACTOR;
+
+            hittable?.GetHit((int)damage, gameObject);
             IKnockback knockback = collision.GetComponent<IKnockback>();
             knockback?.Knockback(Vector2.one, _towerData.knockbackPower,1f);
         }
+    }
+
+    private bool IsCritical()
+    {
+        float critical = UnityEngine.Random.value;
+        bool isCritical = false;
+
+        if (critical <= (DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.Critical) / CRITICAL_MAX_PERCENT))
+        {
+            isCritical = true;
+        }
+
+        return isCritical;
     }
 }

@@ -10,12 +10,24 @@ public class GameManager : MonoSingleton<GameManager>
     public bool isClick;
 
     [SerializeField] private PoolListSO _initList = null;
-    [SerializeField] private MainCameraMove _mainCameraMove;
     [SerializeField] private FollowCamera _followCamera;
 
-    public MainCameraMove MainCameraMove => _mainCameraMove;
+    private MainCameraMove _mainCameraMove;
+
+    public MainCameraMove MainCameraMove
+    {
+        get
+        {
+            if (_mainCameraMove == null)
+                _mainCameraMove = Define.MainCam.GetComponent<MainCameraMove>();
+
+            return _mainCameraMove;
+        }
+    }
+
+
     public FollowCamera FollowCamera => _followCamera;
-    
+
     public enum GameState
     {
         Game,
@@ -32,7 +44,8 @@ public class GameManager : MonoSingleton<GameManager>
         CreatePool();
 
         gameState = GameState.Game;
-    }
+        _mainCameraMove = Define.MainCam.GetComponent<MainCameraMove>();
+    }   
 
     private void CreatePool()
     {
@@ -60,5 +73,5 @@ public class GameManager : MonoSingleton<GameManager>
         _followCamera.EndFollow();
     }
 
-    
+
 }
