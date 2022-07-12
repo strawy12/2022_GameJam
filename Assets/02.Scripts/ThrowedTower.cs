@@ -8,7 +8,7 @@ public class ThrowedTower : MonoBehaviour
     [SerializeField] private float _reloadDelay;   
     [SerializeField] private float _maxForce;
     [SerializeField] private float _forceOffset;
-    [SerializeField] private  _Tower _towerPref;
+    [SerializeField] private Tower _towerPref;
     [SerializeField] private ThrowLine _throwLine = null;
     
     private float _force;
@@ -18,7 +18,7 @@ public class ThrowedTower : MonoBehaviour
     private bool _isPressed = false;
     private Vector2 _startMousePos;
 
-    private _Tower _currentTower;
+    private Tower _currentTower;
     private bool _isReloading;
 
     private void Awake()
@@ -87,7 +87,8 @@ public class ThrowedTower : MonoBehaviour
         yield return new WaitForSeconds(_reloadDelay);
 
         // 풀매니저 사용
-        _currentTower = Instantiate(_towerPref, transform.position, Quaternion.identity);
+        _currentTower = PoolManager.Instance.Pop(_towerPref.gameObject.name) as Tower;
+        _currentTower.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
         _currentTower.Init();
         _currentTower.Collider.enabled = false;
         _currentTower.Rigid.isKinematic = true;

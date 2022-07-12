@@ -41,6 +41,6 @@ public class ElfTower : Tower
 
     private void OnMouseDown()
     {
-        UseSkill();
+        UseSkill(); //화면을 누르면 스킬로 변경
     }
 }
