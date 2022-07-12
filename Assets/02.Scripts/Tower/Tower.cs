@@ -22,6 +22,8 @@ public abstract class Tower : PoolableMono
     public Rigidbody2D Rigid => _rigidbody;
     public Collider2D Collider => _collider;
 
+    public Action OnEndThrow;
+
     protected virtual void Awake()
     {
         StartInit();
@@ -101,8 +103,8 @@ public abstract class Tower : PoolableMono
                 UseSkill();
             }
 
+            OnEndThrow?.Invoke();
             GameManager.Inst.EndFollow();
-
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !_isStop)
         {
