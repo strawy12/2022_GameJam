@@ -4,18 +4,43 @@ using UnityEngine;
 
 public class PeaceMakerTower : Tower
 {
-    //[SerializeField] private BoxCollider2D _peaceCol;
+    public bool isSkill = false;
+
+    [SerializeField] private LayerMask _whatIsEnemy;
 
     protected override void Awake()
     {
         base.Awake();
     }
 
+    private void FixedUpdate()
+    {
+        if(isSkill)
+        {
+            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 3f, _whatIsEnemy);
+
+            if (cols.Length <= 0)
+            {
+                Debug.Log("¾È¸ØÃã");
+                return;
+            }
+
+            foreach (var hitMonster in cols)
+            {
+                AgentMovement monsterAgent = hitMonster.GetComponent<AgentMovement>();
+                EnemyAIBrain monsterAI = hitMonster.GetComponent<EnemyAIBrain>();
+
+                monsterAgent.StopImmediatelly();
+            }
+        }
+    }
+
     IEnumerator PeaceMakerAbilityTower()
     {
-        Debug.Log("ÀßµÊ");
-
+        isSkill = true;
         yield return new WaitForSeconds(3f);
+
+        isSkill = false;
 
         DestroyTower();
     }
@@ -25,4 +50,17 @@ public class PeaceMakerTower : Tower
         StartCoroutine(PeaceMakerAbilityTower());
     }
 
+    private void ColiderCheck()
+    {
+
+    }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 5f);
+    }
+#endif
 }
+

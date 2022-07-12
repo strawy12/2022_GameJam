@@ -95,6 +95,7 @@ public abstract class Tower : PoolableMono
             {
                 UseSkill();
             }
+
             if (_towerData.towerType == ETowerType.ActiveType && GameManager.Inst.isClick)
             {
                 //UseSkill();

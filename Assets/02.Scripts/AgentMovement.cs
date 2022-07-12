@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 public class AgentMovement : MonoBehaviour
 {
+    public bool isPeaceMaker = false;
+
     private Rigidbody2D _rigidbody;
 
     [Range(0, 10)]
@@ -30,7 +32,8 @@ public class AgentMovement : MonoBehaviour
 
     public void MoveAgent(Vector2 movementInput)
     {
-        if (movementInput.sqrMagnitude > 0)
+
+         if (movementInput.sqrMagnitude > 0)
         {
             if (Vector2.Dot(movementInput, _movementDirection) < 0)
             {
