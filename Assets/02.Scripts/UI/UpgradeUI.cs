@@ -10,7 +10,7 @@ public class UpgradeUI : MonoBehaviour
 
     private void Awake()
     {
-        _scrollRect = GetComponent<ScrollRect>();
+        _scrollRect = GetComponentInChildren<ScrollRect>();
     }
 
     public void ChangeContent(RectTransform rectTransform)

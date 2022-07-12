@@ -31,6 +31,9 @@ public abstract class Tower : PoolableMono
             return _towerStatData.towerType;
         }
     }
+
+    protected TowerData _towerData;
+    public TowerData Data => _towerData;
     #endregion
 
     protected bool isStop = false;

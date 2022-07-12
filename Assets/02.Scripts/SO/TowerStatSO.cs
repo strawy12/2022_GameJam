@@ -2,12 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ETowerType
-{
-    ActiveType,
-    PassiveType,
-    FixingType
-}
+
 
 [CreateAssetMenu(menuName = "SO/Tower/Stats")]
 
