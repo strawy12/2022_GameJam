@@ -12,7 +12,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     protected EnemyAnimation _enemyAnimation;
     protected EnemyAttack _enemyAttack;
     protected BoxCollider2D _boxCollider;
-
+    protected int _level = 1;
     //죽었을때 처리할 것과
     //액티브 상태를 관리할 애가 필요
 
@@ -20,6 +20,15 @@ public class Enemy : PoolableMono, IHittable, IKnockback
 
     #region 인터페이스 구현부
     public int Health { get; private set; }
+    public int Damage 
+    { 
+        get
+        {
+            int totalValue;
+            totalValue = _enemyData.damage  + _enemyData.damage * (_level % 10) + _level/2;
+            return totalValue;
+        } 
+    }
     [field: SerializeField] public UnityEvent OnDie { get; set; }
     [field: SerializeField] public UnityEvent OnGetHit { get; set; }
 
@@ -56,13 +65,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         _enemyAttack.attackDelay = _enemyData.attackDelay;
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            Debug.Log("Ground");
-        }
-    }
+
     public virtual void PerformAttack()
     {
         if (!_isDead && _isActive)
@@ -75,7 +78,6 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     public override void Reset()
     {
         _isActive = false;
-        Health = _enemyData.maxHealth;
         _isDead = false;
         _agentMovement.enabled = true;
         _boxCollider.enabled = true;
@@ -84,13 +86,17 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     }
     private void Start()
     {
-        Health = _enemyData.maxHealth;
+        Health = Health = _enemyData.maxHealth;
     }
     public void Die()
     {
         PoolManager.Instance.Push(this);
     }
-
+    public void SetEnemyStat(int level)
+    {
+        _level = level;
+        Health = _enemyData.maxHealth + _enemyData.maxHealth * (_level % 10) / 2;
+    }
     public void Knockback(Vector2 dir, float power, float duration)
     {
         if (!_isDead && !_isActive)

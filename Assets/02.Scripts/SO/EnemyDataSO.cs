@@ -14,5 +14,4 @@ public class EnemyDataSO : ScriptableObject
     public int damage = 1;
     public float attackDelay = 1;
     public float hitRange = 0;
-    public float knockbackPower = 5f;
 }

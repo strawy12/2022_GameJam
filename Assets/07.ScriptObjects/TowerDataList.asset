@@ -21,7 +21,7 @@ MonoBehaviour:
     itemExplanation: "\uD0C0\uC6CC\uAC00 \uBD80\uC154\uC9C0\uBA70 \uAD11\uC5ED \uD53C\uD574\uB97C
       \uC900\uB2E4"
     prefabName: StoneTower
-    damage: 1
+    damage: 4
     weight: 2
     isLock: 0
     knockbackPower: 3
