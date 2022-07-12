@@ -9,7 +9,8 @@ public class PlayerData
 
     public bool isTutorial;
 
-    public List<TowerStat> towerStatDataList;
+    public List<TowerData> towerDataList;
+    public List<PlayerStatData> statDataList;
     public int currentRound;
     public int gold;
     public PlayerData(float soundVolume)
@@ -17,9 +18,10 @@ public class PlayerData
         effectSoundVolume = soundVolume;
         bgmSoundVolume = soundVolume;
         isTutorial = false;
-        towerStatDataList = new List<TowerStat>();
+        towerDataList = new List<TowerData>();
+        statDataList = new List<PlayerStatData>();
         currentRound = 0;
-        gold = 0;
+        gold = 10000000;
 
     }
 }

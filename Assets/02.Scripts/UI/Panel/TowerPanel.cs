@@ -3,39 +3,76 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TowerPanel : MonoBehaviour
+public class TowerPanel : UpgradePanel
 {
-    [SerializeField] private Image _towerImage;
+    [SerializeField] private Image _backgroundImage;
 
-    [SerializeField] private Text _nameText;
-    [SerializeField] private Text _infoText;
-    [SerializeField] private Text _explanationText;
-    [SerializeField] private UpgradeButton _upgradeBtn;
+    private TowerData _towerData;
 
-    private TowerData _currentData;
-
-    public void Init(TowerData data)
+    public override void Init(ItemData data)
     {
-        _currentData = data;
+        _towerData = data as TowerData;
 
-        _towerImage.sprite = _currentData.towerSprite;
-        _nameText.text = $"Lv.{_currentData.towerStat.level.ToString()}{_currentData.towerName}";
-        _infoText.text = _currentData.towerSkillExplanation;
-        _explanationText.text = $"Atk : {_currentData.towerStat.damage.ToString()} \n Weight : {_currentData.weight.ToString()}";
-        _upgradeBtn.text = $"강화/n{_currentData.towerStat.needGold} Gold";
+        base.Init(data);
+
+    }
+
+    public override void SetUI()
+    {
+        if (_towerData.isLock)
+        {
+            TowerData beforeData = DataManager.Inst.CurrentPlayer.towerDataList[_currentData.itemNum - 1];
+            if (beforeData.isLock == false && beforeData.itemLevel >= 10)
+            {
+                _towerData.isLock = false;
+                UnLockUI();
+            }
+
+            else
+            {
+                LockUI();
+            }
+
+
+        }
+
+        else
+        {
+            UnLockUI();
+        }
+    }
+
+    public void LockUI()
+    {
+        _nameText.text = "????";
+        _explanationText.text = string.Format("조건: {0}의 Lv. 10 이상 달성", DataManager.Inst.CurrentPlayer.towerDataList[_towerData.itemNum - 1].itemName);
+        _itemImage.color = Color.black;
+        _infoText.text = "";
+        _backgroundImage.color = Color.gray;
 
         SetUpgradeButton();
-        UIManager.Inst.AddTowerPanel(this);
-        gameObject.SetActive(true);
+    }
+    public void UnLockUI()
+    {
+        _itemImage.color = Color.white;
+        _backgroundImage.color = Color.white;
+        base.SetUI();
+        _infoText.text = $"Atk : {_towerData.damage.ToString()} \n Weight : {_towerData.weight.ToString()}";
     }
 
-    public void UpgradeTower()
+    public override void SetUpgradeButton()
     {
+        TowerData data = _currentData as TowerData;
+        if (data.isLock)
+        {
 
-    }
 
-    public void SetUpgradeButton()
-    {
-        _upgradeBtn.interactable = DataManager.Inst.CurrentPlayer.gold <= _currentData.towerStat.needGold;
+            _upgradeBtn.interactable = false;
+            _upgradeBtn.text = "X";
+        }
+        else
+        {
+            base.SetUpgradeButton();
+        }
     }
 }
