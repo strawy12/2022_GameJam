@@ -92,7 +92,7 @@ public abstract class Tower : PoolableMono
             }
             if (_towerData.towerType == ETowerType.ActiveType && GameManager.Inst.isClick)
             {
-                     //UseSkill();
+                //UseSkill();
                 //GameManager.Inst.isClick = false;
             }
             if (_towerData.towerType == ETowerType.FixingType)
@@ -104,7 +104,8 @@ public abstract class Tower : PoolableMono
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !isStop)
         {
-            
+            IHittable hittable = collision.GetComponent<IHittable>();
+            hittable?.GetHit(_towerData.damage, gameObject);
         }
     }
 }
