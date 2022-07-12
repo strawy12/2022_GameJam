@@ -20,6 +20,7 @@ MonoBehaviour:
     needGold: 10
     itemExplanation: "\uD0C0\uC6CC\uAC00 \uBD80\uC154\uC9C0\uBA70 \uAD11\uC5ED \uD53C\uD574\uB97C
       \uC900\uB2E4"
+    prefabName: StoneTower
     damage: 1
     weight: 2
     isLock: 0
@@ -32,7 +33,8 @@ MonoBehaviour:
     itemExplanation: "\uC124\uCE58\uB418\uACE0 1\uCD08\uD6C4 \uBD80\uD130 \uC778\uC2DD\uB418\uBA70
       \uC801\uC744 \uC778\uC2DD\uD558\uACE0 \uD130\uC9C0\uBA70 \uD53C\uD574\uB97C
       \uC900\uB2E4"
-    damage: 0
+    prefabName: FireTower
+    damage: 1
     weight: 1
     isLock: 1
     towerType: 1
@@ -43,7 +45,8 @@ MonoBehaviour:
     needGold: 10
     itemExplanation: "3\uCD08\uB3D9\uC548 \uBC18\uACBD 2m\uC758 \uC801\uB4E4\uC774
       \uC804\uD22C\uC758\uC9C0\uB97C \uC783\uACE0 \uAC00\uB9CC\uD788 \uC11C\uC788\uB294\uB2E4."
-    damage: 0
+    prefabName: PieceOfHero
+    damage: 1
     weight: 2
     isLock: 1
     towerType: 0
@@ -54,7 +57,8 @@ MonoBehaviour:
     needGold: 10
     itemExplanation: "\uD0C0\uC6CC\uC5D0 \uC788\uB294 \uC5D8\uD504\uB4E4\uC774 \uBC11\uC744
       \uD5A5\uD574 \uC218\uC9C1\uC73C\uB85C \uD654\uC0B4\uC744 \uC3DC\uB2E4."
-    damage: 0
+    prefabName: ElfTower
+    damage: 1
     weight: 1
     isLock: 1
     towerType: 0
@@ -66,6 +70,7 @@ MonoBehaviour:
     itemExplanation: "\uAC74\uBB3C\uC774 \uD30C\uAD34\uB418\uBA70 \uC77C\uC815 \uBC94\uC704\uC758
       \uC801\uB4E4\uC5D0\uAC8C \uB370\uBBF8\uC9C0\uB97C \uC8FC\uACE0, \uC18D\uB3C4\uB97C
       \uB2A6\uCD98\uB2E4."
+    prefabName: Pyramid
     damage: 0
     weight: 3
     isLock: 1

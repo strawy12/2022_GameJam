@@ -12,6 +12,8 @@ public enum ETowerType
 [System.Serializable]
 public class TowerData : ItemData
 {
+    [Header("타워 정보")]
+    public string prefabName;
     public int damage;
     public float weight;
     public bool isLock;

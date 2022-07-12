@@ -1,16 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ThrowedTower : MonoBehaviour
 {
-    [SerializeField] private float _reloadDelay;   
+    [SerializeField] private float _reloadDelay;
     [SerializeField] private float _maxForce;
     [SerializeField] private float _forceOffset;
     [SerializeField] private Tower _towerPref;
     [SerializeField] private ThrowLine _throwLine = null;
-    
+
     private float _force;
     private Camera _mainCam;
 
@@ -21,16 +22,18 @@ public class ThrowedTower : MonoBehaviour
     private Tower _currentTower;
     private bool _isReloading;
 
+    private List<Tower> _nextTowerList = new List<Tower>();
+
     private void Awake()
     {
         _mainCam = Define.MainCam;
 
-        _currentTower = Instantiate(_towerPref, transform.position, Quaternion.identity);
-        _currentTower.Init();
-        _currentTower.Rigid.isKinematic = true;
-        _currentTower.gameObject.SetActive(true);
-
         _isReloading = false;
+    }
+
+    private void Start()
+    {
+        GenerateTower();
     }
 
     private void Update()
@@ -87,13 +90,61 @@ public class ThrowedTower : MonoBehaviour
         yield return new WaitForSeconds(_reloadDelay);
 
         // 풀매니저 사용
-        _currentTower = PoolManager.Instance.Pop(_towerPref.gameObject.name) as Tower;
+        GenerateTower();
+
+        _isReloading = false;
+    }
+
+    private void GenerateTower()
+    {
+        _currentTower = GetTower();
         _currentTower.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
         _currentTower.Init();
         _currentTower.Collider.enabled = false;
         _currentTower.Rigid.isKinematic = true;
         _currentTower.gameObject.SetActive(true);
-
-        _isReloading = false;
     }
+
+    private Tower GetTower()
+    {
+        if (_nextTowerList.Count == 0)
+            SetTowerList();
+
+        Tower tower = _nextTowerList[0];
+        _nextTowerList.RemoveAt(0);
+
+        SettingNextTowerUI();
+
+        return tower;
+    }
+
+    private void SettingNextTowerUI()
+    {
+        Sprite[] sprites = new Sprite[4];
+        for (int i = 0; i < 4; i++)
+        {
+            sprites[i] = _nextTowerList[i].Data.itemSprite;
+        }
+        UIManager.Inst.SetNextTowerPanels(sprites);
+    }
+
+    private void SetTowerList()
+    {
+        if (_nextTowerList.Count != 0) return;
+
+        _nextTowerList.Clear();
+
+        foreach(var data in DataManager.Inst.CurrentPlayer.towerDataList)
+        {
+            if (data.isLock)
+                continue;
+
+            Tower tower = PoolManager.Instance.Pop(data.prefabName) as Tower;
+            _nextTowerList.Add(tower);
+        }
+
+        var rnd = new System.Random();
+        _nextTowerList = _nextTowerList.OrderBy(item => rnd.Next()).ToList();
+    }
+
 }
