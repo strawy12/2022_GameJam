@@ -43,11 +43,14 @@ public abstract class Tower : PoolableMono
 
     private SpriteRenderer _spriteRenderer;
 
+    private ParticleSystem _particle;
+
     private bool _isThrow;
 
     protected virtual void Awake()
     {
         baseTrm = transform.Find("baseTransform");
+        _particle = transform.Find("TowerShootParticle").GetComponent<ParticleSystem>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
     public void Init()
@@ -77,10 +80,6 @@ public abstract class Tower : PoolableMono
         PoolManager.Instance.Push(this);
     }
 
-    public virtual void StartThrowed()
-    {
-
-    }
 
     internal void ChangeAngle(float angle)
     {
@@ -91,9 +90,10 @@ public abstract class Tower : PoolableMono
     {
         
     }
-    public void StartThrow()
+    public virtual void StartThrow()
     {
         _isThrow = true;
+        _particle.Play();
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision) 
     {
@@ -103,6 +103,7 @@ public abstract class Tower : PoolableMono
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.isKinematic = true;
             _isThrow = false;
+            _particle.Stop();
             if (_towerStatData.towerType == ETowerType.PassiveType)
             {
                 UseSkill();

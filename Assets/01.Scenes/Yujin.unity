@@ -719,6 +719,7 @@ MonoBehaviour:
   _forceOffset: 4.5
   _towerPref: {fileID: 8367169064594803529, guid: c1f7017c3cd68f64f9dbade9b03fcb0b, type: 3}
   _throwLine: {fileID: 484093521}
+  _particle: {fileID: 8039882792692684960, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
 --- !u!1 &190745433
 GameObject:
   m_ObjectHideFlags: 0

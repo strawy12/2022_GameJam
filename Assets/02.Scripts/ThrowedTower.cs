@@ -10,7 +10,7 @@ public class ThrowedTower : MonoBehaviour
     [SerializeField] private float _forceOffset;
     [SerializeField] private Tower _towerPref;
     [SerializeField] private ThrowLine _throwLine = null;
-    
+
     private float _force;
     private Camera _mainCam;
 
@@ -79,6 +79,7 @@ public class ThrowedTower : MonoBehaviour
         _isReloading = true;
         _throwLine.ClearLine();
 
+
         StartCoroutine(Release());
     }
 
@@ -94,6 +95,7 @@ public class ThrowedTower : MonoBehaviour
         _currentTower.Rigid.isKinematic = true;
         _currentTower.gameObject.SetActive(true);
 
+        
         _isReloading = false;
     }
 }
