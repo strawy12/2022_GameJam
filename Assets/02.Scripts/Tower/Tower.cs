@@ -117,7 +117,8 @@ public abstract class Tower : PoolableMono
             {
                 UseSkill();
             }
-            EventManager.TriggerEvent(Constant.END_THROW_TOWER);
+
+            GameManager.Inst.EndFollow();
 
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !isStop)
