@@ -685,6 +685,7 @@ MonoBehaviour:
   _duration: 0.5
   _shootDelay: 0.05
   _shootPosOffset: 0.5
+  _shootForce: 100
 --- !u!1 &719790628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,6 +1073,10 @@ PrefabInstance:
       propertyPath: _towerStatData
       value: 
       objectReference: {fileID: 11400000, guid: 6cc7f6e0af206104685bfca39bf38a55, type: 2}
+    - target: {fileID: 105542192999226453, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1082,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 105542192999226454, guid: ed9cbc4dd12f4234d89ebabcacd16b64, type: 3}
       propertyPath: m_LocalPosition.z

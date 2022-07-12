@@ -26,10 +26,17 @@ public class FireTower : Tower
         isBoom = true;
     }
 
+    IEnumerator ExPlosionFireTower()
+    {
+        // 범위 내 몬스터 죽이기
+        return null;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.CompareTag("Enemy") && isBoom)
         {
+            StartCoroutine(ExPlosionFireTower());
             DestroyTower();
         }
     }

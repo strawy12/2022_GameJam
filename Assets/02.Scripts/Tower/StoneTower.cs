@@ -11,11 +11,13 @@ public class StoneTower : Tower
     {
         base.Awake();
         anim.SetBool("isExplore", false);
+        _exploreCol.enabled = false;
     }
 
     IEnumerator ExPlosionStoneTower()
     {
         anim.SetBool("isExplore", true);
+        _exploreCol.enabled = true;
         yield return new WaitForSeconds(1f);
         
         DestroyTower();
