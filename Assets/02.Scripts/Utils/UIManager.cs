@@ -6,9 +6,11 @@ using DG.Tweening;
 
 public class UIManager : MonoSingleton<UIManager>
 {
+    [SerializeField] private UpgradeUI _upgradeUI;
+    [SerializeField] private GoldPanel _goldPanel;
+
     private List<NextTowerPanel> _nextTowerPanelList = new List<NextTowerPanel>();
     private List<UpgradePanel> _upgradePanelList = new List<UpgradePanel>();
-    [SerializeField] private UpgradeUI _upgradeUI;
 
     public void AddUpgradePanel(UpgradePanel panel)
     {
@@ -37,6 +39,7 @@ public class UIManager : MonoSingleton<UIManager>
     public void GoldEvent()
     {
         _upgradePanelList.ForEach(panel => panel.SetUI());
+        _goldPanel.SetText();
     }
 
     public void GoUpgradeUI()
