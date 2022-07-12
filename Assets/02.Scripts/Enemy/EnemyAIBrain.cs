@@ -28,6 +28,7 @@ public class EnemyAIBrain : MonoBehaviour
 
     public void Move(Vector2 moveDirection)
     {
+        if (GameManager.Inst.gameState == GameManager.GameState.Throwing) return;
         OnMovementKeyPress?.Invoke(moveDirection);
     }
     public void SetAttackState(bool state)
@@ -36,6 +37,8 @@ public class EnemyAIBrain : MonoBehaviour
     }
     protected virtual void Update()
     {
+        if (GameManager.Inst.gameState == GameManager.GameState.Throwing) return;
+
         if (target == null)
         {
             OnMovementKeyPress?.Invoke(Vector2.zero);

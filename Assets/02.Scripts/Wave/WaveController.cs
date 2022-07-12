@@ -7,6 +7,13 @@ public class WaveController : MonoBehaviour
     public List<WaveDataSO> waves;
     public UnityEvent OnEndWave;
     private bool _isWave = false;
+    public bool IsWave
+    {
+        get 
+        {
+            return _isWave;
+        }
+    }
     private int _waveLevel = 1;
     private int _waveIndex = 0;
     private int _waveMonsterCount = 0;
