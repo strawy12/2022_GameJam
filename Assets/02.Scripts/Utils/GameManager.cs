@@ -6,14 +6,31 @@ using static Define;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+
     public bool isClick;
+
+
+    [SerializeField] private PoolListSO _initList = null;
 
     [SerializeField] private float _cameraSpeed = 5f;
     [SerializeField] private float _duration = 0f;
 
     [SerializeField] private Transform _cameraTransform;
-        
+
     private float _currentDir = 0f;
+
+    private void Awake()
+    {
+        new PoolManager(transform);
+        CreatePool();
+    }
+
+    private void CreatePool()
+    {
+        foreach (PoolingPair pair in _initList.list)
+            PoolManager.Instance.CreatePool(pair.prefab, pair.poolCnt);
+    }
+
 
     public void CameraMove(float dir)
     {

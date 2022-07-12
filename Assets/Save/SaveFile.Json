@@ -1,0 +1,37 @@
+﻿{
+    "effectSoundVolume": 0.5,
+    "bgmSoundVolume": 0.5,
+    "isTutorial": false,
+    "towerStatDataList": [
+        {
+            "towerNum": 1,
+            "damage": 1,
+            "level": 0,
+            "isLock": true,
+            "needGold": 100
+        },
+        {
+            "towerNum": 2,
+            "damage": 1,
+            "level": 0,
+            "isLock": true,
+            "needGold": 100
+        },
+        {
+            "towerNum": 3,
+            "damage": 1,
+            "level": 0,
+            "isLock": true,
+            "needGold": 100
+        },
+        {
+            "towerNum": 4,
+            "damage": 1,
+            "level": 0,
+            "isLock": true,
+            "needGold": 100
+        }
+    ],
+    "currentRound": 0,
+    "gold": 0
+}

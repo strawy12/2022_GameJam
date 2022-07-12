@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class DataManager : MonoSingleton<DataManager>
 {
-    [SerializeField] private float defaultSound = 0.5f;
-    [SerializeField] private PlayerData player;
+    [SerializeField] private float _defaultSound = 0.5f;
+    [SerializeField] private PlayerData _player;
+    [SerializeField] private TowerDataListSO _towerDataList;
 
-    public PlayerData CurrentPlayer { get { return player; } }
+    public PlayerData CurrentPlayer => _player;
 
     private string SAVE_PATH = "";
     private const string SAVE_FILE = "/SaveFile.Json";
@@ -41,24 +42,38 @@ public class DataManager : MonoSingleton<DataManager>
         if (File.Exists(SAVE_PATH + SAVE_FILE))
         {
             string stringJson = File.ReadAllText(SAVE_PATH + SAVE_FILE);
-            player = JsonUtility.FromJson<PlayerData>(stringJson);
+            _player = JsonUtility.FromJson<PlayerData>(stringJson);
         }
         else
         {
-            player = new PlayerData(defaultSound);
+            _player = new PlayerData(_defaultSound);
+
+            for(int i = 1; i <= _towerDataList.Count; i++)
+            { 
+                _player.towerStatDataList.Add(new TowerStat(i));
+            }
         }
         SaveToJson();
     }
     public void SaveToJson()
     {
-        string stringJson = JsonUtility.ToJson(player, true);
+        string stringJson = JsonUtility.ToJson(_player, true);
         File.WriteAllText(SAVE_PATH + SAVE_FILE, stringJson, System.Text.Encoding.UTF8);
     }
     public void DataReset()
     {
-        player = new PlayerData(defaultSound);
+        _player = new PlayerData(_defaultSound);
         SaveToJson();
         Application.Quit();
     }
 
+
+    public TowerData FindTowerData(int towerNum)
+    {
+        TowerData data = _towerDataList.towerDataList.Find(tower => tower.towerNum == towerNum);
+        TowerStat stat = _player.towerStatDataList.Find(tower => tower.towerNum == towerNum);
+
+        data.towerStat = stat;
+        return data;
+    }
 }   
