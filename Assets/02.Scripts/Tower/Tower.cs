@@ -107,6 +107,8 @@ public abstract class Tower : PoolableMono
         {
             IHittable hittable = collision.GetComponent<IHittable>();
             hittable?.GetHit(_towerData.damage, gameObject);
+            IKnockback knockback = collision.GetComponent<IKnockback>();
+            knockback?.Knockback(Vector2.one, _towerData.knockbackPower,1f);
         }
     }
 }

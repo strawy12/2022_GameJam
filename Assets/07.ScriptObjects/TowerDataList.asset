@@ -24,6 +24,7 @@ MonoBehaviour:
     damage: 1
     weight: 2
     isLock: 0
+    knockbackPower: 3
     towerType: 0
   - itemNum: 1
     itemName: "\uD30C\uC774\uC5B4 \uD0C0\uC6CC"
@@ -37,6 +38,7 @@ MonoBehaviour:
     damage: 1
     weight: 1
     isLock: 1
+    knockbackPower: 0
     towerType: 1
   - itemNum: 2
     itemName: "\uD3C9\uD654\uC758 \uC601\uC6C5\uC0C1"
@@ -49,6 +51,7 @@ MonoBehaviour:
     damage: 1
     weight: 2
     isLock: 1
+    knockbackPower: 0
     towerType: 0
   - itemNum: 3
     itemName: "\uC5D8\uD504\uD0C0\uC6CC"
@@ -61,6 +64,7 @@ MonoBehaviour:
     damage: 1
     weight: 1
     isLock: 1
+    knockbackPower: 0
     towerType: 0
   - itemNum: 4
     itemName: "\uD53C\uB77C\uBBF8\uB4DC"
@@ -74,4 +78,5 @@ MonoBehaviour:
     damage: 0
     weight: 3
     isLock: 1
+    knockbackPower: 0
     towerType: 0
