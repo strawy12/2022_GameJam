@@ -15,8 +15,6 @@ public class ElfTower : Tower
     protected override void Awake()
     {
         base.Awake();
-        new PoolManager(transform);
-        PoolManager.Instance.CreatePool(_elfArrowPref);
     }
 
     IEnumerator ElfTowerSkill()

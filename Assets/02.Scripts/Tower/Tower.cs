@@ -6,45 +6,45 @@ using UnityEngine;
 public abstract class Tower : PoolableMono
 {
     protected TowerData _towerData;
-    public TowerData Data => _towerData;
 
-    protected bool isStop = false;
-    protected Transform baseTrm;
+    protected Transform _baseTrm;
+
     protected Rigidbody2D _rigidbody;
-    public Rigidbody2D Rigid => _rigidbody;
-
     private Collider2D _collider;
-    public Collider2D Collider => _collider;
 
     private SpriteRenderer _spriteRenderer;
-
     private ParticleSystem _particle;
 
+    protected bool _isStop = false;
     private bool _isThrow;
+
+    public TowerData Data => _towerData;
+    public Rigidbody2D Rigid => _rigidbody;
+    public Collider2D Collider => _collider;
 
     protected virtual void Awake()
     {
-        baseTrm = transform.Find("baseTransform");
-        _particle = transform.Find("TowerShootParticle").GetComponent<ParticleSystem>();
-        _rigidbody = GetComponent<Rigidbody2D>();
+        StartInit();
     }
-    public void Init()
+    private void StartInit()
     {
-        if (_rigidbody == null)
-            _rigidbody = GetComponent<Rigidbody2D>();
-        if (_collider == null)
-            _collider = GetComponent<Collider2D>();
+        _baseTrm ??= transform.Find("BaseTransform");
+        _particle ??= transform.Find("TowerShootParticle").GetComponent<ParticleSystem>();
+        _spriteRenderer ??= transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
+        _collider ??= transform.Find("VisualSprite").GetComponent<Collider2D>();
+        _rigidbody ??= GetComponent<Rigidbody2D>();
 
-        if (_spriteRenderer == null)
-            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
-        if (_towerData == null)
-            _towerData = DataManager.Inst.CurrentPlayer.towerDataList.Find(tower => tower.prefabName.Equals(name));
+        _towerData ??= DataManager.Inst.CurrentPlayer.towerDataList.Find(tower => tower.prefabName.Equals(name));
     }
+
+    private void Start()
+    {
+    }
+
     public override void Reset()
     {
-        Init();
-        isStop = false;
+        StartInit();
+        _isStop = false;
         _isThrow = false;
         _rigidbody.constraints = 0;
         Collider.enabled = false;
@@ -81,7 +81,7 @@ public abstract class Tower : PoolableMono
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            isStop = true;
+            _isStop = true;
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.isKinematic = true;
             _isThrow = false;
@@ -103,7 +103,7 @@ public abstract class Tower : PoolableMono
             GameManager.Inst.EndFollow();
 
         }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !isStop)
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !_isStop)
         {
 
         }
