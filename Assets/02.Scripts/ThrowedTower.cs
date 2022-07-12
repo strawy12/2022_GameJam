@@ -154,10 +154,6 @@ public class ThrowedTower : MonoBehaviour
             }
         }
 
-<<<<<<< HEAD
         
-        _isReloading = false;
-=======
->>>>>>> OIF
     }
 }
