@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public abstract class Tower : PoolableMono
 {
     protected TowerData _towerData;
@@ -23,7 +23,7 @@ public abstract class Tower : PoolableMono
     public Collider2D Collider => _collider;
 
     public Action OnEndThrow;
-
+    protected Sequence seq;
     protected virtual void Awake()
     {
         StartInit();
@@ -105,6 +105,8 @@ public abstract class Tower : PoolableMono
 
             OnEndThrow?.Invoke();
             GameManager.Inst.EndFollow();
+            seq = DOTween.Sequence(); 
+            
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !_isStop)
         {
