@@ -40,7 +40,7 @@ public abstract class Tower : PoolableMono
 
         if (_towerData == null)
             _towerData = DataManager.Inst.CurrentPlayer.towerDataList.Find(tower => tower.prefabName.Equals(name));
-     }
+    }
     public override void Reset()
     {
         Init();
@@ -70,16 +70,16 @@ public abstract class Tower : PoolableMono
 
     public virtual void UseSkill()
     {
-        
+
     }
     public virtual void StartThrow()
     {
         _isThrow = true;
         _particle.Play();
     }
-    protected virtual void OnTriggerEnter2D(Collider2D collision) 
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isStop = true;
             _rigidbody.velocity = Vector3.zero;
@@ -99,11 +99,13 @@ public abstract class Tower : PoolableMono
             {
                 UseSkill();
             }
-            EventManager.TriggerEvent(Constant.END_THROW_TOWER);
+
+            GameManager.Inst.EndFollow();
 
         }
-        else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !isStop)
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !isStop)
         {
+
             IHittable hittable = collision.GetComponent<IHittable>();
             hittable?.GetHit(_towerData.damage, gameObject);
         }
