@@ -142,7 +142,7 @@ public class ThrowedTower : MonoBehaviour
 
     private Tower GetTower()
     {
-        if (_nextTowerList.Count <= 4)
+        if (_nextTowerList.Count <= 5)
             SetTowerList();
 
         Tower tower = _nextTowerList[0];

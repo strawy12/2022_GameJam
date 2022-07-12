@@ -7,7 +7,7 @@
             "itemNum": 0,
             "itemName": "돌 타워",
             "itemSprite": {
-                "instanceID": 22470
+                "instanceID": 20822
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -22,7 +22,7 @@
             "itemNum": 1,
             "itemName": "파이어 타워",
             "itemSprite": {
-                "instanceID": 22472
+                "instanceID": 20824
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -30,14 +30,14 @@
             "prefabName": "FireTower",
             "damage": 1,
             "weight": 1.0,
-            "isLock": true,
+            "isLock": false,
             "towerType": 1
         },
         {
             "itemNum": 2,
             "itemName": "평화의 영웅상",
             "itemSprite": {
-                "instanceID": 22466
+                "instanceID": 20826
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -45,14 +45,14 @@
             "prefabName": "PeaceMakerTower",
             "damage": 1,
             "weight": 2.0,
-            "isLock": true,
+            "isLock": false,
             "towerType": 0
         },
         {
             "itemNum": 3,
             "itemName": "엘프타워",
             "itemSprite": {
-                "instanceID": 0
+                "instanceID": 20828
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -60,14 +60,14 @@
             "prefabName": "ElfTower",
             "damage": 1,
             "weight": 1.0,
-            "isLock": true,
+            "isLock": false,
             "towerType": 0
         },
         {
             "itemNum": 4,
             "itemName": "피라미드",
             "itemSprite": {
-                "instanceID": 22474
+                "instanceID": 20830
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -75,7 +75,7 @@
             "prefabName": "PyramidTower",
             "damage": 0,
             "weight": 3.0,
-            "isLock": true,
+            "isLock": false,
             "towerType": 0
         }
     ],

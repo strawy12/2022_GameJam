@@ -22,7 +22,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void SetNextTowerPanels(Sprite[] sprites)
     {
-        for(int i = 0; i < sprites.Length; i++)
+        int cnt = Mathf.Max(_nextTowerPanelList.Count, sprites.Length);
+        for(int i = 0; i < cnt; i++)
         {
             _nextTowerPanelList[i].SetSprite(sprites[i]);
         }
