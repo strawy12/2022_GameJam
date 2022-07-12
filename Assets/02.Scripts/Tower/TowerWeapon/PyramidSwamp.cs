@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PyramidSwamp : MonoBehaviour
+public class PyramidSwamp : PoolableMono
 {
     [SerializeField] private float _swampPosX;
     [SerializeField] private float _swampPosY;
@@ -22,6 +22,11 @@ public class PyramidSwamp : MonoBehaviour
     {
         transform.position = new Vector2(_swampPosX, _swampPosY);
         yield return new WaitForSeconds(3f);
-        Destroy(gameObject); // 게임매니저풀로 되받음
+        PoolManager.Instance.Push(this);
+    }
+
+    public override void Reset()
+    {
+        throw new System.NotImplementedException();
     }
 }

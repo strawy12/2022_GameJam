@@ -15,12 +15,24 @@ public class ElfTower : Tower
     protected override void Awake()
     {
         base.Awake();
+
+        GameManager.Inst.isGround = false;
+    }
+
+    void Update()
+    {
+        // 터치아직안함
+        if(Input.GetMouseButtonDown(0) && !GameManager.Inst.isGround)
+        {
+            UseSkill();
+        }
     }
 
     IEnumerator ElfTowerSkill()
     {
         float time = _duration;
         Vector2 shootPos = transform.position;
+
         while (time > 0)
         {
             ElfArrow arrow = PoolManager.Instance.Pop("ElfArrow") as ElfArrow;
@@ -35,10 +47,5 @@ public class ElfTower : Tower
     public override void UseSkill()
     {
         StartCoroutine(ElfTowerSkill());
-    }
-
-    private void OnMouseDown()
-    {
-        UseSkill(); //화면을 누르면 스킬로 변경
     }
 }

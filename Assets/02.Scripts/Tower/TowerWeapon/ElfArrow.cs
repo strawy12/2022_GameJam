@@ -30,6 +30,30 @@ public class ElfArrow : PoolableMono
         _arrowRigidbody.AddForce(_targetDir * _arrowForce);
     }
 
+
+
+    private void OnCollisionEnter2D(Collision2D collicion)
+    {
+        if (collicion.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            IHittable monsterHit = collicion.collider.GetComponent<IHittable>();
+            monsterHit.GetHit(2, transform.gameObject);
+            PoolManager.Instance.Push(this);
+        }
+
+        if(collicion.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            StartCoroutine(DeleteArrow());
+        }
+
+    }
+
+    IEnumerator DeleteArrow()
+    {
+        yield return new WaitForSeconds(1f);
+        PoolManager.Instance.Push(this);
+    }
+
     public override void Reset()
     {
         if (_arrowRigidbody == null)

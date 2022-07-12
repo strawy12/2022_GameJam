@@ -7,7 +7,7 @@ using static Define;
 public class GameManager : MonoSingleton<GameManager>
 {
 
-    public bool isClick;
+    public bool isGround = false;
 
     [SerializeField] private PoolListSO _initList = null;
     [SerializeField] private MainCameraMove _mainCameraMove;

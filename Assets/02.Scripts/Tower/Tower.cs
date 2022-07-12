@@ -62,11 +62,11 @@ public abstract class Tower : PoolableMono
         float angle = Mathf.Atan2(_rigidbody.velocity.y, _rigidbody.velocity.x) * Mathf.Rad2Deg - 90f;
         ChangeAngle(angle);
     }
+
     public virtual void DestroyTower()
     {
         PoolManager.Instance.Push(this);
     }
-
 
     internal void ChangeAngle(float angle)
     {
@@ -95,11 +95,10 @@ public abstract class Tower : PoolableMono
             {
                 UseSkill();
             }
-
-            if (_towerData.towerType == ETowerType.ActiveType && GameManager.Inst.isClick)
+            if (_towerData.towerType == ETowerType.ActiveType)
             {
-                //UseSkill();
-                //GameManager.Inst.isClick = false;
+                Debug.Log("¾ê¶¥¿¡´êÀ½");
+                GameManager.Inst.isGround = true;
             }
 
             GameManager.Inst.EndFollow();
