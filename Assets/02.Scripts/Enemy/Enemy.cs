@@ -39,7 +39,7 @@ public class Enemy : PoolableMono, IHittable
 
         if (Health <= 0)
         {
-            Debug.Log("Á×À½");
+            Debug.Log("enemy Á×À½");
             _isDead = true;
             _agentMovement.StopImmediatelly();
             _agentMovement.enabled = false;

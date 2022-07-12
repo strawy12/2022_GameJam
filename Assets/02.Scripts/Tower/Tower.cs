@@ -28,6 +28,7 @@ public abstract class Tower : PoolableMono
         _particle = transform.Find("TowerShootParticle").GetComponent<ParticleSystem>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
+
     private void Start()
     {
         Init();
@@ -90,7 +91,7 @@ public abstract class Tower : PoolableMono
             _isThrow = false;
             _particle.Stop();
 
-            if (_towerData.towerType == ETowerType.PassiveType)
+            if (_towerData.towerType == ETowerType.PassiveType || _towerData.towerType == ETowerType.FixingType)
             {
                 UseSkill();
             }
@@ -98,10 +99,6 @@ public abstract class Tower : PoolableMono
             {
                 //UseSkill();
                 //GameManager.Inst.isClick = false;
-            }
-            if (_towerData.towerType == ETowerType.FixingType)
-            {
-                UseSkill();
             }
 
             GameManager.Inst.EndFollow();

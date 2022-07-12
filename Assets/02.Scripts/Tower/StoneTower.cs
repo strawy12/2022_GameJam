@@ -20,7 +20,7 @@ public class StoneTower : Tower
 
     private IEnumerator ExPlosionStoneTower()
     {
-        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 5f, _whatIsEnemy);
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 2.5f, _whatIsEnemy);
 
         foreach (var hitMonster in cols)
         {
@@ -38,7 +38,7 @@ public class StoneTower : Tower
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 5f);
+        Gizmos.DrawWireSphere(transform.position, 2.5f);
     }
 #endif
 }

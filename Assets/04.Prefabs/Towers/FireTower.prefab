@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 7099580903576157326}
   - component: {fileID: 4383015467563815904}
   - component: {fileID: 2433312747664129143}
-  - component: {fileID: 2290779184826932098}
   - component: {fileID: 7028934211899046651}
   m_Layer: 0
   m_Name: FireTower
@@ -165,25 +164,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &2290779184826932098
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7028934211899046642}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fb37a871015051344bcd6e0b15c01a59, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7028934211899046651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoom: 0
-  _fireBoomCol: {fileID: 0}
+  _whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1001 &2968352161084481872
 PrefabInstance:
   m_ObjectHideFlags: 0

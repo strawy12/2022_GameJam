@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc77e5d5d5335f49818482ab21edafe, type: 3}
   m_Name: 1_FireTower
   m_EditorClassIdentifier: 
-  damage: 3
+  poolPrefab: {fileID: 0}
+  damage: 6
   weight: 1
   towerType: 2
