@@ -54,6 +54,7 @@ public class Enemy : PoolableMono, IHittable
         _enemyAttack = GetComponent<EnemyAttack>();
         _enemyBrain = GetComponent<EnemyAIBrain>();
         _enemyAttack.attackDelay = _enemyData.attackDelay;
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -70,9 +71,7 @@ public class Enemy : PoolableMono, IHittable
             _enemyAttack.Attack(_enemyData.damage);
         }
     }
-    public void Update()
-    {
-    }
+
     public override void Reset()
     {
         _isActive = false;

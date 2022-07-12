@@ -13,6 +13,7 @@ public class EnemyAIBrain : MonoBehaviour
     public Transform target;
     protected virtual void Awake()
     {
+        target = GameObject.Find("Player").transform;
         _actionData = transform.Find("AI").GetComponent<AIActionData>();
     }
 

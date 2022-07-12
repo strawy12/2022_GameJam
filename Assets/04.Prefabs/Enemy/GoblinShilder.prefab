@@ -2422,7 +2422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae54af3480231014d9ffdfbc40f56447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 100
+  distance: 150
 --- !u!1 &3479278818904274461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2544,7 +2544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae54af3480231014d9ffdfbc40f56447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 100
+  distance: 150
 --- !u!1 &3479278818999024524
 GameObject:
   m_ObjectHideFlags: 0
@@ -2891,7 +2891,7 @@ Animator:
   m_GameObject: {fileID: 4326172070014579906}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c2fc0aafc4ba14749a6cc196ffeb52b8, type: 2}
+  m_Controller: {fileID: 9100000, guid: ab937231d0600440fb0d8757568d78d7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
