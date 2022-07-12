@@ -34,7 +34,11 @@ public class GameManager : MonoSingleton<GameManager>
             PoolManager.Instance.CreatePool(pair.prefab, pair.poolCnt);
     }
 
-
+    public void SetGold(int gold)
+    {
+        DataManager.Inst.CurrentPlayer.gold += gold;
+        UIManager.Inst.GoldEvent();
+    }
     
 
 }

@@ -9,6 +9,7 @@ public class DataManager : MonoSingleton<DataManager>
     [SerializeField] private float _defaultSound = 0.5f;
     [SerializeField] private PlayerData _player;
     [SerializeField] private TowerDataListSO _towerDataList;
+    [SerializeField] private PlayerStatDataSO _statDataList;
 
     public PlayerData CurrentPlayer => _player;
 
@@ -43,15 +44,16 @@ public class DataManager : MonoSingleton<DataManager>
         //{
         //    string stringJson = File.ReadAllText(SAVE_PATH + SAVE_FILE);
         //    _player = JsonUtility.FromJson<PlayerData>(stringJson);
+
+        //    SetStatItemSprite();
+        //    InitTowerDataList();
         //}
         //else
-        //{
+       // {
             _player = new PlayerData(_defaultSound);
 
-            for(int i = 1; i <= _towerDataList.Count; i++)
-            { 
-                _player.towerStatDataList.Add(new TowerStat(i));
-            }
+            InitTowerDataList();
+            InitStatDataList();
         //}
         SaveToJson();
     }
@@ -67,13 +69,53 @@ public class DataManager : MonoSingleton<DataManager>
         Application.Quit();
     }
 
+    private void SetStatItemSprite()
+    {
+        foreach (var data in _player.statDataList)
+        {
+            if (data.itemSprite == null)
+            {
+                data.itemSprite = FindStatData(data.itemNum).itemSprite;
+            }
+        }
+    }
+
+    private void SetTowerItemSprite()
+    {
+        foreach (var data in _player.towerDataList)
+        {
+            if (data.itemSprite == null)
+            {
+                data.itemSprite = FindTowerData(data.itemNum).itemSprite;
+            }
+        }
+    }
+
+    private void InitTowerDataList()
+    {
+        for (int i = 0; i < _towerDataList.Count; i++)
+        {
+            _player.towerDataList.Add(new TowerData(_towerDataList[i]));
+        }
+    }
+
+    private void InitStatDataList()
+    {
+        for (int i = 0; i < _statDataList.Count; i++)
+        {
+            _player.statDataList.Add(new PlayerStatData(_statDataList[i]));
+        }
+    }
 
     public TowerData FindTowerData(int towerNum)
     {
-        TowerData data = _towerDataList.towerDataList.Find(tower => tower.towerNum == towerNum);
-        TowerStat stat = _player.towerStatDataList.Find(tower => tower.towerNum == towerNum);
+        TowerData data = _towerDataList.towerDataList.Find(tower => tower.itemNum == towerNum);
+        return data;
+    }
 
-        data.towerStat = stat;
+    public PlayerStatData FindStatData(int statNum)
+    {
+        PlayerStatData data = _statDataList.statDataList.Find(stat => stat.itemNum == statNum);
         return data;
     }
 }   

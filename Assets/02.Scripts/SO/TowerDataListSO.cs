@@ -2,12 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ETowerType
+{
+    ActiveType,
+    PassiveType,
+    FixingType
+}
+
 [System.Serializable]
 public class TowerData : ItemData
 {
-    public int damage = 1;
-    public float weight = 1;
-    public ETowerType towerType = ETowerType.PassiveType;
+    public int damage;
+    public float weight;
+    public bool isLock;
+    public ETowerType towerType;
+        
+    public TowerData(TowerData data) : base(data)
+    {
+        damage = data.damage;
+        weight = data.weight;
+        isLock = data.isLock;
+        towerType = data.towerType;
+    }
 }
 
 [CreateAssetMenu(menuName = "SO/DataList/TowerDataList")]

@@ -14,9 +14,9 @@ public class UIManager : MonoSingleton<UIManager>
         _upgradePanelList.Add(panel);
     }
 
-    public void AddGoldEvent()
+    public void GoldEvent()
     {
-        _upgradePanelList.ForEach(panel => panel.SetUpgradeButton());
+        _upgradePanelList.ForEach(panel => panel.SetUI());
     }
 
 }

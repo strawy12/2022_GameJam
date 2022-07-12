@@ -5,40 +5,52 @@ using UnityEngine.UI;
 
 public abstract class UpgradePanel : MonoBehaviour
 {
-    [SerializeField] private Image _towerImage;
+    [SerializeField] protected Image _itemImage;
 
-    [SerializeField] private Text _nameText;
-    [SerializeField] private Text _infoText;
-    [SerializeField] private Text _explanationText;
-    [SerializeField] private UpgradeButton _upgradeBtn;
+    [SerializeField] protected Text _nameText;
+    [SerializeField] protected Text _infoText;
+    [SerializeField] protected Text _explanationText;
+    [SerializeField] protected UpgradeButton _upgradeBtn;
 
-    private TowerData _currentData;
+    protected ItemData _currentData;
 
-    public void Init(TowerData data)
+    public virtual void Init(ItemData data)
     {
         _currentData = data;
 
         SetUI();
-        _towerImage.sprite = _currentData.towerSprite;
-        _nameText.text = $"Lv.{_currentData.towerStat.level.ToString()}{_currentData.towerName}";
-        _infoText.text = _currentData.towerSkillExplanation;
-        _explanationText.text = $"Atk : {_currentData.towerStat.damage.ToString()} \n Weight : {_currentData.weight.ToString()}";
-        _upgradeBtn.text = $"강화/n{_currentData.towerStat.needGold} Gold";
 
-        SetUpgradeButton();
         UIManager.Inst.AddUpgradePanel(this);
         gameObject.SetActive(true);
     }
 
-    public abstract void SetUI();
-
-    public void UpgradeTower()
+    public virtual void SetUI()
     {
-
+        _itemImage.sprite = _currentData.itemSprite;
+        _nameText.text = $"Lv.{_currentData.itemLevel.ToString()} {_currentData.itemName}";
+        _explanationText.text = _currentData.itemExplanation;
+        _upgradeBtn.text = $"강화\n{_currentData.needGold} Gold";
+        
+        SetUpgradeButton();
     }
 
-    public void SetUpgradeButton()
+    public virtual void UpgradeItem()
     {
-        _upgradeBtn.interactable = DataManager.Inst.CurrentPlayer.gold <= _currentData.towerStat.needGold;
+        if (DataManager.Inst.CurrentPlayer.gold <= _currentData.needGold) return;
+
+        // 수정 필요할거같은 코드
+        _currentData.itemLevel++;
+
+        GameManager.Inst.SetGold(-_currentData.needGold);
+
+        _currentData.needGold = (int)(_currentData.needGold * 1.5f);
+
+        SetUI();
+        SetUpgradeButton();
+    }
+
+    public virtual void SetUpgradeButton()
+    {
+        _upgradeBtn.interactable = DataManager.Inst.CurrentPlayer.gold >= _currentData.needGold;
     }
 }
