@@ -8,6 +8,8 @@ public class UpgradeUI : MonoBehaviour
     private RectTransform _currentContent;
     private ScrollRect _scrollRect;
 
+    private bool _isOn;
+
     private void Awake()
     {
         _scrollRect = GetComponentInChildren<ScrollRect>();
@@ -19,5 +21,6 @@ public class UpgradeUI : MonoBehaviour
         _scrollRect.content = rectTransform;
         _scrollRect.content.gameObject.SetActive(true);
     }
+
 
 }

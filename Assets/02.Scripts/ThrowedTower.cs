@@ -10,7 +10,6 @@ public class ThrowedTower : MonoBehaviour
     [SerializeField] private float _reloadDelay;
     [SerializeField] private float _maxForce;
     [SerializeField] private float _forceOffset;
-    [SerializeField] private Tower _towerPref;
     [SerializeField] private ThrowLine _throwLine = null;
 
     private float _force;
