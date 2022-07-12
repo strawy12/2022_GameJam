@@ -105,7 +105,6 @@ public abstract class Tower : PoolableMono
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !isStop)
         {
-
             IHittable hittable = collision.GetComponent<IHittable>();
             hittable?.GetHit(_towerData.damage, gameObject);
         }

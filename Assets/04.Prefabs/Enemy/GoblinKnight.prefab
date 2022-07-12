@@ -1481,7 +1481,7 @@ MonoBehaviour:
   _pitchRandomness: 0.2
   _hitClip: {fileID: 0}
   _deathClip: {fileID: 0}
-  _attackSound: {fileID: 0}
+  _attackSound: {fileID: 8300000, guid: fb4f0468d41b1664ea699756b5418846, type: 3}
 --- !u!1 &2625361695802576085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,6 +3575,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1860684700720962483}
         m_TargetAssemblyTypeName: EnemyAnimation, Assembly-CSharp
         m_MethodName: PlayAttackAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4560448542951545909}
+        m_TargetAssemblyTypeName: EnemySound, Assembly-CSharp
+        m_MethodName: PlayAttackSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
