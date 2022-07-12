@@ -14,15 +14,14 @@ public class FollowCamera : MonoBehaviour
         _currentCam = GetComponent<Camera>();
     }
 
-    private void Start()
-    {
-        EventManager<Transform>.StartListening(Constant.START_THROW_TOWER, StartFollow);
-        EventManager.StartListening(Constant.END_THROW_TOWER, EndFollow);
-    }
-
-    public void StartFollow(Transform target)
+    public void SetTarget(Transform target)
     {
         _virtualCam.Follow = target;
+    }
+
+    public void StartFollow()
+    {
+        _virtualCam.enabled = true;
         _currentCam.enabled = true;
     }
 
@@ -30,27 +29,20 @@ public class FollowCamera : MonoBehaviour
     {
         Camera mainCam = Define.MainCam;
         Vector3 originPos = mainCam.transform.position ;
-        Debug.Log(originPos);
 
         mainCam.transform.position = _currentCam.transform.position + Vector3.down;
 
         _currentCam.enabled = false;
         _virtualCam.Follow = null ;
-        
+        _virtualCam.enabled = false;
+
+        _currentCam.transform.position = originPos;
+
+
         Sequence seq = DOTween.Sequence();
         seq.Append(mainCam.DOShakePosition(0.5f, 1.5f, 10));
         seq.Append(mainCam.transform.DOMove(originPos, 0.75f));
     }
 
-    private void OnDestroy()
-    {
-        EventManager<Transform>.StopListening(Constant.START_THROW_TOWER, StartFollow);
-        EventManager.StopListening(Constant.END_THROW_TOWER, EndFollow);
-    }
 
-    private void OnApplicationQuit()
-    {
-        EventManager<Transform>.StopListening(Constant.START_THROW_TOWER, StartFollow);
-        EventManager.StopListening(Constant.END_THROW_TOWER, EndFollow);
-    }
 }

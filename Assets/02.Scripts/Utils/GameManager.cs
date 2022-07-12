@@ -11,6 +11,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     [SerializeField] private PoolListSO _initList = null;
     [SerializeField] private MainCameraMove _mainCameraMove;
+    [SerializeField] private FollowCamera _followCamera;
 
     public MainCameraMove MainCameraMove => _mainCameraMove;
     
@@ -42,6 +43,15 @@ public class GameManager : MonoSingleton<GameManager>
         DataManager.Inst.CurrentPlayer.gold += gold;
         UIManager.Inst.GoldEvent();
     }
-    
 
+    public void StartFollow(Transform target)
+    {
+        _followCamera.SetTarget(target);
+        _followCamera.StartFollow();
+    }
+
+    public void EndFollow()
+    {
+        _followCamera.EndFollow();
+    }
 }
