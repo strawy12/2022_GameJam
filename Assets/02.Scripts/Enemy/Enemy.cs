@@ -55,7 +55,13 @@ public class Enemy : PoolableMono, IHittable
         _enemyBrain = GetComponent<EnemyAIBrain>();
         _enemyAttack.attackDelay = _enemyData.attackDelay;
     }
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            Debug.Log("Ground");
+        }
+    }
     public virtual void PerformAttack()
     {
         if (!_isDead && _isActive)
@@ -66,10 +72,6 @@ public class Enemy : PoolableMono, IHittable
     }
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            GetHit(1, gameObject);
-        }
     }
     public override void Reset()
     {

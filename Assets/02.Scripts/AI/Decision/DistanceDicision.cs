@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DistanceDicision : AIDecision
 {
-    [Range(0.5f, 30f)]
+
     public float distance = 5f;
 
     public override bool MakeDecision()

@@ -24,11 +24,12 @@ public class ThrowedTower : MonoBehaviour
     private void Awake()
     {
         _mainCam = Define.MainCam;
+    }
 
-        _currentTower = Instantiate(_towerPref, transform.position, Quaternion.identity);
-        _currentTower.Init();
-        _currentTower.Rigid.isKinematic = true;
-        _currentTower.gameObject.SetActive(true);
+    private void Start()
+    {
+        _currentTower = PoolManager.Instance.Pop(_towerPref.gameObject.name) as Tower;
+        _currentTower.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
 
         _isReloading = false;
     }
@@ -89,11 +90,8 @@ public class ThrowedTower : MonoBehaviour
         // 풀매니저 사용
         _currentTower = PoolManager.Instance.Pop(_towerPref.gameObject.name) as Tower;
         _currentTower.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
-        _currentTower.Init();
-        _currentTower.Collider.enabled = false;
-        _currentTower.Rigid.isKinematic = true;
-        _currentTower.gameObject.SetActive(true);
 
         _isReloading = false;
+
     }
 }

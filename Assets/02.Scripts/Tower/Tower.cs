@@ -65,10 +65,14 @@ public abstract class Tower : PoolableMono
         isStop = false;
         _isThrow = false;
         _rigidbody.constraints = 0;
+        Init();
+        Collider.enabled = false;
+        Rigid.isKinematic = true;
     }
     private void Update()
     {
         if (_isThrow == false) return;
+
         float angle = Mathf.Atan2(_rigidbody.velocity.y, _rigidbody.velocity.x) * Mathf.Rad2Deg - 90f;
         ChangeAngle(angle);
     }

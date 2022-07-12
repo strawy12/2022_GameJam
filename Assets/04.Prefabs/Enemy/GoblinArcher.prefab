@@ -939,7 +939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae54af3480231014d9ffdfbc40f56447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 30
+  distance: 100
 --- !u!1 &2476525706043029439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae54af3480231014d9ffdfbc40f56447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 30
+  distance: 100
 --- !u!1 &2476525706045178949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,12 +1391,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2476525707465858341
 MonoBehaviour:
   m_ObjectHideFlags: 0
