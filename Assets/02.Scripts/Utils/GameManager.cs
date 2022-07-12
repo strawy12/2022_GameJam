@@ -6,6 +6,13 @@ using static Define;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+<<<<<<< HEAD
+=======
+
+    public bool isClick;
+
+
+>>>>>>> origin/main
     [SerializeField] private PoolListSO _initList = null;
     [SerializeField] private MainCameraMove _mainCameraMove;
 

@@ -64,7 +64,13 @@ public class Enemy : PoolableMono, IHittable
             _enemyAttack.Attack(_enemyData.damage);
         }
     }
-
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            GetHit(1, gameObject);
+        }
+    }
     public override void Reset()
     {
         _isActive = false;
