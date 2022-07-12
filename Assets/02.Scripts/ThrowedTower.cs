@@ -89,6 +89,7 @@ public class ThrowedTower : MonoBehaviour
 
         _animator.speed = 1;
         _animator.SetTrigger(_hashThrow);
+        _currentTower.OnEndThrow += Release;
         GameManager.Inst.gameState = GameManager.GameState.Throwing;
         StartCoroutine(StartThrowDelay());
     }
@@ -109,20 +110,25 @@ public class ThrowedTower : MonoBehaviour
         _currentTower.Rigid.isKinematic = false;
         _currentTower.Rigid.velocity = (-_throwDir * _force);
         _force = 0f;
-        _currentTower = null;
         _throwLine.ClearLine();
 
-        StartCoroutine(Release());
+        
+    }
+
+    private void Release()
+    {
+        _currentTower.OnEndThrow -= Release;
+        _currentTower = null;
+
+        StartCoroutine(ReleaseCoroutine());
     }
 
 
-    private IEnumerator Release()
+    private IEnumerator ReleaseCoroutine()
     {
         yield return new WaitForSeconds(_reloadDelay);
 
-        // 풀매니저 사용
         GenerateTower();
-
         _isReloading = false;
     }
 
