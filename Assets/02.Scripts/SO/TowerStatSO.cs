@@ -13,6 +13,8 @@ public enum ETowerType
 
 public class TowerStatSO : ScriptableObject
 {
+
+    public PoolableMono poolPrefab;
     public int damage = 1;
     [Range(1, 5)]public float weight = 1;
 

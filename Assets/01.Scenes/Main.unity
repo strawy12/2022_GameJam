@@ -717,7 +717,7 @@ MonoBehaviour:
   _reloadDelay: 3
   _maxForce: 50
   _forceOffset: 4.5
-  _towerPref: {fileID: 7909730864759199491, guid: af640db1341529641a57a2f404c6c310, type: 3}
+  _towerPref: {fileID: 7662393971064421792, guid: af640db1341529641a57a2f404c6c310, type: 3}
   _throwLine: {fileID: 484093521}
 --- !u!1 &190745433
 GameObject:
@@ -12909,6 +12909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4805c998f081d7943b2c539de5638f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isClick: 0
   _initList: {fileID: 11400000, guid: 0d87cfba814288e40b4a02a5aaa590e0, type: 2}
   _cameraSpeed: 5
   _duration: 0
