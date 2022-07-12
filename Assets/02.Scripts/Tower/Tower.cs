@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : PoolableMono
+public abstract class Tower : PoolableMono
 {
     #region TowerData
     [SerializeField] protected TowerStatSO _towerStatData;
@@ -35,6 +35,7 @@ public class Tower : PoolableMono
     protected bool isStop = false;
     protected Transform baseTrm;
     protected Rigidbody2D _rigidbody;
+
     protected virtual void Awake()
     {
         baseTrm = transform.Find("baseTransform");
@@ -49,6 +50,7 @@ public class Tower : PoolableMono
 
     public virtual void DestroyTower()
     {
+        return;
         PoolManager.Instance.Push(this);
     }
 
@@ -62,14 +64,29 @@ public class Tower : PoolableMono
         
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision) 
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
         {
             isStop = true;
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            
+            if (_towerStatData.towerType == ETowerType.PassiveType)
+            {
+                UseSkill();
+            }
+            if (_towerStatData.towerType == ETowerType.ActiveType && GameManager.Inst.isClick)
+            {
+                //Debug.Log("ÀÌ³ðºÁ¶ó");
+                //UseSkill();
+                //GameManager.Inst.isClick = false;
+            }
+            if (_towerStatData.towerType == ETowerType.FixingType)
+            {
+                UseSkill();
+            }
         }
-        else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !isStop)
         {
             
         }
