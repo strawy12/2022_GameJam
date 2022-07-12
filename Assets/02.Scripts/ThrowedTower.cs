@@ -12,6 +12,9 @@ public class ThrowedTower : MonoBehaviour
     [SerializeField] private float _forceOffset;
     [SerializeField] private float _throwStartDelay;
     [SerializeField] private ThrowLine _throwLine = null;
+    [SerializeField] private Transform _throwPos;
+    [SerializeField] private Transform _armTransform;
+
 
     private float _force;
     private Camera _mainCam;
@@ -23,11 +26,16 @@ public class ThrowedTower : MonoBehaviour
     private Tower _currentTower;
     private bool _isReloading;
 
+    private Animator _animator;
+
     private List<Tower> _nextTowerList = new List<Tower>();
+
+    private  int _hashThrow = Animator.StringToHash("Throw");
 
     private void Awake()
     {
         _mainCam = Define.MainCam;
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -43,17 +51,18 @@ public class ThrowedTower : MonoBehaviour
             Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
 
 
-            _throwDir = mousePos - (Vector2)transform.position;
+            _throwDir = mousePos - (Vector2)_throwPos.position;
             _throwDir.Normalize();
 
             _force = Vector2.Distance(_startMousePos, mousePos) * _forceOffset;
 
             _force = Mathf.Clamp(_force, 0f, _maxForce);
 
-            float angle = Mathf.Atan2(-_throwDir.y, -_throwDir.x) * Mathf.Rad2Deg - 90f;
+            float angle = Mathf.Atan2(-_throwDir.y, -_throwDir.x) * Mathf.Rad2Deg - 45f;
 
-            _currentTower.ChangeAngle(angle);
-            _throwLine.DrawGuideLine(_currentTower.Rigid, transform.position, -_throwDir * _force, 300);
+            _armTransform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+            _throwLine.DrawGuideLine(_currentTower.Rigid, _throwPos.position, -_throwDir * _force, 300);
         }
 
 
@@ -63,8 +72,10 @@ public class ThrowedTower : MonoBehaviour
     {
         if (_isReloading) return;
 
+        _animator.speed = 0;
         _isPressed = true;
         _currentTower.Rigid.isKinematic = true;
+        _throwPos.position = Vector3.zero;
         _startMousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
     }
 
@@ -76,7 +87,9 @@ public class ThrowedTower : MonoBehaviour
 
         _isReloading = true;
 
-        GameManager.Inst.StartFollow(_currentTower.transform);
+        _animator.speed = 1;
+        _animator.SetTrigger(_hashThrow);
+        GameManager.Inst.gameState = GameManager.GameState.Throwing;
         StartCoroutine(StartThrowDelay());
     }
 
@@ -90,6 +103,7 @@ public class ThrowedTower : MonoBehaviour
     private void StartThrow()
     {
         _currentTower.StartThrow();
+        GameManager.Inst.StartFollow(_currentTower.transform);
 
         _currentTower.Collider.enabled = true;
         _currentTower.Rigid.isKinematic = false;
@@ -115,11 +129,12 @@ public class ThrowedTower : MonoBehaviour
     private void GenerateTower()
     {
         _currentTower = GetTower();
-        _currentTower.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+        _currentTower.transform.SetParent(_throwPos);
+        _currentTower.transform.localPosition = Vector3.zero;
+        _currentTower.transform.localRotation = Quaternion.identity;
 
         _isReloading = false;
 
-        _currentTower.Init();
         _currentTower.Collider.enabled = false;
         _currentTower.Rigid.isKinematic = true;
         _currentTower.gameObject.SetActive(true);
