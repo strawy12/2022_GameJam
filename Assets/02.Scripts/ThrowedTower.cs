@@ -30,7 +30,7 @@ public class ThrowedTower : MonoBehaviour
 
     private List<Tower> _nextTowerList = new List<Tower>();
 
-    private  int _hashThrow = Animator.StringToHash("Throw");
+    private int _hashThrow = Animator.StringToHash("Throw");
 
     private void Awake()
     {
@@ -70,7 +70,11 @@ public class ThrowedTower : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (GameManager.Inst.gameState != GameManager.GameState.Game) return;
         if (_isReloading) return;
+
+        GameManager.Inst.gameState = GameManager.GameState.ThrowReady;
+        GameManager.Inst.MainCameraMove.SetCameraPos(new Vector3(13f, 0f, -10f));
 
         _animator.speed = 0;
         _isPressed = true;
@@ -81,7 +85,12 @@ public class ThrowedTower : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (GameManager.Inst.gameState != GameManager.GameState.Game && 
+            GameManager.Inst.gameState != GameManager.GameState.ThrowReady) return;
+
         if (_isReloading) return;
+        if (_isPressed == false) return;
+
 
         _isPressed = false;
 
@@ -112,7 +121,7 @@ public class ThrowedTower : MonoBehaviour
         _force = 0f;
         _throwLine.ClearLine();
 
-        
+
     }
 
     private void Release()
@@ -181,12 +190,12 @@ public class ThrowedTower : MonoBehaviour
             towerList.Add(towerName);
         }
 
-        while(_nextTowerList.Count < 7)
+        while (_nextTowerList.Count < 7)
         {
             var rnd = new System.Random();
             towerList = towerList.OrderBy(item => rnd.Next()).ToList();
 
-            for(int i = 0; i < towerList.Count; i++)
+            for (int i = 0; i < towerList.Count; i++)
             {
                 Tower tower = PoolManager.Instance.Pop(towerList[i]) as Tower;
                 tower.gameObject.SetActive(false);
