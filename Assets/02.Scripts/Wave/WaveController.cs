@@ -27,10 +27,15 @@ public class WaveController : MonoBehaviour
     }
     public GameObject nextUIPanel;
 
+    private void Awake()
+    {
+        OnEndWave.AddListener(UIManager.Inst.GoUpgradeUI);
+    }
     public void StartWave()
     {
         if (_isWave) return;
         nextUIPanel.SetActive(false);
+        UIManager.Inst.GoGameScene();
         _isWave = true;
         _waveMonsterCount = waves[_waveIndex].RemainMonsterCnt;
         StartCoroutine(SpawnMonsterCoroutine());

@@ -48,6 +48,7 @@ public class UIManager : MonoSingleton<UIManager>
     }
     public void GoGameScene()
     {
+        GameManager.Inst.gameState = GameManager.GameState.Game;
         Sequence seq = DOTween.Sequence();
 
         seq.Append(_upgradeUI.rectTransform.DOAnchorPosX(-_upgradeUI.rectTransform.rect.width, 0.5f));
