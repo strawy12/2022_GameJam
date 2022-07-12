@@ -6,7 +6,7 @@ public class AttackAction : AIAction
 {
     public override void TakeAction()
     {
-        _aIMovementData.direction.x = 0;
+        _aIMovementData.direction = Vector2.zero;
 
         if (_aIActionData.attack == false)
         {

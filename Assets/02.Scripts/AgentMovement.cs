@@ -60,7 +60,7 @@ public class AgentMovement : MonoBehaviour
         OnVelocityChange?.Invoke(_currentVelocity);
 
         if (!_isKnockback)
-            _rigidbody.velocity = new Vector2(_movementDirection.x * _currentVelocity, _rigidbody.velocity.y);
+            _rigidbody.AddForce(new Vector2(_movementDirection.x * _currentVelocity, 0));
     }
 
 

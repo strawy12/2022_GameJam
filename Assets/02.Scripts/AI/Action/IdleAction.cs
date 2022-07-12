@@ -6,7 +6,7 @@ public class IdleAction : AIAction
 {
     public override void TakeAction()
     {
-        _aIMovementData.direction.x = 0;
+        _aIMovementData.direction = Vector2.zero;
         _enemyAIBrain.Move(_aIMovementData.direction);
     }
 }

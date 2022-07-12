@@ -5,33 +5,8 @@ using UnityEngine;
 
 public abstract class Tower : PoolableMono
 {
-    #region TowerData
-    [SerializeField] protected TowerStatSO _towerStatData;
-
-    public int Damage
-    {
-        get
-        {
-            return _towerStatData.damage;
-        }
-    }
-
-    public float Weight
-    {
-        get
-        {
-            return _towerStatData.weight;
-        }
-    }
-
-    public ETowerType TowerType 
-    { 
-        get
-        {
-            return _towerStatData.towerType;
-        }
-    }
-    #endregion
+    protected TowerData _towerData;
+    public TowerData Data => _towerData;
 
     protected bool isStop = false;
     protected Transform baseTrm;
@@ -62,16 +37,23 @@ public abstract class Tower : PoolableMono
 
         if (_spriteRenderer == null)
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    }
+
+        if (_towerData == null)
+            _towerData = DataManager.Inst.CurrentPlayer.towerDataList.Find(tower => tower.prefabName.Equals(name));
+     }
     public override void Reset()
     {
+        Init();
         isStop = false;
         _isThrow = false;
         _rigidbody.constraints = 0;
+        Collider.enabled = false;
+        Rigid.isKinematic = true;
     }
     private void Update()
     {
         if (_isThrow == false) return;
+
         float angle = Mathf.Atan2(_rigidbody.velocity.y, _rigidbody.velocity.x) * Mathf.Rad2Deg - 90f;
         ChangeAngle(angle);
     }
@@ -104,16 +86,16 @@ public abstract class Tower : PoolableMono
             _rigidbody.isKinematic = true;
             _isThrow = false;
             _particle.Stop();
-            if (_towerStatData.towerType == ETowerType.PassiveType)
+            if (_towerData.towerType == ETowerType.PassiveType)
             {
                 UseSkill();
             }
-            if (_towerStatData.towerType == ETowerType.ActiveType && GameManager.Inst.isClick)
+            if (_towerData.towerType == ETowerType.ActiveType && GameManager.Inst.isClick)
             {
                      //UseSkill();
                 //GameManager.Inst.isClick = false;
             }
-            if (_towerStatData.towerType == ETowerType.FixingType)
+            if (_towerData.towerType == ETowerType.FixingType)
             {
                 UseSkill();
             }

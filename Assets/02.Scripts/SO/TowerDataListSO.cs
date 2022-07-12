@@ -2,22 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class TowerData
+public enum ETowerType
 {
-    public int towerNum;
-    public string towerName;
-    public Sprite towerSprite;
+    ActiveType,
+    PassiveType,
+    FixingType
+}
 
-    [HideInInspector]
-    public TowerStat towerStat;
-
-    public float weight = 1;
-    public ETowerType towerType = ETowerType.PassiveType;
-    
-    [TextArea]
-    public string towerSkillExplanation;
-
+[System.Serializable]
+public class TowerData : ItemData
+{
+    [Header("타워 정보")]
+    public string prefabName;
+    public int damage;
+    public float weight;
+    public bool isLock;
+    public ETowerType towerType;
+        
+    public TowerData(TowerData data) : base(data)
+    {
+        prefabName = data.prefabName;
+        damage = data.damage;
+        weight = data.weight;
+        isLock = data.isLock;
+        towerType = data.towerType;
+    }
 }
 
 [CreateAssetMenu(menuName = "SO/DataList/TowerDataList")]

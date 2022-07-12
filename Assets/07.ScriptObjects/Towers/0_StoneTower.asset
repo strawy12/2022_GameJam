@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc77e5d5d5335f49818482ab21edafe, type: 3}
   m_Name: 0_StoneTower
   m_EditorClassIdentifier: 
+  poolPrefab: {fileID: 7662393971064421792, guid: af640db1341529641a57a2f404c6c310, type: 3}
   damage: 4
   weight: 2
   towerType: 1

@@ -8,12 +8,12 @@ public class TouchCameraMove : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        GameManager.Inst.CameraMove(-eventData.delta.x);
+        GameManager.Inst.MainCameraMove.CameraMove(-eventData.delta.x);
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-        GameManager.Inst.CameraMove(0);
+        GameManager.Inst.MainCameraMove.CameraMove(0);
     }
 }
 

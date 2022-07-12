@@ -15,12 +15,13 @@ public class GenerateTowerPanel : MonoBehaviour
     {
         TowerPanel panel;
         TowerData towerData;
-        int cnt = DataManager.Inst.CurrentPlayer.towerStatDataList.Count;
-        for(int i = 1; i <= cnt; i++)
+        int cnt = DataManager.Inst.CurrentPlayer.towerDataList.Count;
+
+        for(int i = 0; i < cnt; i++)
         {
             panel = Instantiate(_towerPanelTemp, _towerPanelTemp.transform.parent);
             panel.name = _towerPanelTemp.name;
-            towerData = DataManager.Inst.FindTowerData(i);
+            towerData = DataManager.Inst.CurrentPlayer.towerDataList[i];
             panel.Init(towerData);
         }
 

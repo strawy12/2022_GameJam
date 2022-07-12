@@ -6,17 +6,36 @@ using DG.Tweening;
 
 public class UIManager : MonoSingleton<UIManager>
 {
+    private List<NextTowerPanel> _nextTowerPanelList = new List<NextTowerPanel>();
+    private List<UpgradePanel> _upgradePanelList = new List<UpgradePanel>();
 
-    private List<TowerPanel> _towerPanelList = new List<TowerPanel>();
 
-    public void AddTowerPanel(TowerPanel panel)
+    public void AddUpgradePanel(UpgradePanel panel)
     {
-        _towerPanelList.Add(panel);
+        _upgradePanelList.Add(panel);
+    }
+    
+    public void AddNextTowerPanel(NextTowerPanel panel)
+    {
+        _nextTowerPanelList.Add(panel);
     }
 
-    public void AddGoldEvent()
+    public void SetNextTowerPanels(Sprite[] sprites)
     {
-        _towerPanelList.ForEach(panel => panel.SetUpgradeButton());
+        for(int i = 0; i < sprites.Length; i++)
+        {
+            _nextTowerPanelList[i].SetSprite(sprites[i]);
+        }
+    }
+
+    public void SetNextTowerPanel(int idx, Sprite towerSprite)
+    {
+        _nextTowerPanelList[idx].SetSprite(towerSprite);
+    }
+
+    public void GoldEvent()
+    {
+        _upgradePanelList.ForEach(panel => panel.SetUI());
     }
 
 }
