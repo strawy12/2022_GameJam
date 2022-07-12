@@ -26,6 +26,7 @@ public class Enemy : PoolableMono, IHittable
     public bool IsEnemy => true;
 
     public Vector3 HitPoint { get; private set; }
+
     public virtual void GetHit(int damage, GameObject damageDealer)
     {
         if (_isDead) return;
@@ -33,8 +34,12 @@ public class Enemy : PoolableMono, IHittable
         Health -= damage;
         HitPoint = damageDealer.transform.position;
         OnGetHit?.Invoke();
+
+        Debug.Log(Health);
+
         if (Health <= 0)
         {
+            Debug.Log("Á×À½");
             _isDead = true;
             _agentMovement.StopImmediatelly();
             _agentMovement.enabled = false;
@@ -62,6 +67,7 @@ public class Enemy : PoolableMono, IHittable
             Debug.Log("Ground");
         }
     }
+
     public virtual void PerformAttack()
     {
         if (!_isDead && _isActive)
@@ -70,9 +76,7 @@ public class Enemy : PoolableMono, IHittable
             _enemyAttack.Attack(_enemyData.damage);
         }
     }
-    public void Update()
-    {
-    }
+
     public override void Reset()
     {
         _isActive = false;
@@ -87,6 +91,7 @@ public class Enemy : PoolableMono, IHittable
     {
         Health = _enemyData.maxHealth;
     }
+
     public void Die()
     {
         PoolManager.Instance.Push(this);

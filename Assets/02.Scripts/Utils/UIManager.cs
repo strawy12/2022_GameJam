@@ -24,6 +24,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         for(int i = 0; i < sprites.Length; i++)
         {
+            return;
             _nextTowerPanelList[i].SetSprite(sprites[i]);
         }
     }

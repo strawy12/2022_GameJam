@@ -878,7 +878,7 @@ MonoBehaviour:
   _reloadDelay: 3
   _maxForce: 50
   _forceOffset: 4.5
-  _towerPref: {fileID: 8367169064594803529, guid: c1f7017c3cd68f64f9dbade9b03fcb0b, type: 3}
+  _throwStartDelay: 0
   _throwLine: {fileID: 484093521}
 --- !u!1 &190745433
 GameObject:
@@ -2501,7 +2501,6 @@ GameObject:
   m_Component:
   - component: {fileID: 288325898}
   - component: {fileID: 288325901}
-  - component: {fileID: 288325900}
   - component: {fileID: 288325899}
   m_Layer: 0
   m_Name: MiniMapCamera
@@ -2557,14 +2556,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &288325900
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288325897}
-  m_Enabled: 1
 --- !u!20 &288325901
 Camera:
   m_ObjectHideFlags: 0
@@ -3281,6 +3272,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589498796}
   m_CullTransparentMesh: 1
+--- !u!1001 &604662872
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787301, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787303, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_Name
+      value: GoblinKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619880941258787303, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
 --- !u!1 &666183763
 GameObject:
   m_ObjectHideFlags: 0
@@ -3374,7 +3426,7 @@ RectTransform:
   m_Children:
   - {fileID: 2113353068}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3528,11 +3580,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6289be4cfa9af4799ac8c49eb6c28b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towerImage: {fileID: 1542197121}
+  _itemImage: {fileID: 0}
   _nameText: {fileID: 95144813}
   _infoText: {fileID: 1701820881}
   _explanationText: {fileID: 190745435}
   _upgradeBtn: {fileID: 0}
+  _backgroundImage: {fileID: 0}
 --- !u!114 &769216032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12441,10 +12494,12 @@ MonoBehaviour:
     effectSoundVolume: 0
     bgmSoundVolume: 0
     isTutorial: 0
-    towerStatDataList: []
+    towerDataList: []
+    statDataList: []
     currentRound: 0
     gold: 0
   _towerDataList: {fileID: 11400000, guid: 3973bc5241cef694da6711e80ac6723b, type: 2}
+  _statDataList: {fileID: 11400000, guid: 6058b70937ef5234a98c49091c3257bd, type: 2}
 --- !u!4 &1025233334
 Transform:
   m_ObjectHideFlags: 0
@@ -12906,7 +12961,7 @@ RectTransform:
   - {fileID: 19509070}
   - {fileID: 1706393564}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -13365,9 +13420,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClick: 0
   _initList: {fileID: 11400000, guid: 0d87cfba814288e40b4a02a5aaa590e0, type: 2}
-  _cameraSpeed: 5
-  _duration: 0
-  _cameraTransform: {fileID: 0}
+  _mainCameraMove: {fileID: 0}
+  _followCamera: {fileID: 15503358}
+  gameState: 0
 --- !u!4 &2015117405
 Transform:
   m_ObjectHideFlags: 0

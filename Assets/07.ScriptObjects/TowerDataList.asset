@@ -21,10 +21,10 @@ MonoBehaviour:
     itemExplanation: "\uD0C0\uC6CC\uAC00 \uBD80\uC154\uC9C0\uBA70 \uAD11\uC5ED \uD53C\uD574\uB97C
       \uC900\uB2E4"
     prefabName: StoneTower
-    damage: 1
+    damage: 4
     weight: 2
     isLock: 0
-    towerType: 0
+    towerType: 1
   - itemNum: 1
     itemName: "\uD30C\uC774\uC5B4 \uD0C0\uC6CC"
     itemSprite: {fileID: 6137813302077351160, guid: 2668ae70f8ea8ba4f92d9d7907a0663a, type: 3}
@@ -37,7 +37,7 @@ MonoBehaviour:
     damage: 1
     weight: 1
     isLock: 1
-    towerType: 1
+    towerType: 2
   - itemNum: 2
     itemName: "\uD3C9\uD654\uC758 \uC601\uC6C5\uC0C1"
     itemSprite: {fileID: -6164834272971422932, guid: 2668ae70f8ea8ba4f92d9d7907a0663a, type: 3}
@@ -49,7 +49,7 @@ MonoBehaviour:
     damage: 1
     weight: 2
     isLock: 1
-    towerType: 0
+    towerType: 2
   - itemNum: 3
     itemName: "\uC5D8\uD504\uD0C0\uC6CC"
     itemSprite: {fileID: 0}
@@ -74,4 +74,4 @@ MonoBehaviour:
     damage: 0
     weight: 3
     isLock: 1
-    towerType: 0
+    towerType: 1

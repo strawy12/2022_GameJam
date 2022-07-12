@@ -7,22 +7,22 @@
             "itemNum": 0,
             "itemName": "돌 타워",
             "itemSprite": {
-                "instanceID": 24246
+                "instanceID": 20678
             },
             "itemLevel": 0,
             "needGold": 10,
             "itemExplanation": "타워가 부셔지며 광역 피해를 준다",
             "prefabName": "StoneTower",
-            "damage": 1,
+            "damage": 4,
             "weight": 2.0,
             "isLock": false,
-            "towerType": 0
+            "towerType": 1
         },
         {
             "itemNum": 1,
             "itemName": "파이어 타워",
             "itemSprite": {
-                "instanceID": 24248
+                "instanceID": 20680
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -31,13 +31,13 @@
             "damage": 1,
             "weight": 1.0,
             "isLock": true,
-            "towerType": 1
+            "towerType": 2
         },
         {
             "itemNum": 2,
             "itemName": "평화의 영웅상",
             "itemSprite": {
-                "instanceID": 24242
+                "instanceID": 20682
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -46,7 +46,7 @@
             "damage": 1,
             "weight": 2.0,
             "isLock": true,
-            "towerType": 0
+            "towerType": 2
         },
         {
             "itemNum": 3,
@@ -67,7 +67,7 @@
             "itemNum": 4,
             "itemName": "피라미드",
             "itemSprite": {
-                "instanceID": 24250
+                "instanceID": 20684
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -76,7 +76,7 @@
             "damage": 0,
             "weight": 3.0,
             "isLock": true,
-            "towerType": 0
+            "towerType": 1
         }
     ],
     "statDataList": [

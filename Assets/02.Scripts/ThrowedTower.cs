@@ -114,6 +114,7 @@ public class ThrowedTower : MonoBehaviour
 
     private void GenerateTower()
     {
+        
         _currentTower = GetTower();
         _currentTower.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
 
@@ -127,7 +128,7 @@ public class ThrowedTower : MonoBehaviour
 
     private Tower GetTower()
     {
-        if (_nextTowerList.Count <= 4)
+        if (_nextTowerList.Count <= 5)
             SetTowerList();
 
         Tower tower = _nextTowerList[0];
@@ -155,7 +156,7 @@ public class ThrowedTower : MonoBehaviour
         {
             if (data.isLock)
                 continue;
-
+                
             string towerName = data.prefabName;
             towerList.Add(towerName);
         }
