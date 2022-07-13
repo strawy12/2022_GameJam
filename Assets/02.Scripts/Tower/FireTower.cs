@@ -43,7 +43,6 @@ public class FireTower : Tower
             {
                 IHittable hit = hitMonster.GetComponent<IHittable>();
                 hit?.GetHit(6, transform.gameObject);
-                Debug.Log("hit");
             }
             yield return new WaitForSeconds(0.01f);
             FadeTower(1f);

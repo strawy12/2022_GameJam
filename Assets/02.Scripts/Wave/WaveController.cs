@@ -57,6 +57,7 @@ public class WaveController : MonoBehaviour
 
     public void KillWaveMonster()
     {
+        Debug.Log(_waveMonsterCount);
         _waveMonsterCount--;
         if(_waveMonsterCount <= 0)
         {
@@ -69,7 +70,7 @@ public class WaveController : MonoBehaviour
         OnEndWave?.Invoke();
         nextUIPanel.SetActive(true);
         _waveIndex++;
-        if (_waveIndex > waves.Count)
+        if (_waveIndex > waves.Count - 1)
         {
             _waveIndex = 0;
             _waveLevel++;

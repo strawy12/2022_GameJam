@@ -6,8 +6,8 @@ public class PyramidSwamp : PoolableMono
 {
     [SerializeField] private LayerMask _whatIsEnemy;
 
-    private void OnEnable()
-    {
+    public void ParticleStart() 
+    { 
         StartCoroutine(MakePyramidSwamp());
     }
 
@@ -19,15 +19,14 @@ public class PyramidSwamp : PoolableMono
 
             IHittable hittable = hitCol.GetComponent<IHittable>();
             AgentMovement monsterSpeed = hitCol.GetComponent<AgentMovement>();
-
             hittable.GetHit(1, transform.gameObject);
-            monsterSpeed.SwampStateEnemyRun();
+            monsterSpeed.SwampStateEnemyRun(0.2f, 3f);
         }
     }
 
     IEnumerator MakePyramidSwamp()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         PoolManager.Instance.Push(this);
     }
 

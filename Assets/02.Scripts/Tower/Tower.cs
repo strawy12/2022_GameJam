@@ -56,6 +56,7 @@ public abstract class Tower : PoolableMono
         _isThrow = false;
         _rigidbody.constraints = 0;
         Collider.enabled = false;
+        _spriteRenderer.DOFade(1, 0.01f);
         Rigid.isKinematic = true;
     }
     private void Update()
@@ -111,7 +112,6 @@ public abstract class Tower : PoolableMono
             OnEndThrow?.Invoke();
             GameManager.Inst.EndFollow();
         }
-       
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             OnTriggerEnemy(collision);
@@ -148,7 +148,6 @@ protected virtual void OnTriggerEnemy(Collider2D collision)
         {
             isCritical = true;
         }
-
         return isCritical;
     }
 }

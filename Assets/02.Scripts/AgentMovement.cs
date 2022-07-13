@@ -5,10 +5,9 @@ using UnityEngine.Events;
 using DG.Tweening;
 public class AgentMovement : MonoBehaviour
 {
-    public float slowSwamp = 2f;
 
     private Rigidbody2D _rigidbody;
-
+    private float _offsetSpeedValue = 1;
     [Range(0, 10)]
     public float maxSpeed = 5;
 
@@ -17,7 +16,7 @@ public class AgentMovement : MonoBehaviour
 
     protected float _currentVelocity = 3f;
     protected Vector2 _movementDirection;
-
+    protected bool _isSlowness = false;
     public UnityEvent<float> OnVelocityChange; //플레이어 속도가 바뀔때 실행될 이벤트
     
     #region 넉백 관련 파라메터
@@ -66,15 +65,23 @@ public class AgentMovement : MonoBehaviour
         OnVelocityChange?.Invoke(_currentVelocity);
 
         if (!_isKnockback)
-            _rigidbody.velocity = new Vector2(_movementDirection.x * _currentVelocity, _rigidbody.velocity.y);
+            _rigidbody.velocity = new Vector2(_movementDirection.x * _currentVelocity * _offsetSpeedValue, _rigidbody.velocity.y);
     }
 
-    public void SwampStateEnemyRun()
+    public void SwampStateEnemyRun(float percent, float duration)
     {
-        _rigidbody.AddForce(new Vector2(_movementDirection.x * _currentVelocity - slowSwamp, 0));
+        if (_isSlowness) return;
+        StartCoroutine(SlownessCoroutine(percent, duration));
     }
 
-
+    public IEnumerator SlownessCoroutine(float percent, float duration)
+    {
+        _isSlowness = true;
+        _offsetSpeedValue = 1 - percent;
+        yield return new WaitForSeconds(duration);
+        _offsetSpeedValue = 1;
+        _isSlowness = false;
+    }
     //넉백구현할 때 사용할 거다.
     public void StopImmediatelly()
     {
@@ -92,7 +99,6 @@ public class AgentMovement : MonoBehaviour
     }
     public IEnumerator KnockbackCorutine(Vector2 dir, float power, float duration)
     {
-        Debug.Log("dd");
         _rigidbody.AddForce(dir.normalized * power, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
         ResetKnockbackParam();

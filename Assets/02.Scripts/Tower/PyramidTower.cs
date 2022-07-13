@@ -11,24 +11,13 @@ public class PyramidTower : Tower
         base.Awake();
     }
 
-    void Update()
-    {
-        // 터치아직안함
-        if (Input.GetMouseButtonDown(0) && !GameManager.Inst.isGround)
-        {
-            UseSkill();
-        }
-    }
-
-
-    IEnumerator SpawnSwamp()
+    private IEnumerator SpawnSwamp()
     {
         PyramidSwamp swamp = PoolManager.Instance.Pop("PyramidSwamp") as PyramidSwamp;
         swamp.transform.position = new Vector2(transform.position.x, -7);
-        swamp.gameObject.SetActive(true);
-
+        swamp.ParticleStart();
         yield return new WaitForSeconds(.7f);
-        DestroyTower();
+        FadeTower(1f);
     }
 
     public override void UseSkill()
