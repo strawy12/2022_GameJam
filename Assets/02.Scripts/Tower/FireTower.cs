@@ -13,14 +13,6 @@ public class FireTower : Tower
         base.Awake();
     }
 
-    private void Update()
-    {
-        if (isBoom)
-        {
-            StartCoroutine(ExPlosionFireTower());
-        }
-    }
-
     public override void UseSkill()
     {
         StartCoroutine(StartedMonsterCheck());
