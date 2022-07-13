@@ -6,20 +6,16 @@ public class PyramidTower : Tower
 {
     [SerializeField] private PyramidSwamp _swampObj;
 
+
     protected override void Awake()
     {
         base.Awake();
     }
 
-    void Update()
+    private void Start()
     {
-        // 터치아직안함
-        if (Input.GetMouseButtonDown(0) && !GameManager.Inst.isGround)
-        {
-            UseSkill();
-        }
+        EventManager.StartListening(Constant.CLICK_SCREEN, UseSkill);
     }
-
 
     IEnumerator SpawnSwamp()
     {
@@ -36,5 +32,26 @@ public class PyramidTower : Tower
         StartCoroutine(SpawnSwamp());
     }
 
+    public override void DestroyTower()
+    {
+        EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
+        base.DestroyTower();
+    }
 
+    public override void Reset()
+    {
+        base.Reset();
+        EventManager.StartListening(Constant.CLICK_SCREEN, UseSkill);
+
+    }
+    private void OnDestroy()
+    {
+        EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
+
+    }
 }

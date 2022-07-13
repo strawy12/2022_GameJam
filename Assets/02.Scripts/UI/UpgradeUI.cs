@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,8 @@ public class UpgradeUI : MonoBehaviour
     private RectTransform _currentContent;
     private ScrollRect _scrollRect;
 
-    private bool _isOn;
+
+    private bool _isOpen;
 
     private void Awake()
     {
@@ -25,5 +27,30 @@ public class UpgradeUI : MonoBehaviour
         _scrollRect.content.gameObject.SetActive(true);
     }
 
+    public void ClickOpenButton()
+    {
+        _isOpen = !_isOpen;
+
+        if (_isOpen)
+        {
+            OpenUI();
+        }
+
+        else
+        {
+            CloseUI();
+        }
+    }
+
+    public Tween OpenUI()
+    {
+        _isOpen = true;
+        return rectTransform.DOAnchorPosX(0f, 0.5f);
+    }
+    public Tween CloseUI()
+    {
+        _isOpen = false;
+        return rectTransform.DOAnchorPosX(-rectTransform.rect.width, 0.5f);
+    }
 
 }

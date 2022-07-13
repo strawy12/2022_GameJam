@@ -8,6 +8,7 @@ public class UIManager : MonoSingleton<UIManager>
 {
     [SerializeField] private UpgradeUI _upgradeUI;
     [SerializeField] private GoldPanel _goldPanel;
+    [SerializeField] private CanvasGroup _nextTowerUI;
 
     private List<NextTowerPanel> _nextTowerPanelList = new List<NextTowerPanel>();
     private List<UpgradePanel> _upgradePanelList = new List<UpgradePanel>();
@@ -27,7 +28,6 @@ public class UIManager : MonoSingleton<UIManager>
         int cnt = Mathf.Max(_nextTowerPanelList.Count, sprites.Length);
         for (int i = 0; i < cnt; i++)
         {
-            return;
             _nextTowerPanelList[i].SetSprite(sprites[i]);
         }
     }
@@ -45,17 +45,20 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void GoUpgradeUI()
     {
-        Sequence seq = DOTween.Sequence();
+        GameManager.Inst.gameState = GameManager.GameState.UI;
 
+        Sequence seq = DOTween.Sequence();
         seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(-2.1f,0,-10f), 0.75f));
-        seq.Append(_upgradeUI.rectTransform.DOAnchorPosX(0f, 0.5f));
+        seq.Join(_nextTowerUI.DOFade(0f, 0.75f));
+        seq.Append(_upgradeUI.OpenUI());
     }
     public void GoGameScene()
     {
         GameManager.Inst.gameState = GameManager.GameState.Game;
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(_upgradeUI.rectTransform.DOAnchorPosX(-_upgradeUI.rectTransform.rect.width, 0.5f));
+        seq.Append(_upgradeUI.CloseUI());
         seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(13f, 0, -10f), 0.75f));
+        seq.Join(_nextTowerUI.DOFade(0f, 0.75f));
     }
 }

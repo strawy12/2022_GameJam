@@ -146,7 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65348fa631957a8478862007fa8d984f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _peaceCol: {fileID: 2526374075218553042}
+  _towerType: 2
+  isSkill: 0
+  _whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &7414254480766446388
 GameObject:
   m_ObjectHideFlags: 0

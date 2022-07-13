@@ -7,7 +7,8 @@ using static Constant;
 
 public abstract class Tower : PoolableMono
 {
-    [SerializeField] private int _towerNum;
+    public enum ETower { Stone, Fire, PieceMaker, Elf, Pyramid}
+    [SerializeField] private ETower _towerType;
 
 
     protected TowerData _towerData;
@@ -21,7 +22,8 @@ public abstract class Tower : PoolableMono
     private ParticleSystem _particle;
 
     protected bool _isStop = false;
-    private bool _isThrow;
+    protected bool _isThrow;
+    protected bool _isGround;
 
     public TowerData Data => _towerData;
     public Rigidbody2D Rigid => _rigidbody;
@@ -32,7 +34,7 @@ public abstract class Tower : PoolableMono
     protected virtual void Awake()
     {
         StartInit();
-    }
+        _isGround = false;
     }
 
     private void StartInit()
@@ -43,11 +45,7 @@ public abstract class Tower : PoolableMono
         _collider ??= transform.Find("VisualSprite").GetComponent<Collider2D>();
         _rigidbody ??= GetComponent<Rigidbody2D>();
 
-        _towerData ??= DataManager.Inst.CurrentPlayer.GetTowerData(_towerNum);
-    }
-
-    private void Start()
-    {
+        _towerData ??= DataManager.Inst.CurrentPlayer.GetTowerData((int )_towerType);
     }
 
     public override void Reset()
@@ -102,8 +100,7 @@ public abstract class Tower : PoolableMono
             }
             if (_towerData.towerType == ETowerType.ActiveType)
             {
-                Debug.Log("�궥������");
-                GameManager.Inst.isGround = true;
+                _isGround = true;
             }
 
             OnEndThrow?.Invoke();
@@ -138,3 +135,4 @@ public abstract class Tower : PoolableMono
         return isCritical;
     }
 }
+

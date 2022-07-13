@@ -7,7 +7,7 @@
             "itemNum": 0,
             "itemName": "돌 타워",
             "itemSprite": {
-                "instanceID": 20842
+                "instanceID": 21678
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -23,7 +23,7 @@
             "itemNum": 1,
             "itemName": "파이어 타워",
             "itemSprite": {
-                "instanceID": 20844
+                "instanceID": 21686
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -39,7 +39,7 @@
             "itemNum": 2,
             "itemName": "평화의 영웅상",
             "itemSprite": {
-                "instanceID": 20846
+                "instanceID": 21684
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -55,7 +55,7 @@
             "itemNum": 3,
             "itemName": "엘프타워",
             "itemSprite": {
-                "instanceID": 0
+                "instanceID": 21682
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -71,7 +71,7 @@
             "itemNum": 4,
             "itemName": "피라미드",
             "itemSprite": {
-                "instanceID": 20848
+                "instanceID": 21688
             },
             "itemLevel": 0,
             "needGold": 10,

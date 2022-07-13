@@ -6,9 +6,6 @@ using static Define;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-
-    public bool isGround = false;
-
     [SerializeField] private PoolListSO _initList = null;
     [SerializeField] private FollowCamera _followCamera;
 
@@ -45,8 +42,12 @@ public class GameManager : MonoSingleton<GameManager>
 
         gameState = GameState.Game;
         _mainCameraMove = Define.MainCam.GetComponent<MainCameraMove>();
-    }   
+    }
 
+    private void Start()
+    {
+        UIManager.Inst.GoUpgradeUI();
+    }
     private void CreatePool()
     {
         foreach (PoolingPair pair in _initList.list)

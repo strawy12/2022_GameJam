@@ -54,7 +54,6 @@ public class Enemy : PoolableMono, IHittable, IKnockback
             _enemyAttack.Reset();
         }
     }
-    #endregion
 
     [SerializeField]
     private bool _isActive = false;
