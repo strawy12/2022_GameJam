@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ElfTower : Tower
 {
-    // ���� �ڵ�
     [SerializeField] private ElfArrow _elfArrowPref;
 
     [SerializeField] private float _duration;
@@ -61,6 +60,5 @@ public class ElfTower : Tower
     private void OnApplicationQuit()
     {
         EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
-
     }
 }

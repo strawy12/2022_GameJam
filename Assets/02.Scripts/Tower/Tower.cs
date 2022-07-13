@@ -102,6 +102,7 @@ public abstract class Tower : PoolableMono
                     break;
                 case ETowerType.ActiveType:
                     _isGround = true;
+                    FadeTower(1f);
                     break;
                 case ETowerType.FixingType:
                     UseSkill();
