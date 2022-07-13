@@ -171,12 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9239f5c7567b9344fa725ce840431597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towerType: 3
+  _towerNum: 0
   _elfArrowPref: {fileID: -805298637847678045, guid: 60f5e68f9ab34944f88cebc869a61a35, type: 3}
   _duration: 0.5
-  _shootDelay: 1
+  _shootDelay: 0.5
   _shootPosOffset: 0.5
-  _shootForce: 200
+  _shootForce: 700
 --- !u!1 &5046635459087269594
 GameObject:
   m_ObjectHideFlags: 0

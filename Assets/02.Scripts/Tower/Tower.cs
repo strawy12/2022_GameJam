@@ -11,7 +11,7 @@ public abstract class Tower : PoolableMono
 
 
     protected TowerData _towerData;
-
+    
     protected Transform _baseTrm;
 
     protected Rigidbody2D _rigidbody;
@@ -84,8 +84,12 @@ public abstract class Tower : PoolableMono
         _isThrow = true;
         transform.SetParent(null);
         _particle.Play();
+        OnThrowTower();
     }
+    protected virtual void OnThrowTower()
+    {
 
+    }
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !_isStop)

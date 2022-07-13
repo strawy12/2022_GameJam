@@ -11,30 +11,25 @@ public class ElfTower : Tower
     [SerializeField] private float _shootPosOffset;
     [SerializeField] private float _shootForce;
 
-    private bool isGround;
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
     IEnumerator ElfTowerSkill()
     {
-        float time = _duration;
         Vector2 shootPos = transform.position;
 
-        while (time > 0)
+        for (int i = 0; i < 8; i++)
         {
             ElfArrow arrow = PoolManager.Instance.Pop("ElfArrow") as ElfArrow;
-            arrow.transform.position = shootPos + new Vector2(_shootPosOffset* Random.Range(-1, 1), 0f);
-            arrow.gameObject.SetActive(true);
+            arrow.transform.position = shootPos + new Vector2(_shootPosOffset * Random.Range(-1f, 1f), 0f);
             arrow.Init(Vector2.down, _shootForce);
             yield return new WaitForSeconds(_shootDelay);
-            time -= _shootDelay;
         }
     }
-
+    protected override void OnThrowTower()
+    {
+        EventManager.StartListening(Constant.CLICK_SCREEN, UseSkill);
+    }
     public override void UseSkill()
     {
+        Debug.Log("useElf");
         if (gameObject.activeSelf == false) return;
 
         StartCoroutine(ElfTowerSkill());
@@ -50,7 +45,6 @@ public class ElfTower : Tower
     public override void Reset()
     {
         base.Reset();
-        EventManager.StartListening(Constant.CLICK_SCREEN, UseSkill);
     }
     private void OnDestroy()
     {
