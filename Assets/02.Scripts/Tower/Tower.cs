@@ -26,7 +26,7 @@ public abstract class Tower : PoolableMono
     public TowerData Data => _towerData;
     public Rigidbody2D Rigid => _rigidbody;
     public Collider2D Collider => _collider;
-
+    private bool _isGround;
     public Action OnEndThrow;
     protected Sequence seq;
     protected virtual void Awake()
@@ -101,7 +101,7 @@ public abstract class Tower : PoolableMono
                     UseSkill();
                     break;
                 case ETowerType.ActiveType:
-                    GameManager.Inst.isGround = true;
+                    _isGround = true;
                     break;
                 case ETowerType.FixingType:
                     UseSkill();

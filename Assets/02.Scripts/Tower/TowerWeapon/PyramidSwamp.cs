@@ -15,8 +15,6 @@ public class PyramidSwamp : PoolableMono
     {
         if (hitCol.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Debug.Log("´ê´Â Áß");
-
             IHittable hittable = hitCol.GetComponent<IHittable>();
             AgentMovement monsterSpeed = hitCol.GetComponent<AgentMovement>();
             hittable.GetHit(1, transform.gameObject);

@@ -26,8 +26,12 @@ public class FireTower : Tower
 
     protected override void OnTriggerEnemy(Collider2D collision)
     {
-        if (!_isStop) base.OnTriggerEnemy(collision);
-        else if(_isCheck && !_isBoom)
+        if (!_isStop)
+        {
+            base.OnTriggerEnemy(collision);
+            Debug.Log("hit_Enemy no stop tower");
+        }
+        else if (_isCheck && !_isBoom)
         {
             StartCoroutine(ExPlosionFireTower());
         }
@@ -43,6 +47,7 @@ public class FireTower : Tower
             {
                 IHittable hit = hitMonster.GetComponent<IHittable>();
                 hit?.GetHit(6, transform.gameObject);
+                Debug.Log("boom");
             }
             yield return new WaitForSeconds(0.01f);
             FadeTower(1f);
