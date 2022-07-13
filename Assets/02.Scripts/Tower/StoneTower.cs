@@ -32,9 +32,15 @@ public class StoneTower : Tower
         }
 
         yield return new WaitForSeconds(1f);
+<<<<<<< HEAD
         FadeTower(0.1f);
         
     }
+=======
+        FadeTower(1f);
+    }
+
+>>>>>>> OIF
     protected override void SpawnEffect()
     {
         Vector2 rayPos = transform.position;
@@ -47,6 +53,8 @@ public class StoneTower : Tower
             effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
             effect.StartAnim();
         }
+
+        ShakeObject(hit.point);
     }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -54,5 +62,16 @@ public class StoneTower : Tower
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 2.5f);
     }
+<<<<<<< HEAD
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 2.5f);
+    }
+=======
+
+    
+>>>>>>> OIF
 #endif
 }
