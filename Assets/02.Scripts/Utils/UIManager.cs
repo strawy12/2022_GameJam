@@ -59,6 +59,6 @@ public class UIManager : MonoSingleton<UIManager>
 
         seq.Append(_upgradeUI.CloseUI());
         seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(13f, 0, -10f), 0.75f));
-        seq.Join(_nextTowerUI.DOFade(0f, 0.75f));
+        seq.Join(_nextTowerUI.DOFade(1f, 0.75f));
     }
 }

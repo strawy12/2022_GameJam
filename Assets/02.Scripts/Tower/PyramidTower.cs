@@ -16,8 +16,8 @@ public class PyramidTower : Tower
         PyramidSwamp swamp = PoolManager.Instance.Pop("PyramidSwamp") as PyramidSwamp;
         swamp.transform.position = new Vector2(transform.position.x, -7);
         swamp.ParticleStart();
-        yield return new WaitForSeconds(.7f);
-        FadeTower(1f);
+        yield return new WaitForSeconds(.01f);
+        FadeTower(0.1f);
     }
 
     public override void UseSkill()
@@ -25,5 +25,18 @@ public class PyramidTower : Tower
         StartCoroutine(SpawnSwamp());
     }
 
-
+    protected override void SpawnEffect()
+    {
+        Vector2 rayPos = transform.position;
+        rayPos.y = 10f;
+        var hit = Physics2D.Raycast(rayPos, Vector2.down, 999f, LayerMask.GetMask("Ground"));
+        Debug.DrawRay(rayPos, Vector2.down * 999f, Color.red, 10f);
+        if (hit.collider != null)
+        {
+            Effect effect = PoolManager.Instance.Pop(_effectPrefab.name) as Effect;
+            effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
+            effect.StartAnim();
+        }
+        ShakeObject(hit.point);
+    }
 }

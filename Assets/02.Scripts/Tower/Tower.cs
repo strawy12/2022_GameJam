@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using static Constant;
 
 public abstract class Tower : PoolableMono
 {
-    [SerializeField] private int _towerNum;
-
+    public enum ETower { Stone, Fire, PieceMaker, Elf, Pyramid }
+    [SerializeField] private ETower _towerType;
+    [SerializeField] protected GameObject _effectPrefab; 
+    [SerializeField] private ParticleSystem _throwEffect;
 
     protected TowerData _towerData;
 
@@ -18,7 +19,6 @@ public abstract class Tower : PoolableMono
     private Collider2D _collider;
 
     private SpriteRenderer _spriteRenderer;
-    private ParticleSystem _particle;
 
     protected bool _isStop = false;
     private bool _isThrow;
@@ -37,16 +37,16 @@ public abstract class Tower : PoolableMono
     private void StartInit()
     {
         _baseTrm ??= transform.Find("BaseTransform");
-        _particle ??= transform.Find("TowerShootParticle").GetComponent<ParticleSystem>();
         _spriteRenderer ??= transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
         _collider ??= transform.Find("VisualSprite").GetComponent<Collider2D>();
         _rigidbody ??= GetComponent<Rigidbody2D>();
 
-        _towerData ??= DataManager.Inst.CurrentPlayer.GetTowerData(_towerNum);
+        _towerData ??= DataManager.Inst.CurrentPlayer.GetTowerData((int)_towerType);
     }
 
     private void Start()
     {
+
     }
 
     public override void Reset()
@@ -58,6 +58,7 @@ public abstract class Tower : PoolableMono
         Collider.enabled = false;
         _spriteRenderer.DOFade(1, 0.01f);
         Rigid.isKinematic = true;
+        _spriteRenderer.transform.rotation = Quaternion.identity;
     }
     private void Update()
     {
@@ -83,9 +84,13 @@ public abstract class Tower : PoolableMono
     {
         _isThrow = true;
         transform.SetParent(null);
-        _particle.Play();
+        _throwEffect.Play();
+        OnThrowTower();
     }
+    protected virtual void OnThrowTower()
+    {
 
+    }
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !_isStop)
@@ -94,7 +99,7 @@ public abstract class Tower : PoolableMono
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.isKinematic = true;
             _isThrow = false;
-            _particle.Stop();
+            _throwEffect.Stop();
             switch (_towerData.towerType)
             {
                 case ETowerType.PassiveType:
@@ -102,6 +107,7 @@ public abstract class Tower : PoolableMono
                     break;
                 case ETowerType.ActiveType:
                     _isGround = true;
+                    FadeTower(1f);
                     break;
                 case ETowerType.FixingType:
                     UseSkill();
@@ -111,6 +117,8 @@ public abstract class Tower : PoolableMono
             }
             OnEndThrow?.Invoke();
             GameManager.Inst.EndFollow();
+
+            SpawnEffect();
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
@@ -122,32 +130,36 @@ public abstract class Tower : PoolableMono
     {
         seq = DOTween.Sequence();
         seq.AppendInterval(delay);
-        seq.Append(_spriteRenderer.DOFade(0, 1f));
+        seq.Append(_spriteRenderer.DOFade(0, 0.2f));
         seq.AppendCallback(DestroyTower);
     }
-
-protected virtual void OnTriggerEnemy(Collider2D collision)
-{
-    if(!_isStop)
+    protected virtual void OnTriggerEnemy(Collider2D collision)
     {
-        IHittable hittable = collision.GetComponent<IHittable>();
-        float damage = (_towerData.damage * DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.DamageFactor));
-        if (IsCritical())
-            damage *= CRITICAL_DAMAGE_FACTOR;
-        hittable?.GetHit((int)damage, gameObject);
-        IKnockback knockback = collision.GetComponent<IKnockback>();
-        knockback?.Knockback(Vector2.one, _towerData.knockbackPower, 1f);
-    }
-}
-    private bool IsCritical()
-    {
-        float critical = UnityEngine.Random.value;
-        bool isCritical = false;
-
-        if (critical <= (DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.Critical) / CRITICAL_MAX_PERCENT))
+        if (!_isStop)
         {
-            isCritical = true;
+            IHittable hittable = collision.GetComponent<IHittable>();
+            float damage = (_towerData.damage * DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.DamageFactor));
+           
+            hittable?.GetHit((int)damage, gameObject);
+            IKnockback knockback = collision.GetComponent<IKnockback>();
+            knockback?.Knockback(Vector2.one, _towerData.knockbackPower, 1f);
         }
-        return isCritical;
+    }
+    
+
+    protected abstract void SpawnEffect();
+    protected void ShakeObject(Vector2 hitPoint)
+    {
+        Collider2D[] hits = Physics2D.OverlapBoxAll(hitPoint, new Vector2(20f, 3f), 0f, LayerMask.GetMask("Enemy"));
+
+        foreach(var hit in hits)
+        {
+            IShake shakeObj = hit.GetComponent<IShake>();
+
+            if(shakeObj != null)
+            {
+                shakeObj.StartShake();
+            }
+        }
     }
 }

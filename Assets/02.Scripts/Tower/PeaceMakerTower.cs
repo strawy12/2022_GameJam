@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PeaceMakerTower : Tower
-{
+{ 
     public bool isSkill = false;
 
     [SerializeField] private LayerMask _whatIsEnemy;
@@ -47,13 +47,17 @@ public class PeaceMakerTower : Tower
     {
         StartCoroutine(PeaceMakerAbilityTower());
     }
-
+    protected override void SpawnEffect()
+    {
+    }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
+
+
 #endif
 }
 

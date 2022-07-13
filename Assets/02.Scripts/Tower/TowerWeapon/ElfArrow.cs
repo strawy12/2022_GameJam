@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class ElfArrow : PoolableMono
 {
     private Vector2 _targetDir;
     private float _arrowForce;
 
     private Rigidbody2D _arrowRigidbody;
+    private SpriteRenderer _spriteRenderer;
+    private Sequence seq;
+    private void Awake()
+    {
+        _arrowRigidbody = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void Init(Vector2 dir, float force)
     {
-        if (_arrowRigidbody == null)
-            _arrowRigidbody = GetComponent<Rigidbody2D>();
-
         _targetDir = dir;
         _arrowForce = force;
 
@@ -30,34 +34,32 @@ public class ElfArrow : PoolableMono
         _arrowRigidbody.AddForce(_targetDir * _arrowForce);
     }
 
-
-
-    private void OnCollisionEnter2D(Collision2D collicion)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collicion.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            IHittable monsterHit = collicion.collider.GetComponent<IHittable>();
+            IHittable monsterHit = collision.GetComponent<IHittable>();
             monsterHit.GetHit(2, transform.gameObject);
             PoolManager.Instance.Push(this);
         }
 
-        if(collicion.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            StartCoroutine(DeleteArrow());
+            _arrowRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            DeleteArrow();
         }
-
     }
 
-    IEnumerator DeleteArrow()
+    private void DeleteArrow()
     {
-        yield return new WaitForSeconds(1f);
-        PoolManager.Instance.Push(this);
+        seq = DOTween.Sequence();
+        seq.Append(_spriteRenderer.DOFade(0, 1f));
+        seq.AppendCallback(() => PoolManager.Instance.Push(this));
     }
 
     public override void Reset()
     {
-        if (_arrowRigidbody == null)
-            _arrowRigidbody = GetComponent<Rigidbody2D>();
+        _arrowRigidbody.constraints = 0;
     }
 
 }
