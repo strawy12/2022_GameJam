@@ -7,17 +7,19 @@ using static Constant;
 
 public abstract class Tower : PoolableMono
 {
-    [SerializeField] private int _towerNum;
-    [SerializeField] private GameObject _onGroundEffectPrefab;
+    public enum ETower { Stone, Fire, PieceMaker, Elf, Pyramid }
+    [SerializeField] private ETower _towerType;
+    [SerializeField] protected GameObject _effectPrefab; 
+    [SerializeField] private ParticleSystem _throwEffect;
+
     protected TowerData _towerData;
-    
+
     protected Transform _baseTrm;
 
     protected Rigidbody2D _rigidbody;
     private Collider2D _collider;
 
     private SpriteRenderer _spriteRenderer;
-    private ParticleSystem _particle;
 
     protected bool _isStop = false;
     private bool _isThrow;
@@ -36,12 +38,11 @@ public abstract class Tower : PoolableMono
     private void StartInit()
     {
         _baseTrm ??= transform.Find("BaseTransform");
-        _particle ??= transform.Find("TowerShootParticle").GetComponent<ParticleSystem>();
         _spriteRenderer ??= transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
         _collider ??= transform.Find("VisualSprite").GetComponent<Collider2D>();
         _rigidbody ??= GetComponent<Rigidbody2D>();
 
-        _towerData ??= DataManager.Inst.CurrentPlayer.GetTowerData(_towerNum);
+        _towerData ??= DataManager.Inst.CurrentPlayer.GetTowerData((int)_towerType);
     }
 
     private void Start()
@@ -58,6 +59,7 @@ public abstract class Tower : PoolableMono
         Collider.enabled = false;
         _spriteRenderer.DOFade(1, 0.01f);
         Rigid.isKinematic = true;
+        _spriteRenderer.transform.rotation = Quaternion.identity;
     }
     private void Update()
     {
@@ -83,12 +85,12 @@ public abstract class Tower : PoolableMono
     {
         _isThrow = true;
         transform.SetParent(null);
-        _particle.Play();
+        _throwEffect.Play();
         OnThrowTower();
     }
     protected virtual void OnThrowTower()
     {
-        
+
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
@@ -98,7 +100,7 @@ public abstract class Tower : PoolableMono
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.isKinematic = true;
             _isThrow = false;
-            _particle.Stop();
+            _throwEffect.Stop();
             switch (_towerData.towerType)
             {
                 case ETowerType.PassiveType:
@@ -116,12 +118,8 @@ public abstract class Tower : PoolableMono
             }
             OnEndThrow?.Invoke();
             GameManager.Inst.EndFollow();
-            if(_onGroundEffectPrefab != null)
-            {
-                Effect effect = PoolManager.Instance.Pop(_onGroundEffectPrefab.gameObject.name) as Effect;
-                effect.transform.SetPositionAndRotation(_baseTrm.position, Quaternion.identity);
-                effect.StartAnim();
-            }
+
+            SpawnEffect();
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
@@ -137,18 +135,18 @@ public abstract class Tower : PoolableMono
         seq.AppendCallback(DestroyTower);
     }
     protected virtual void OnTriggerEnemy(Collider2D collision)
-{
-    if(!_isStop)
     {
-        IHittable hittable = collision.GetComponent<IHittable>();
-        float damage = (_towerData.damage * DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.DamageFactor));
-        if (IsCritical())
-            damage *= CRITICAL_DAMAGE_FACTOR;
-        hittable?.GetHit((int)damage, gameObject);
-        IKnockback knockback = collision.GetComponent<IKnockback>();
-        knockback?.Knockback(Vector2.one, _towerData.knockbackPower, 1f);
+        if (!_isStop)
+        {
+            IHittable hittable = collision.GetComponent<IHittable>();
+            float damage = (_towerData.damage * DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.DamageFactor));
+            if (IsCritical())
+                damage *= CRITICAL_DAMAGE_FACTOR;
+            hittable?.GetHit((int)damage, gameObject);
+            IKnockback knockback = collision.GetComponent<IKnockback>();
+            knockback?.Knockback(Vector2.one, _towerData.knockbackPower, 1f);
+        }
     }
-}
     private bool IsCritical()
     {
         float critical = UnityEngine.Random.value;
@@ -160,4 +158,6 @@ public abstract class Tower : PoolableMono
         }
         return isCritical;
     }
+
+    protected abstract void SpawnEffect();
 }

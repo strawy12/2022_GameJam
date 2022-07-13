@@ -60,5 +60,9 @@ public class FireTower : Tower
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
+
+    protected override void SpawnEffect()
+    {
+    }
 #endif
 }

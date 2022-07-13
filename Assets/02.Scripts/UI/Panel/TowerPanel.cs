@@ -21,7 +21,7 @@ public class TowerPanel : UpgradePanel
     {
         if (_towerData.isLock)
         {
-            TowerData beforeData = DataManager.Inst.CurrentPlayer.towerDataList[_currentData.itemNum - 1];
+            TowerData beforeData = DataManager.Inst.CurrentPlayer.towerDataList[Mathf.Max(0,_currentData.itemNum - 1)];
             if (beforeData.isLock == false && beforeData.itemLevel >= 10)
             {
                 _towerData.isLock = false;

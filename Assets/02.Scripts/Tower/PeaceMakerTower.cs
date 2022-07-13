@@ -54,6 +54,11 @@ public class PeaceMakerTower : Tower
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
+
+    protected override void SpawnEffect()
+    {
+        throw new System.NotImplementedException();
+    }
 #endif
 }
 

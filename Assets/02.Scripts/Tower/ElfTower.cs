@@ -55,4 +55,9 @@ public class ElfTower : Tower
     {
         EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
     }
+
+    protected override void SpawnEffect()
+    {
+        throw new System.NotImplementedException();
+    }
 }
