@@ -56,7 +56,7 @@ public class FireTower : Tower
                 Debug.Log("boom");
             }
             yield return new WaitForSeconds(0.01f);
-            FadeTower(0.1f);
+            FadeTower(0f);
         }
     }
     protected override void SpawnEffect()

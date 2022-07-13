@@ -42,7 +42,7 @@ public class PeaceMakerTower : Tower
         deletePeaceMakerTower.Play("PeaceMakerDust");
         yield return new WaitForSeconds(0.5f);
 
-        DestroyTower();
+        FadeTower(0.5f);
     }
 
     public override void UseSkill()

@@ -10,7 +10,7 @@ public abstract class Tower : PoolableMono
     [SerializeField] private ETower _towerType;
     [SerializeField] protected GameObject _effectPrefab; 
     [SerializeField] private ParticleSystem _throwEffect;
-
+    [SerializeField] private PoolParticle _destroyParticle;
     protected TowerData _towerData;
 
     protected Transform _baseTrm;
@@ -70,6 +70,11 @@ public abstract class Tower : PoolableMono
 
     public virtual void DestroyTower()
     {
+        if(_destroyParticle !=null)
+        {
+            PoolParticle particle = PoolManager.Instance.Pop(_destroyParticle.gameObject.name) as PoolParticle;
+            particle.OnEnableParticle(transform.position);
+        }
         PoolManager.Instance.Push(this);
     }
 
@@ -98,8 +103,8 @@ public abstract class Tower : PoolableMono
             _isStop = true;
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.isKinematic = true;
-            _isThrow = false;
             _throwEffect.Stop();
+            _isThrow = false;
             switch (_towerData.towerType)
             {
                 case ETowerType.PassiveType:
@@ -107,7 +112,7 @@ public abstract class Tower : PoolableMono
                     break;
                 case ETowerType.ActiveType:
                     _isGround = true;
-                    FadeTower(1f);
+                    FadeTower(0f);
                     break;
                 case ETowerType.FixingType:
                     UseSkill();
@@ -130,7 +135,7 @@ public abstract class Tower : PoolableMono
     {
         seq = DOTween.Sequence();
         seq.AppendInterval(delay);
-        seq.Append(_spriteRenderer.DOFade(0, 0.2f));
+        seq.Append(_spriteRenderer.DOFade(0, 0.1f));
         seq.AppendCallback(DestroyTower);
     }
     protected virtual void OnTriggerEnemy(Collider2D collision)

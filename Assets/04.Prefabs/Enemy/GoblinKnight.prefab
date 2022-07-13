@@ -3605,7 +3605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ea3a39f494e6747ab953dd9e966a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowSwamp: 2
   maxSpeed: 10
   acceleration: 50
   deAcceleration: 50
@@ -3678,6 +3677,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyData: {fileID: 11400000, guid: a933362c527435848b7a905e5baf4dce, type: 2}
+  _dieParticle: {fileID: 6685863785894033053, guid: a5a9e46fc50735b459da257503c7341c, type: 3}
+  _dieEffect: {fileID: 786217160, guid: 636e7b280ca2b1548ae6224b627180e7, type: 3}
   <OnDie>k__BackingField:
     m_PersistentCalls:
       m_Calls:

@@ -244,7 +244,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1320579803
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -468653090123924258, guid: 10a04f553dcbf324e9dd8cba2a9ca0a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -373,7 +373,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerType: 1
-  isBoom: 0
+  _effectPrefab: {fileID: 0}
+  _throwEffect: {fileID: 8039882792692684960, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+  _destroyParticle: {fileID: 3780044184393783289, guid: f17e2650c20101e4ebb7bf22d08f5414, type: 3}
+  _isBoom: 0
+  _isCheck: 0
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128

@@ -170,7 +170,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7118322480965584789}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &3526841311150648096
 AudioSource:
@@ -375,6 +375,7 @@ MonoBehaviour:
   _towerType: 4
   _effectPrefab: {fileID: 3508577413298797006, guid: f0f773d820a2cec40bcebf65b5070eab, type: 3}
   _throwEffect: {fileID: 5080168907425406462}
+  _destroyParticle: {fileID: 3327410511934936455, guid: a68b481053c1435479971535a27c5dcc, type: 3}
   _swampObj: {fileID: 9173671696485567779, guid: 3e703bed807d0fe4db7d94b9afe9a9ab, type: 3}
   OnBrokeTower:
     m_PersistentCalls:

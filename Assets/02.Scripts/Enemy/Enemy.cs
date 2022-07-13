@@ -7,6 +7,8 @@ using static Constant;
 public class Enemy : PoolableMono, IHittable, IKnockback, IShake
 {
     [SerializeField] private EnemyDataSO _enemyData;
+    [SerializeField] private PoolParticle _dieParticle;
+    [SerializeField] private Effect _dieEffect;
     public EnemyDataSO EnemyData => _enemyData;
     protected WaveController _waveController;
     protected bool _isDead = false;
@@ -75,6 +77,11 @@ public class Enemy : PoolableMono, IHittable, IKnockback, IShake
             _agentMovement.StopImmediatelly();
             _agentMovement.enabled = false;
             GameManager.Inst.SetGold(_enemyData.dropCoin * _level / 2);
+            PoolParticle particle = PoolManager.Instance.Pop(_dieParticle.gameObject.name) as PoolParticle;
+            particle.OnEnableParticle(transform.position);
+            Effect effect = PoolManager.Instance.Pop(_dieEffect.gameObject.name) as Effect;
+            effect.transform.position = transform.position; 
+            effect.StartAnim();
             OnDie?.Invoke();
             _enemyAttack.Reset();
         }

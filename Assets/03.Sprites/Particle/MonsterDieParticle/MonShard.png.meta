@@ -1,34 +1,43 @@
 fileFormatVersion: 2
-guid: 4600f6e962f51404d8b74629d9d915b2
+guid: 2f9205f57e83b6c44b27211b32bbdda8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5684327315910396547
-    second: Blood_0
+      213: 253890792852975187
+    second: MonShard_0
   - first:
-      213: -1189345562256101844
-    second: Blood_1
+      213: -4158718331913034532
+    second: MonShard_1
   - first:
-      213: 5722333315871558701
-    second: Blood_2
+      213: -1308587892081699909
+    second: MonShard_2
   - first:
-      213: 3909595645733894167
-    second: Blood_3
+      213: 8989709116250975148
+    second: MonShard_3
   - first:
-      213: -374699494892873770
-    second: Blood_4
+      213: -3683437169478285237
+    second: MonShard_4
   - first:
-      213: 5281811327271454313
-    second: Blood_5
+      213: 4895471555869310166
+    second: MonShard_5
   - first:
-      213: -2044344349260785571
-    second: Blood_6
+      213: -8834876247805046461
+    second: MonShard_6
   - first:
-      213: 1295801174852132906
-    second: Blood_7
+      213: -6033144645611326844
+    second: MonShard_7
   - first:
-      213: 1921429812043486609
-    second: Blood_8
+      213: 1547234378877799046
+    second: MonShard_8
+  - first:
+      213: 1936072360918401994
+    second: MonShard_9
+  - first:
+      213: -2567376317049155451
+    second: MonShard_10
+  - first:
+      213: -3811433910795850021
+    second: MonShard_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -114,206 +123,257 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blood_0
+      name: MonShard_0
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 47
+        y: 398
+        width: 32
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38a83e3b399c2ee40800000000000000
-      internalID: 5684327315910396547
+      spriteID: 35e6eb7b450068300800000000000000
+      internalID: 253890792852975187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blood_1
+      name: MonShard_1
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 146
+        y: 385
+        width: 64
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2ea98633889e7fe0800000000000000
-      internalID: -1189345562256101844
+      spriteID: cd42b6106b34946c0800000000000000
+      internalID: -4158718331913034532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blood_2
+      name: MonShard_2
       rect:
         serializedVersion: 2
-        x: 384
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 276
+        y: 412
+        width: 67
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2c48e225dfc96f40800000000000000
-      internalID: 5722333315871558701
+      spriteID: bb3d71fce36f6dde0800000000000000
+      internalID: -1308587892081699909
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blood_3
+      name: MonShard_3
       rect:
         serializedVersion: 2
-        x: 512
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 383
+        y: 389
+        width: 76
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 718f16f968ca14630800000000000000
-      internalID: 3909595645733894167
+      spriteID: cabea3ccfccd1cc70800000000000000
+      internalID: 8989709116250975148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blood_4
+      name: MonShard_4
       rect:
         serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 63
+        y: 230
+        width: 50
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d7546d6bcccccaf0800000000000000
-      internalID: -374699494892873770
+      spriteID: b48c6c8f86dc1ecc0800000000000000
+      internalID: -3683437169478285237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blood_5
+      name: MonShard_5
       rect:
         serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 179
+        y: 240
+        width: 58
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96646acfa63cc4940800000000000000
-      internalID: 5281811327271454313
+      spriteID: 6dc7e97517530f340800000000000000
+      internalID: 4895471555869310166
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blood_6
+      name: MonShard_6
       rect:
         serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 274
+        y: 241
+        width: 57
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d58dbbf45a701a3e0800000000000000
-      internalID: -2044344349260785571
+      spriteID: 3415b0f9cd6346580800000000000000
+      internalID: -8834876247805046461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blood_7
+      name: MonShard_7
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 389
+        y: 242
+        width: 51
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2068969d4c9bf110800000000000000
-      internalID: 1295801174852132906
+      spriteID: 48279c7e8e6f54ca0800000000000000
+      internalID: -6033144645611326844
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blood_8
+      name: MonShard_8
       rect:
         serializedVersion: 2
-        x: 1153
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        x: 59
+        y: 80
+        width: 34
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19592bfdb3a4aaa10800000000000000
-      internalID: 1921429812043486609
+      spriteID: 68a88415871e87510800000000000000
+      internalID: 1547234378877799046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MonShard_9
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 74
+        width: 43
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac34ef3fd8f4eda10800000000000000
+      internalID: 1936072360918401994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MonShard_10
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 98
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 580d88997d8de5cd0800000000000000
+      internalID: -2567376317049155451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MonShard_11
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 80
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdea22e4d011b1bc0800000000000000
+      internalID: -3811433910795850021
       vertices: []
       indices: 
       edges: []

@@ -32,6 +32,7 @@ public class StoneTower : Tower
         }
 
         yield return new WaitForSeconds(1f);
+        
         FadeTower(0.1f);
     }
 
