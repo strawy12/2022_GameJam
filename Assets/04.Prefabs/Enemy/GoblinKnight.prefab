@@ -3493,6 +3493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919d63b85b59ae94684f4d60fdbb9e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPeaceMaker: 0
   <OnMovementKeyPress>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -3537,7 +3538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ea3a39f494e6747ab953dd9e966a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  slowSwamp: 2
+  maxSpeed: 2
   acceleration: 50
   deAcceleration: 50
   OnVelocityChange:

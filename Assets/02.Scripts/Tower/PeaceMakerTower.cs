@@ -19,15 +19,10 @@ public class PeaceMakerTower : Tower
         {
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 3f, _whatIsEnemy);
 
-            if (cols.Length <= 0)
-            {
-                Debug.Log("æ»∏ÿ√„");
-                return;
-            }
-
             foreach (var hitMonster in cols)
             {
                 AgentMovement monsterAgent = hitMonster.GetComponent<AgentMovement>();
+                Debug.Log("∏ÿ√„");
                 //EnemyAIBrain monsterAI = hitMonster.GetComponent<EnemyAIBrain>();
 
                 monsterAgent.StopImmediatelly();

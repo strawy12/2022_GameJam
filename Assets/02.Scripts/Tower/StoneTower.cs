@@ -29,8 +29,7 @@ public class StoneTower : Tower
         }
 
         yield return new WaitForSeconds(1f);
-
-        DestroyTower();
+        FadeTower(1f);
     }
 
 
