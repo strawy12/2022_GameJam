@@ -87,7 +87,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
 
     public override void Reset()
     {
-        _isActive = false;
+        _isActive = true;
         _isDead = false;
         _agentMovement.enabled = true;
         _boxCollider.enabled = true;

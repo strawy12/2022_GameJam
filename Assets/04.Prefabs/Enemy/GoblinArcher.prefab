@@ -1061,7 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae54af3480231014d9ffdfbc40f56447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 5
+  distance: 15
 --- !u!1 &2476525706305822518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae54af3480231014d9ffdfbc40f56447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 5
+  distance: 15
 --- !u!1 &2476525707185103985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,7 +1454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ea3a39f494e6747ab953dd9e966a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 2
+  maxSpeed: 10
   acceleration: 50
   deAcceleration: 50
   OnVelocityChange:

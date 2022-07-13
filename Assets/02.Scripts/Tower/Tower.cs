@@ -108,7 +108,10 @@ public abstract class Tower : PoolableMono
 
             OnEndThrow?.Invoke();
             GameManager.Inst.EndFollow();
-            seq = DOTween.Sequence(); 
+            seq = DOTween.Sequence();
+            seq.AppendInterval(2f);
+            seq.Append(_spriteRenderer.DOFade(0, 1f));
+            seq.AppendCallback(DestroyTower);
             
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !_isStop)

@@ -16,17 +16,14 @@ public class RangeEnemyAttack : EnemyAttack
             _enemyBrain.SetAttackState(true);
             AttackFeedback?.Invoke();
 
-            _moveDir = GetTarget().position - attackTrm.position;
-            _moveDir.Normalize();
-            _damage = damage;
-   
+            _damage = damage;   
             StartCoroutine(WaitBeforeAttackCoroutine());
         }
     }
     public void SpawnArrow() 
     {
         EnemyProjectile projectile = PoolManager.Instance.Pop(projectilePrefab.gameObject.name) as EnemyProjectile;
-        projectile.StartShot(_moveDir, _damage);
         projectile.transform.position = attackTrm.position;
+        projectile.StartShot(GetTarget().position, _damage);
     }
 }
