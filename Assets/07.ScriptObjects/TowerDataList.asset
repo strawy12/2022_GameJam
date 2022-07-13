@@ -23,9 +23,9 @@ MonoBehaviour:
     prefabName: StoneTower
     damage: 4
     weight: 2
-    isLock: 0
+    isLock: 1
     knockbackPower: 3
-    towerType: 0
+    towerType: 1
   - itemNum: 1
     itemName: "\uD30C\uC774\uC5B4 \uD0C0\uC6CC"
     itemSprite: {fileID: -468653090123924258, guid: 10a04f553dcbf324e9dd8cba2a9ca0a6, type: 3}
@@ -39,7 +39,7 @@ MonoBehaviour:
     weight: 1
     isLock: 0
     knockbackPower: 0
-    towerType: 1
+    towerType: 2
   - itemNum: 2
     itemName: "\uD3C9\uD654\uC758 \uC601\uC6C5\uC0C1"
     itemSprite: {fileID: 880132769457654187, guid: 10a04f553dcbf324e9dd8cba2a9ca0a6, type: 3}
@@ -50,9 +50,9 @@ MonoBehaviour:
     prefabName: PeaceMakerTower
     damage: 1
     weight: 2
-    isLock: 0
+    isLock: 1
     knockbackPower: 0
-    towerType: 0
+    towerType: 2
   - itemNum: 3
     itemName: "\uC5D8\uD504\uD0C0\uC6CC"
     itemSprite: {fileID: -7738428890328671378, guid: 10a04f553dcbf324e9dd8cba2a9ca0a6, type: 3}
@@ -63,7 +63,7 @@ MonoBehaviour:
     prefabName: ElfTower
     damage: 1
     weight: 1
-    isLock: 0
+    isLock: 1
     knockbackPower: 0
     towerType: 0
   - itemNum: 4
@@ -77,6 +77,6 @@ MonoBehaviour:
     prefabName: PyramidTower
     damage: 0
     weight: 3
-    isLock: 0
+    isLock: 1
     knockbackPower: 0
-    towerType: 0
+    towerType: 1

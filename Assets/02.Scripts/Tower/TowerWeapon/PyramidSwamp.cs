@@ -6,26 +6,25 @@ public class PyramidSwamp : PoolableMono
 {
     [SerializeField] private LayerMask _whatIsEnemy;
 
-    private void OnEnable()
-    {
+    public void ParticleStart() 
+    { 
         StartCoroutine(MakePyramidSwamp());
     }
 
     private void OnTriggerStay2D(Collider2D hitCol)
     {
-        if(hitCol.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (hitCol.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            IHittable monsterHit = hitCol.GetComponent<IHittable>();
+            IHittable hittable = hitCol.GetComponent<IHittable>();
             AgentMovement monsterSpeed = hitCol.GetComponent<AgentMovement>();
-
-            monsterHit.GetHit(1, transform.gameObject);
-            monsterSpeed.SwampStateEnemyRun();
+            hittable.GetHit(1, transform.gameObject);
+            monsterSpeed.SwampStateEnemyRun(0.2f, 3f);
         }
     }
 
     IEnumerator MakePyramidSwamp()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         PoolManager.Instance.Push(this);
     }
 

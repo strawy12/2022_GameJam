@@ -10,6 +10,7 @@ public class Golem : MonoBehaviour,IHittable
     public int Health { get; private set; }
 
     public UnityEvent OnPlayerDead;
+    public UnityEvent OnHit;
     private bool _isDead =false;
 
     private void Awake()
@@ -20,7 +21,8 @@ public class Golem : MonoBehaviour,IHittable
     {
         golemHitAnim.Play("GolemHit");
         Health -= damage;
-        if(Health <= 0)
+        OnHit?.Invoke();
+        if (Health <= 0)
         {
             Death();
         }

@@ -4,59 +4,26 @@ using UnityEngine;
 
 public class PyramidTower : Tower
 {
-    [SerializeField] private Animator deletePyramidTower;
     [SerializeField] private PyramidSwamp _swampObj;
-
 
     protected override void Awake()
     {
         base.Awake();
     }
 
-    private void Start()
-    {
-        EventManager.StartListening(Constant.CLICK_SCREEN, UseSkill);
-    }
-
-    IEnumerator SpawnSwamp()
+    private IEnumerator SpawnSwamp()
     {
         PyramidSwamp swamp = PoolManager.Instance.Pop("PyramidSwamp") as PyramidSwamp;
         swamp.transform.position = new Vector2(transform.position.x, -7);
-        swamp.gameObject.SetActive(true);
-
-        deletePyramidTower.Play("PyramidDust");
-
+        swamp.ParticleStart();
         yield return new WaitForSeconds(.7f);
-        Debug.Log("피라미드타워삭제");
-        DestroyTower();
+        FadeTower(1f);
     }
 
     public override void UseSkill()
     {
-        if (gameObject.activeSelf == false) return;
         StartCoroutine(SpawnSwamp());
     }
 
-    public override void DestroyTower()
-    {
-        EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
-        base.DestroyTower();
-    }
 
-    public override void Reset()
-    {
-        base.Reset();
-        EventManager.StartListening(Constant.CLICK_SCREEN, UseSkill);
-
-    }
-    private void OnDestroy()
-    {
-        EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
-    }
-
-    private void OnApplicationQuit()
-    {
-        EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
-
-    }
 }

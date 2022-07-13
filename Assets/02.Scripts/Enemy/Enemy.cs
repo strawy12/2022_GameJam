@@ -13,7 +13,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     protected EnemyAttack _enemyAttack;
     protected BoxCollider2D _boxCollider;
     protected int _level = 1;
-
+    protected bool _isStiff = false;
     protected EnemyAIBrain _enemyBrain;
 
     public int Health { get; private set; }
@@ -35,17 +35,14 @@ public class Enemy : PoolableMono, IHittable, IKnockback
 
     public virtual void GetHit(int damage, GameObject damageDealer)
     {
-        if (_isDead) return;
-     
+        if (_isDead || _isStiff) return;
         Health -= damage;
+        StartCoroutine(StiffCoroutine());
         HitPoint = damageDealer.transform.position;
         OnGetHit?.Invoke();
 
-        Debug.Log(Health);
-
         if (Health <= 0)
         {
-            Debug.Log("enemy 죽음");
             _isDead = true;
             _waveController.KillWaveMonster();
             _agentMovement.StopImmediatelly();
@@ -66,29 +63,26 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         _enemyAttack = GetComponent<EnemyAttack>();
         _enemyBrain = GetComponent<EnemyAIBrain>();
         _enemyAttack.attackDelay = _enemyData.attackDelay;
-        
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            //Debug.Log("Ground");
-        }
     }
 
     public virtual void PerformAttack()
     {
         if (!_isDead && _isActive)
         {
-            //���⿡ �������� ������ �����ϴ� �ڵ�
             _enemyAttack.Attack(_enemyData.damage);
         }
     }
-
+    public IEnumerator StiffCoroutine()
+    {
+        _isStiff = true;
+        yield return new WaitForSeconds(0.5f);
+        _isStiff = false;
+    }
     public override void Reset()
     {
         _isActive = true;
         _isDead = false;
+        _isStiff = false;
         _agentMovement.enabled = true;
         _boxCollider.enabled = true;
         _enemyAttack.Reset();
@@ -96,7 +90,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     }
     private void Start()
     {
-        Health = Health = _enemyData.maxHealth;
+        Health = _enemyData.maxHealth;
     }
 
     public void Die()

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class FireTower : Tower
 {
-    public bool isBoom = false;
-
+    public bool _isBoom = false;
+    public bool _isCheck = false;
     [SerializeField] private LayerMask _whatIsEnemy;
 
     protected override void Awake()
     {
         base.Awake();
     }
-
     public override void UseSkill()
     {
         StartCoroutine(StartedMonsterCheck());
@@ -21,12 +20,25 @@ public class FireTower : Tower
     IEnumerator StartedMonsterCheck() // 1초뒤 시작되게
     {
         yield return new WaitForSeconds(1f);
-        isBoom = true;
-        Debug.Log("일단 스타트몬스터쳌");
+        _isCheck = true;
     }
 
+
+    protected override void OnTriggerEnemy(Collider2D collision)
+    {
+        if (!_isStop)
+        {
+            base.OnTriggerEnemy(collision);
+            Debug.Log("hit_Enemy no stop tower");
+        }
+        else if (_isCheck && !_isBoom)
+        {
+            StartCoroutine(ExPlosionFireTower());
+        }
+    }
     IEnumerator ExPlosionFireTower() // 스킬
     {
+        _isBoom = true;
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 5f, _whatIsEnemy);
 
         if (cols.Length >= 2)
@@ -35,10 +47,10 @@ public class FireTower : Tower
             {
                 IHittable hit = hitMonster.GetComponent<IHittable>();
                 hit?.GetHit(6, transform.gameObject);
+                Debug.Log("boom");
             }
-
-            DestroyTower();
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
+            FadeTower(1f);
         }
     }
 
