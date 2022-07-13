@@ -4921,6 +4921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upgradeUI: {fileID: 1133493250}
   _goldPanel: {fileID: 1056053139}
+  _nextTowerUI: {fileID: 0}
 --- !u!114 &1607702449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4933,7 +4934,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4805c998f081d7943b2c539de5638f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGround: 0
   _initList: {fileID: 11400000, guid: 0d87cfba814288e40b4a02a5aaa590e0, type: 2}
   _followCamera: {fileID: 269573820}
   gameState: 0
@@ -5721,7 +5721,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 255
+    m_Bits: 767
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5800,8 +5800,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfabe7b71b4dca41ad18850b8b205a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraSpeed: 5
-  _duration: 10
+  _maxSpeed: 5
+  _minPosX: 0
+  _maxPosX: 0
+  _deceleration: 0
 --- !u!1 &1863471457
 GameObject:
   m_ObjectHideFlags: 0

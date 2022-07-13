@@ -27,11 +27,13 @@ public class PyramidTower : Tower
         deletePyramidTower.Play("PyramidDust");
 
         yield return new WaitForSeconds(.7f);
+        Debug.Log("피라미드타워삭제");
         DestroyTower();
     }
 
     public override void UseSkill()
     {
+        if (gameObject.activeSelf == false) return;
         StartCoroutine(SpawnSwamp());
     }
 

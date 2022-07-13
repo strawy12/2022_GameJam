@@ -18,12 +18,6 @@ public class ElfTower : Tower
     {
         base.Awake();
     }
-    private void Start()
-    {
-        EventManager.StartListening(Constant.CLICK_SCREEN, UseSkill);
-    }
-
-
     IEnumerator ElfTowerSkill()
     {
         float time = _duration;
@@ -42,6 +36,8 @@ public class ElfTower : Tower
 
     public override void UseSkill()
     {
+        if (gameObject.activeSelf == false) return;
+
         StartCoroutine(ElfTowerSkill());
     }
 

@@ -13,13 +13,14 @@ public class PyramidSwamp : PoolableMono
 
     private void OnTriggerStay2D(Collider2D hitCol)
     {
-        Debug.Log("´ê´Â Áß");
+        if(hitCol.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            IHittable monsterHit = hitCol.GetComponent<IHittable>();
+            AgentMovement monsterSpeed = hitCol.GetComponent<AgentMovement>();
 
-        IHittable monsterHit = hitCol.GetComponent<IHittable>();
-        AgentMovement monsterSpeed = hitCol.GetComponent<AgentMovement>();
-
-        monsterHit.GetHit(1, transform.gameObject);
-        monsterSpeed.SwampStateEnemyRun();
+            monsterHit.GetHit(1, transform.gameObject);
+            monsterSpeed.SwampStateEnemyRun();
+        }
     }
 
     IEnumerator MakePyramidSwamp()

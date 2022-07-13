@@ -45,7 +45,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
 
         if (Health <= 0)
         {
-            Debug.Log("enemy ����");
+            Debug.Log("enemy 죽음");
             _isDead = true;
             _waveController.KillWaveMonster();
             _agentMovement.StopImmediatelly();
@@ -72,7 +72,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("Ground");
+            //Debug.Log("Ground");
         }
     }
 

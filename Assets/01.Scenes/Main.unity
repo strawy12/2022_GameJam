@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 163385651}
   - component: {fileID: 163385650}
   - component: {fileID: 163385649}
+  - component: {fileID: 163385653}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Untagged
@@ -425,6 +426,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &163385653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163385648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2562b0c71ffcd468a3b4dddd22f020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  golemHitAnim: {fileID: 6413381175649742380, guid: db97cf5b73cc0c940a5014924bee854d, type: 3}
+  OnPlayerDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &267774342
 GameObject:
   m_ObjectHideFlags: 0

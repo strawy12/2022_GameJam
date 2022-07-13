@@ -174,9 +174,9 @@ MonoBehaviour:
   _towerType: 3
   _elfArrowPref: {fileID: -805298637847678045, guid: 60f5e68f9ab34944f88cebc869a61a35, type: 3}
   _duration: 0.5
-  _shootDelay: 0.05
+  _shootDelay: 1
   _shootPosOffset: 0.5
-  _shootForce: 100
+  _shootForce: 200
 --- !u!1 &5046635459087269594
 GameObject:
   m_ObjectHideFlags: 0
