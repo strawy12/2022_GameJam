@@ -88,7 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65348fa631957a8478862007fa8d984f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towerType: 2
+  _towerNum: 0
+  _onGroundEffectPrefab: {fileID: 6571444346209281385, guid: 9de204c1ee40856418c5d33da951c08e, type: 3}
   isSkill: 0
   _whatIsEnemy:
     serializedVersion: 2
@@ -164,7 +165,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1320579803
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 880132769457654187, guid: 10a04f553dcbf324e9dd8cba2a9ca0a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -213,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3395473643248334311}
   m_Layer: 0
-  m_Name: baseTransform
+  m_Name: BaseTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

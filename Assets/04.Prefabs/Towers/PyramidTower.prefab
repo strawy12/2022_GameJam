@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 542350449155354119}
   m_Layer: 0
-  m_Name: baseTransform
+  m_Name: BaseTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2400616787228625013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7118322480965584789}
@@ -100,7 +100,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1320579803
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 9001407358634217701, guid: 10a04f553dcbf324e9dd8cba2a9ca0a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c3a0f1b4062dd4399a44559498102e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towerType: 4
-  deletePyramidTower: {fileID: 3867240942635581463, guid: f0f773d820a2cec40bcebf65b5070eab, type: 3}
+  _towerNum: 0
+  _onGroundEffectPrefab: {fileID: 3508577413298797006, guid: f0f773d820a2cec40bcebf65b5070eab, type: 3}
   _swampObj: {fileID: 9173671696485567779, guid: 3e703bed807d0fe4db7d94b9afe9a9ab, type: 3}
 --- !u!1001 &2959714298121307486
 PrefabInstance:
@@ -243,7 +243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8039882792692684961, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8039882792692684961, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
       propertyPath: m_SortingLayerID

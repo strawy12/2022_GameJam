@@ -8,8 +8,7 @@ using static Constant;
 public abstract class Tower : PoolableMono
 {
     [SerializeField] private int _towerNum;
-
-
+    [SerializeField] private GameObject _onGroundEffectPrefab;
     protected TowerData _towerData;
     
     protected Transform _baseTrm;
@@ -47,6 +46,7 @@ public abstract class Tower : PoolableMono
 
     private void Start()
     {
+
     }
 
     public override void Reset()
@@ -88,7 +88,7 @@ public abstract class Tower : PoolableMono
     }
     protected virtual void OnThrowTower()
     {
-
+        
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
@@ -116,6 +116,12 @@ public abstract class Tower : PoolableMono
             }
             OnEndThrow?.Invoke();
             GameManager.Inst.EndFollow();
+            if(_onGroundEffectPrefab != null)
+            {
+                Effect effect = PoolManager.Instance.Pop(_onGroundEffectPrefab.gameObject.name) as Effect;
+                effect.transform.SetPositionAndRotation(_baseTrm.position, Quaternion.identity);
+                effect.StartAnim();
+            }
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
@@ -127,11 +133,10 @@ public abstract class Tower : PoolableMono
     {
         seq = DOTween.Sequence();
         seq.AppendInterval(delay);
-        seq.Append(_spriteRenderer.DOFade(0, 1f));
+        seq.Append(_spriteRenderer.DOFade(0, 0.2f));
         seq.AppendCallback(DestroyTower);
     }
-
-protected virtual void OnTriggerEnemy(Collider2D collision)
+    protected virtual void OnTriggerEnemy(Collider2D collision)
 {
     if(!_isStop)
     {

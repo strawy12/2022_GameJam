@@ -7,7 +7,7 @@
             "itemNum": 0,
             "itemName": "돌 타워",
             "itemSprite": {
-                "instanceID": 21656
+                "instanceID": 20870
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -23,7 +23,7 @@
             "itemNum": 1,
             "itemName": "파이어 타워",
             "itemSprite": {
-                "instanceID": 21664
+                "instanceID": 20872
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -31,7 +31,7 @@
             "prefabName": "FireTower",
             "damage": 1,
             "weight": 1.0,
-            "isLock": false,
+            "isLock": true,
             "knockbackPower": 0.0,
             "towerType": 2
         },
@@ -39,7 +39,7 @@
             "itemNum": 2,
             "itemName": "평화의 영웅상",
             "itemSprite": {
-                "instanceID": 21662
+                "instanceID": 20874
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -55,7 +55,7 @@
             "itemNum": 3,
             "itemName": "엘프타워",
             "itemSprite": {
-                "instanceID": 21660
+                "instanceID": 20876
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -71,7 +71,7 @@
             "itemNum": 4,
             "itemName": "피라미드",
             "itemSprite": {
-                "instanceID": 21666
+                "instanceID": 20878
             },
             "itemLevel": 0,
             "needGold": 10,
@@ -79,7 +79,7 @@
             "prefabName": "PyramidTower",
             "damage": 0,
             "weight": 3.0,
-            "isLock": true,
+            "isLock": false,
             "knockbackPower": 0.0,
             "towerType": 1
         }

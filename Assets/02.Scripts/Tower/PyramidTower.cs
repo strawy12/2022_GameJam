@@ -16,8 +16,8 @@ public class PyramidTower : Tower
         PyramidSwamp swamp = PoolManager.Instance.Pop("PyramidSwamp") as PyramidSwamp;
         swamp.transform.position = new Vector2(transform.position.x, -7);
         swamp.ParticleStart();
-        yield return new WaitForSeconds(.7f);
-        FadeTower(1f);
+        yield return new WaitForSeconds(.01f);
+        FadeTower(0.1f);
     }
 
     public override void UseSkill()

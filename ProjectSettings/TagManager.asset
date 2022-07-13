@@ -47,6 +47,9 @@ TagManager:
   - name: Map
     uniqueID: 4045656535
     locked: 0
+  - name: Effect
+    uniqueID: 3798657683
+    locked: 0
   - name: Golem
     uniqueID: 2381808539
     locked: 0
