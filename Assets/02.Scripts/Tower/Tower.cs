@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 using static Constant;
 
 public abstract class Tower : PoolableMono
@@ -30,6 +31,7 @@ public abstract class Tower : PoolableMono
     private bool _isGround;
     public Action OnEndThrow;
     protected Sequence seq;
+
     protected virtual void Awake()
     {
         StartInit();
@@ -108,7 +110,7 @@ public abstract class Tower : PoolableMono
                     break;
                 case ETowerType.ActiveType:
                     _isGround = true;
-                    FadeTower(1f);
+                    FadeTower(1.5f);
                     break;
                 case ETowerType.FixingType:
                     UseSkill();

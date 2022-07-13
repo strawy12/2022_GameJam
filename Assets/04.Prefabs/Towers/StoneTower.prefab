@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1320579803
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2601696028496754424, guid: 10a04f553dcbf324e9dd8cba2a9ca0a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -405,6 +405,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerType: 0
+  _effectPrefab: {fileID: 2656563277955601306}
+  _throwEffect: {fileID: 2656563277955601304}
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
@@ -484,8 +486,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+--- !u!1 &2656563277955601306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8039882792692684962, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+  m_PrefabInstance: {fileID: 5426104127062870840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2656563277955601311 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8039882792692684967, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+  m_PrefabInstance: {fileID: 5426104127062870840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2656563277955601304 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8039882792692684960, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
   m_PrefabInstance: {fileID: 5426104127062870840}
   m_PrefabAsset: {fileID: 0}

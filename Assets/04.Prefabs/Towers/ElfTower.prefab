@@ -173,6 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerType: 3
+  _effectPrefab: {fileID: 2771984249414161426}
+  _throwEffect: {fileID: 2771984249414161424}
   _elfArrowPref: {fileID: -805298637847678045, guid: 60f5e68f9ab34944f88cebc869a61a35, type: 3}
   _duration: 0.5
   _shootDelay: 1
@@ -452,7 +454,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1320579803
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -7738428890328671378, guid: 10a04f553dcbf324e9dd8cba2a9ca0a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -548,8 +550,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+--- !u!1 &2771984249414161426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8039882792692684962, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+  m_PrefabInstance: {fileID: 5326480939192552624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2771984249414161431 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8039882792692684967, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+  m_PrefabInstance: {fileID: 5326480939192552624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2771984249414161424 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8039882792692684960, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
   m_PrefabInstance: {fileID: 5326480939192552624}
   m_PrefabAsset: {fileID: 0}

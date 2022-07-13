@@ -21,14 +21,12 @@ public class PyramidTower : Tower
         swamp.transform.position = new Vector2(transform.position.x, -7);
         swamp.ParticleStart();
         OnBrokeTower?.Invoke();
-        yield return new WaitForSeconds(.01f);
+        yield return new WaitForSeconds(1f);
         FadeTower(0.1f);
 
         swamp.gameObject.SetActive(true);
 
         //deletePyramidTower.Play("PyramidDust");
-   
-
     }
 
     public override void UseSkill()
