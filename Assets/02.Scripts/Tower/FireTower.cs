@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FireTower : Tower
 {
     public bool _isBoom = false;
     public bool _isCheck = false;
     [SerializeField] private LayerMask _whatIsEnemy;
+
+    public UnityEvent OnUseSkill;
 
     protected override void Awake()
     {
@@ -21,6 +24,9 @@ public class FireTower : Tower
     {
         yield return new WaitForSeconds(1f);
         _isCheck = true;
+        _isBoom = true;
+        OnUseSkill?.Invoke();
+
     }
 
 
@@ -50,7 +56,7 @@ public class FireTower : Tower
                 Debug.Log("boom");
             }
             yield return new WaitForSeconds(0.01f);
-            FadeTower(1f);
+            FadeTower(0.1f);
         }
     }
 
@@ -59,6 +65,10 @@ public class FireTower : Tower
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 5f);
+    }
+
+    protected override void SpawnEffect()
+    {
     }
 #endif
 }
