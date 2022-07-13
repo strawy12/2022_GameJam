@@ -50,15 +50,20 @@ public class ThrowedTower : MonoBehaviour
         {
             Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
 
+            if (mousePos.x >= transform.position.x) return;
 
-            _throwDir = mousePos - (Vector2)_throwPos.position;
-            _throwDir.Normalize();
+            Vector2 throwDir = mousePos - (Vector2)transform.position;
+            throwDir.Normalize();
+
+            float angle = Mathf.Atan2(-throwDir.y, -throwDir.x) * Mathf.Rad2Deg;
+
+            if (angle < -45f || angle > 70f) return;
+
+            angle += -45f;
 
             _force = Vector2.Distance(_startMousePos, mousePos) * _forceOffset;
-
             _force = Mathf.Clamp(_force, 0f, _maxForce);
-
-            float angle = Mathf.Atan2(-_throwDir.y, -_throwDir.x) * Mathf.Rad2Deg - 45f;
+            _throwDir = throwDir;
 
             _armTransform.rotation = Quaternion.Euler(0f, 0f, angle);
 
@@ -159,7 +164,7 @@ public class ThrowedTower : MonoBehaviour
     private Tower GetTower()
     {
         if (_nextTowerList.Count <= 5)
-            SetTowerList();
+            SetNextTowerList();
 
         Tower tower = _nextTowerList[0];
         _nextTowerList.RemoveAt(0);
@@ -179,7 +184,13 @@ public class ThrowedTower : MonoBehaviour
         UIManager.Inst.SetNextTowerPanels(sprites);
     }
 
-    private void SetTowerList()
+    public void ResetNextTowerList()
+    {
+        _nextTowerList.Clear();
+        SetNextTowerList();
+    }
+
+    private void SetNextTowerList()
     {
         List<string> towerList = new List<string>();
         foreach (var data in DataManager.Inst.CurrentPlayer.towerDataList)

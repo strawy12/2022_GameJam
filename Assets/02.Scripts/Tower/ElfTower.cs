@@ -12,13 +12,12 @@ public class ElfTower : Tower
     [SerializeField] private float _shootPosOffset;
     [SerializeField] private float _shootForce;
 
+    private bool isGround;
+
     protected override void Awake()
     {
         base.Awake();
-        GameManager.Inst.isGround = false;
     }
-
-
     IEnumerator ElfTowerSkill()
     {
         float time = _duration;
@@ -37,6 +36,31 @@ public class ElfTower : Tower
 
     public override void UseSkill()
     {
+        if (gameObject.activeSelf == false) return;
+
         StartCoroutine(ElfTowerSkill());
+    }
+
+
+    public override void DestroyTower()
+    {
+        EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
+        base.DestroyTower();
+    }
+
+    public override void Reset()
+    {
+        base.Reset();
+        EventManager.StartListening(Constant.CLICK_SCREEN, UseSkill);
+    }
+    private void OnDestroy()
+    {
+        EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
+
     }
 }

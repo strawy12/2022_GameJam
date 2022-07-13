@@ -8,27 +8,38 @@ public class MobileControl : MonoBehaviour, IDragHandler, IEndDragHandler, IPoin
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (GameManager.Inst.gameState == GameManager.GameState.Game)
+        switch (GameManager.Inst.gameState)
         {
-            GameManager.Inst.MainCameraMove.CameraMove(-eventData.delta.x);
+            case GameManager.GameState.Game:
+            case GameManager.GameState.UI:
+                GameManager.Inst.MainCameraMove.CameraMove(-eventData.delta.x);
+                break;
         }
-
-
     }
-
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (GameManager.Inst.gameState == GameManager.GameState.Throwing)
+        switch (GameManager.Inst.gameState)
         {
-            EventManager.TriggerEvent(Constant.CLICK_SCREEN);
+            case GameManager.GameState.Throwing:
+                EventManager.TriggerEvent(Constant.CLICK_SCREEN);
+                break;
+
+            case GameManager.GameState.Game:
+            case GameManager.GameState.UI:
+                GameManager.Inst.MainCameraMove.StopImmediately();
+                break;
         }
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-        if (GameManager.Inst.gameState == GameManager.GameState.Game)
+        switch (GameManager.Inst.gameState)
         {
-            GameManager.Inst.MainCameraMove.CameraMove(0);
+            case GameManager.GameState.Game:
+            case GameManager.GameState.UI:
+                GameManager.Inst.MainCameraMove.CameraMove(0);
+
+                break;
         }
     }
 }
