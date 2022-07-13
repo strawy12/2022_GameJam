@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemySound : AudioPlayer
 {
-    [SerializeField] private AudioClip _hitClip = null, _deathClip = null, _attackSound = null;
+    [SerializeField] private AudioClip _hitClip = null, 
+                                       _deathClip = null, 
+                                       _attackSound = null, 
+                                       _arrowShootSound = null;
 
     public void PlayHitSound()
     {
@@ -17,5 +20,9 @@ public class EnemySound : AudioPlayer
     public void PlayAttackSound()
     {
         PlayClip(_attackSound);
+    }
+    public void PlayArrowSound()
+    {
+        PlayClip(_arrowShootSound);
     }
 }

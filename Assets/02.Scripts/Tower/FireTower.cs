@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FireTower : Tower
 {
     public bool isBoom = false;
 
     [SerializeField] private LayerMask _whatIsEnemy;
+
+    public UnityEvent OnUseSkill;
 
     protected override void Awake()
     {
@@ -22,7 +25,8 @@ public class FireTower : Tower
     {
         yield return new WaitForSeconds(1f);
         isBoom = true;
-        Debug.Log("일단 스타트몬스터쳌");
+        OnUseSkill?.Invoke();
+        //Debug.Log("일단 스타트몬스터쳌");
     }
 
     IEnumerator ExPlosionFireTower() // 스킬
@@ -37,8 +41,8 @@ public class FireTower : Tower
                 hit?.GetHit(6, transform.gameObject);
             }
 
+            yield return new WaitForSeconds(0.5f);
             DestroyTower();
-            yield return new WaitForSeconds(0.1f);
         }
     }
 

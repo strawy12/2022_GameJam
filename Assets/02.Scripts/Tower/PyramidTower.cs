@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PyramidTower : Tower
 {
     [SerializeField] private Animator deletePyramidTower;
     [SerializeField] private PyramidSwamp _swampObj;
 
+    public UnityEvent OnBrokeTower;
 
     protected override void Awake()
     {
@@ -25,9 +27,11 @@ public class PyramidTower : Tower
         swamp.gameObject.SetActive(true);
 
         deletePyramidTower.Play("PyramidDust");
+        OnBrokeTower?.Invoke();
 
         yield return new WaitForSeconds(.7f);
         Debug.Log("피라미드타워삭제");
+
         DestroyTower();
     }
 

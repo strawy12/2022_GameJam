@@ -1410,6 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919d63b85b59ae94684f4d60fdbb9e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPeaceMaker: 0
   <OnMovementKeyPress>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -1454,6 +1455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ea3a39f494e6747ab953dd9e966a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowSwamp: 2
   maxSpeed: 10
   acceleration: 50
   deAcceleration: 50
@@ -1501,6 +1503,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2489719811527723503}
+        m_TargetAssemblyTypeName: EnemySound, Assembly-CSharp
+        m_MethodName: PlayDeathSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <OnGetHit>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -1536,6 +1550,18 @@ MonoBehaviour:
       - m_Target: {fileID: 4931360392673363609}
         m_TargetAssemblyTypeName: EnemyAnimation, Assembly-CSharp
         m_MethodName: PlayAttackAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2489719811527723503}
+        m_TargetAssemblyTypeName: EnemySound, Assembly-CSharp
+        m_MethodName: PlayArrowSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3533,7 +3559,7 @@ AudioSource:
   m_GameObject: {fileID: 6187725689297460400}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5763930671011225742, guid: 82946dd0188c37840a1c74a5c6a26a6a, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -3634,8 +3660,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pitchRandomness: 0.2
   _hitClip: {fileID: 0}
-  _deathClip: {fileID: 0}
+  _deathClip: {fileID: 8300000, guid: 04cb1374cbb0d1347a314e4208aa7b32, type: 3}
   _attackSound: {fileID: 0}
+  _arrowShootSound: {fileID: 8300000, guid: a9d97b91fd592e14db29e97449632371, type: 3}
 --- !u!1 &6471153300721198137
 GameObject:
   m_ObjectHideFlags: 0

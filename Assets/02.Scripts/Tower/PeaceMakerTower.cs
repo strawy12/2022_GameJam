@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PeaceMakerTower : Tower
 {
@@ -8,6 +9,7 @@ public class PeaceMakerTower : Tower
 
     [SerializeField] private LayerMask _whatIsEnemy;
     [SerializeField] private Animator deletePeaceMakerTower;
+    public UnityEvent OnUseSkill;
 
     protected override void Awake()
     {
@@ -51,6 +53,12 @@ public class PeaceMakerTower : Tower
     public override void UseSkill()
     {
         StartCoroutine(PeaceMakerAbilityTower());
+        OnUseSkill?.Invoke();
+    }
+
+    public override void DestroyTower()
+    {
+        base.DestroyTower();
     }
 
 #if UNITY_EDITOR

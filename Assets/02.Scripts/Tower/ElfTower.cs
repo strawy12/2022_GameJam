@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ElfTower : Tower
 {
@@ -14,6 +15,9 @@ public class ElfTower : Tower
 
     private bool isGround;
 
+    public UnityEvent OnBrokeTower;
+    public UnityEvent OnSkillShot;
+
     protected override void Awake()
     {
         base.Awake();
@@ -25,6 +29,7 @@ public class ElfTower : Tower
 
         while (time > 0)
         {
+            OnSkillShot?.Invoke();
             ElfArrow arrow = PoolManager.Instance.Pop("ElfArrow") as ElfArrow;
             arrow.transform.position = shootPos + new Vector2(_shootPosOffset* Random.Range(-1, 1), 0f);
             arrow.gameObject.SetActive(true);
@@ -46,6 +51,8 @@ public class ElfTower : Tower
     {
         EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
         base.DestroyTower();
+
+        OnBrokeTower?.Invoke();
     }
 
     public override void Reset()
@@ -61,6 +68,5 @@ public class ElfTower : Tower
     private void OnApplicationQuit()
     {
         EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
-
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class ThrowedTower : MonoBehaviour
@@ -31,6 +32,8 @@ public class ThrowedTower : MonoBehaviour
     private List<Tower> _nextTowerList = new List<Tower>();
 
     private int _hashThrow = Animator.StringToHash("Throw");
+
+    public UnityEvent OnThrowStart;
 
     private void Awake()
     {
@@ -103,6 +106,7 @@ public class ThrowedTower : MonoBehaviour
 
         _animator.speed = 1;
         _animator.SetTrigger(_hashThrow);
+        OnThrowStart?.Invoke();
         _currentTower.OnEndThrow += Release;
         GameManager.Inst.gameState = GameManager.GameState.Throwing;
         StartCoroutine(StartThrowDelay());
