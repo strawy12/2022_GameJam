@@ -34,13 +34,8 @@ public abstract class Tower : PoolableMono
     protected virtual void Awake()
     {
         StartInit();
-<<<<<<< HEAD
-    }
-    
-=======
         _isGround = false;
     }
->>>>>>> OIF
 
     private void StartInit()
     {
