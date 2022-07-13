@@ -58,7 +58,7 @@ public abstract class Tower : PoolableMono
         Collider.enabled = false;
         _spriteRenderer.DOFade(1, 0.01f);
         Rigid.isKinematic = true;
-        _spriteRenderer.transform.rotation = Quaternion.identity;
+        _spriteRenderer.transform.localRotation = Quaternion.identity;
     }
     private void Update()
     {

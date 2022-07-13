@@ -8,9 +8,9 @@ public class UpgradeUI : MonoBehaviour
 {
     public RectTransform rectTransform { get; private set; }
 
+    private CanvasGroup _canvasGroup;
     private RectTransform _currentContent;
     private ScrollRect _scrollRect;
-
 
     private bool _isOpen;
 
@@ -19,6 +19,7 @@ public class UpgradeUI : MonoBehaviour
         _scrollRect = GetComponentInChildren<ScrollRect>();
         rectTransform = GetComponent<RectTransform>();
     }
+
 
     public void ChangeContent(RectTransform rectTransform)
     {

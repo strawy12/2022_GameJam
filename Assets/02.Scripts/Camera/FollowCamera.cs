@@ -36,22 +36,20 @@ public class FollowCamera : MonoBehaviour
 
     public void EndFollow()
     {
-        Camera mainCam = Define.MainCam;
-        Vector3 originPos = mainCam.transform.position ;
+        StopAllCoroutines();
 
+        Camera mainCam = Define.MainCam;
         mainCam.transform.position = _currentCam.transform.position + Vector3.down;
 
         _currentCam.enabled = false;
         _virtualCam.Follow = null ;
         _virtualCam.enabled = false;
 
-        _currentCam.transform.position = originPos;
-
-
         Sequence seq = DOTween.Sequence();
+
         seq.Append(mainCam.DOShakePosition(0.5f, 1.5f, 10));
         seq.AppendInterval(_endCameraStayTime);
-        seq.Append(mainCam.transform.DOMove(originPos, 0.75f));
+        seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(13f, 0f, -10f), 0.5f));
         seq.AppendCallback(() => 
         {
             GameManager.Inst.gameState = GameManager.GameState.Game;

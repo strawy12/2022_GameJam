@@ -30,7 +30,7 @@ public class StoneTower : Tower
             IHittable hit = hitMonster.GetComponent<IHittable>();
             hit?.GetHit(4, transform.gameObject);
         }
-
+        OnBrokeTower.Invoke();
         yield return new WaitForSeconds(1f);
         
         FadeTower(0.1f);

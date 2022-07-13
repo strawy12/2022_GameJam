@@ -22,7 +22,7 @@ public class ElfTower : Tower
     {
         base.Awake();
     }
-    
+
     IEnumerator ElfTowerSkill()
     {
         Vector2 shootPos = transform.position;
@@ -48,13 +48,10 @@ public class ElfTower : Tower
         StartCoroutine(ElfTowerSkill());
     }
 
-
     public override void DestroyTower()
     {
         EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
         base.DestroyTower();
-
-        OnBrokeTower?.Invoke();
     }
 
     public override void Reset()

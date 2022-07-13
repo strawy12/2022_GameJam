@@ -36,6 +36,7 @@ public class PeaceMakerTower : Tower
     IEnumerator PeaceMakerAbilityTower()
     {
         isSkill = true;
+        OnUseSkill.Invoke();
         yield return new WaitForSeconds(3f);
 
         isSkill = false;
@@ -48,7 +49,6 @@ public class PeaceMakerTower : Tower
     public override void UseSkill()
     {
         StartCoroutine(PeaceMakerAbilityTower());
-        OnUseSkill?.Invoke();
     }
 
     public override void DestroyTower()
