@@ -179,6 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7118322480965584789}
   - component: {fileID: 3614238749576103711}
+  - component: {fileID: 1469853887998458704}
   - component: {fileID: 7118322480965584776}
   m_Layer: 0
   m_Name: PyramidTower
@@ -226,6 +227,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &1469853887998458704
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7118322480965584778}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb37a871015051344bcd6e0b15c01a59, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7118322480965584776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,12 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c3a0f1b4062dd4399a44559498102e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  _towerNum: 0
-  deletePyramidTower: {fileID: 3867240942635581463, guid: f0f773d820a2cec40bcebf65b5070eab, type: 3}
-=======
   _towerType: 4
->>>>>>> OIF
   _swampObj: {fileID: 9173671696485567779, guid: 3e703bed807d0fe4db7d94b9afe9a9ab, type: 3}
 --- !u!1001 &2959714298121307486
 PrefabInstance:

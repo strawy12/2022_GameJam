@@ -67,6 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2526374076467574229}
   - component: {fileID: 4894047411868041241}
+  - component: {fileID: 5340683395096899378}
   - component: {fileID: 2526374076467574230}
   m_Layer: 0
   m_Name: PeaceMakerTower
@@ -114,6 +115,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &5340683395096899378
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526374076467574191}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb37a871015051344bcd6e0b15c01a59, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2526374076467574230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,20 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65348fa631957a8478862007fa8d984f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  _towerNum: 0
-  isSkill: 0
-  _whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 128
-  deletePeaceMakerTower: {fileID: 1274571147390150150, guid: 9de204c1ee40856418c5d33da951c08e, type: 3}
-=======
   _towerType: 2
   isSkill: 0
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 0
->>>>>>> OIF
 --- !u!1 &7414254480766446388
 GameObject:
   m_ObjectHideFlags: 0

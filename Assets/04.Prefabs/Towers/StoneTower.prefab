@@ -318,11 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd161144ab0be14d9d3e0b6b89ff194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towerNum: 0
   anim: {fileID: -4809247577665533898}
-  _whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 128
+  _exploreCol: {fileID: 477495163867337901}
 --- !u!95 &-4809247577665533898
 Animator:
   serializedVersion: 3
