@@ -33,7 +33,6 @@ public abstract class Tower : PoolableMono
     {
         StartInit();
     }
-    }
 
     private void StartInit()
     {

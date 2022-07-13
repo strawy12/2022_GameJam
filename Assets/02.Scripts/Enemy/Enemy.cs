@@ -45,7 +45,6 @@ public class Enemy : PoolableMono, IHittable, IKnockback
 
         if (Health <= 0)
         {
-            Debug.Log("enemy ����");
             _isDead = true;
             _waveController.KillWaveMonster();
             _agentMovement.StopImmediatelly();
@@ -54,7 +53,6 @@ public class Enemy : PoolableMono, IHittable, IKnockback
             _enemyAttack.Reset();
         }
     }
-    #endregion
 
     [SerializeField]
     private bool _isActive = false;
@@ -81,7 +79,6 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     {
         if (!_isDead && _isActive)
         {
-            //���⿡ �������� ������ �����ϴ� �ڵ�
             _enemyAttack.Attack(_enemyData.damage);
         }
     }
