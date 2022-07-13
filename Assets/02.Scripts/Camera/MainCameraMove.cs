@@ -5,56 +5,66 @@ using UnityEngine;
 
 public class MainCameraMove : MonoBehaviour
 {
-    [SerializeField] private float _cameraSpeed = 5f;
-    [SerializeField] private float _duration = 10f;
+    [SerializeField] private float _maxSpeed = 5f;
 
-    private Camera _mainCam;
+    [SerializeField] private float _minPosX;
+    [SerializeField] private float _maxPosX;
+
+    [SerializeField] private float _deceleration;
+
+    private float _currentSpeed;
     private float _currentDir = 0f;
-    private void Awake()
-    {
-        _mainCam = Define.MainCam;
-    }
 
     public void CameraMove(float dir)
     {
-        if (dir > 0)
+        if (dir == 0)
         {
-            _mainCam.transform.Translate(Vector3.right * Time.deltaTime * _cameraSpeed);
-            _currentDir = 1;
-        }
-        else if (dir < 0)
-        {
-            _mainCam.transform.Translate(Vector3.left * Time.deltaTime * _cameraSpeed);
-            _currentDir = -1;
+            StartCoroutine(ReturnCoroutine());
+
         }
         else
         {
-            StartCoroutine(ReturnCoroutine());
+            StopAllCoroutines();
+            if (dir > 0 && transform.position.x >= _maxPosX) return;
+            if (dir < 0 && transform.position.x <= _minPosX) return;
+
+            _currentDir = dir;
+
+            _currentDir = Mathf.Clamp(_currentDir, -_maxSpeed, _maxSpeed);
+            transform.Translate(Vector3.right * Time.deltaTime * _currentDir);
         }
+    }
+
+    public void StopImmediately()
+    {
+        StopAllCoroutines();
+        _currentDir = 0f;
     }
 
     private IEnumerator ReturnCoroutine()
     {
-        float time = _duration;
-        float moveSpeed = _cameraSpeed;
+        bool isLeft = _currentDir < 0;
+        float speed = Mathf.Abs(_currentDir);
 
-        while (time > 0)
+        while (speed > 0)
         {
-            _mainCam.transform.Translate(Vector3.right * _currentDir * Time.deltaTime * moveSpeed);
-            moveSpeed = Mathf.Lerp(0f, moveSpeed, time / _duration);
-            yield return null;
-            time -= Time.deltaTime;
+            if (transform.position.x <= _minPosX || transform.position.x >= _maxPosX) yield break;
 
+            transform.Translate(Vector3.right * _currentDir * Time.deltaTime );
+            speed -= _deceleration * Time.deltaTime;
+
+            _currentDir = speed * (isLeft ? -1f : 1f);
+            yield return new WaitForEndOfFrame();
         }
     }
 
     public Tween MoveCameraPos(Vector3 pos, float duration)
     {
-        return _mainCam.transform.DOMove(pos, duration);
+        return transform.DOMove(pos, duration);
     }
 
     public void SetCameraPos(Vector3 pos)
     {
-        _mainCam.transform.position = pos;
+        transform.position = pos;
     }
 }

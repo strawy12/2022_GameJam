@@ -238,8 +238,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c3a0f1b4062dd4399a44559498102e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _towerNum: 0
   deletePyramidTower: {fileID: 3867240942635581463, guid: f0f773d820a2cec40bcebf65b5070eab, type: 3}
+=======
+  _towerType: 4
+>>>>>>> OIF
   _swampObj: {fileID: 9173671696485567779, guid: 3e703bed807d0fe4db7d94b9afe9a9ab, type: 3}
 --- !u!1001 &2959714298121307486
 PrefabInstance:

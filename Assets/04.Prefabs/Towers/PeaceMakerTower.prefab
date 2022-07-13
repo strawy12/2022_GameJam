@@ -126,12 +126,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65348fa631957a8478862007fa8d984f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _towerNum: 0
   isSkill: 0
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
   deletePeaceMakerTower: {fileID: 1274571147390150150, guid: 9de204c1ee40856418c5d33da951c08e, type: 3}
+=======
+  _towerType: 2
+  isSkill: 0
+  _whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 0
+>>>>>>> OIF
 --- !u!1 &7414254480766446388
 GameObject:
   m_ObjectHideFlags: 0
