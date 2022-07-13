@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UpgradeUI : MonoBehaviour
 {
+    public RectTransform rectTransform { get; private set; }
+
     private RectTransform _currentContent;
     private ScrollRect _scrollRect;
 
@@ -13,6 +15,7 @@ public class UpgradeUI : MonoBehaviour
     private void Awake()
     {
         _scrollRect = GetComponentInChildren<ScrollRect>();
+        rectTransform = GetComponent<RectTransform>();
     }
 
     public void ChangeContent(RectTransform rectTransform)

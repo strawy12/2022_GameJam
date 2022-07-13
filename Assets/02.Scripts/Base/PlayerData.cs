@@ -24,4 +24,14 @@ public class PlayerData
         gold = 10000000;
 
     }
+
+    public float GetStat(PlayerStatData.EPlayerStat stat)
+    {
+        return statDataList.Find(x => x.statType == stat).value;
+    }
+
+    public TowerData GetTowerData(int towerNum)
+    {
+        return towerDataList.Find(tower => tower.itemNum == towerNum);
+    }
 }

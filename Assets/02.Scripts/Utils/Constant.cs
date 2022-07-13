@@ -7,5 +7,8 @@ public static class Constant
     public const string START_THROW_TOWER = "ST_TR_TW";
     public const string END_THROW_TOWER = "EN_TR_TW";
 
-    public const string PIECEMAKER_DEBUFF_END = "PM_DB_ED";
+    public const string CLICK_SCREEN = "CK_SC";
+
+    public const float CRITICAL_MAX_PERCENT = 100f;
+    public const float CRITICAL_DAMAGE_FACTOR = 2f;
 }

@@ -17,6 +17,7 @@ public class TowerData : ItemData
     public int damage;
     public float weight;
     public bool isLock;
+    public float knockbackPower;
     public ETowerType towerType;
         
     public TowerData(TowerData data) : base(data)
@@ -26,6 +27,7 @@ public class TowerData : ItemData
         weight = data.weight;
         isLock = data.isLock;
         towerType = data.towerType;
+        knockbackPower = data.knockbackPower;
     }
 }
 

@@ -75,4 +75,8 @@ public class TowerPanel : UpgradePanel
             base.SetUpgradeButton();
         }
     }
+
+    public override void UpgradeItem()
+    {
+    }
 }

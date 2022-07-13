@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElfTower : Tower
 {
-    // ¹ö¸± ÄÚµå
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
     [SerializeField] private ElfArrow _elfArrowPref;
 
     [SerializeField] private float _duration;
@@ -15,18 +15,9 @@ public class ElfTower : Tower
     protected override void Awake()
     {
         base.Awake();
-
         GameManager.Inst.isGround = false;
     }
 
-    void Update()
-    {
-        // ÅÍÄ¡¾ÆÁ÷¾ÈÇÔ
-        if(Input.GetMouseButtonDown(0) && !GameManager.Inst.isGround)
-        {
-            UseSkill();
-        }
-    }
 
     IEnumerator ElfTowerSkill()
     {

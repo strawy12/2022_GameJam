@@ -10,16 +10,30 @@ public class GameManager : MonoSingleton<GameManager>
     public bool isGround = false;
 
     [SerializeField] private PoolListSO _initList = null;
-    [SerializeField] private MainCameraMove _mainCameraMove;
     [SerializeField] private FollowCamera _followCamera;
 
-    public MainCameraMove MainCameraMove => _mainCameraMove;
-    
+    private MainCameraMove _mainCameraMove;
+
+    public MainCameraMove MainCameraMove
+    {
+        get
+        {
+            if (_mainCameraMove == null)
+                _mainCameraMove = Define.MainCam.GetComponent<MainCameraMove>();
+
+            return _mainCameraMove;
+        }
+    }
+
+
+    public FollowCamera FollowCamera => _followCamera;
+
     public enum GameState
     {
         Game,
         UI,
-        Throwing
+        Throwing,
+        ThrowReady
     }
 
     public GameState gameState;
@@ -30,12 +44,15 @@ public class GameManager : MonoSingleton<GameManager>
         CreatePool();
 
         gameState = GameState.Game;
-    }
+        _mainCameraMove = Define.MainCam.GetComponent<MainCameraMove>();
+    }   
 
     private void CreatePool()
     {
         foreach (PoolingPair pair in _initList.list)
+        {
             PoolManager.Instance.CreatePool(pair.prefab, pair.poolCnt);
+        }
     }
 
     public void SetGold(int gold)
@@ -50,8 +67,11 @@ public class GameManager : MonoSingleton<GameManager>
         _followCamera.StartFollow();
     }
 
+
     public void EndFollow()
     {
         _followCamera.EndFollow();
     }
+
+
 }

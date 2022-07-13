@@ -2,24 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class Enemy : PoolableMono, IHittable
+public class Enemy : PoolableMono, IHittable, IKnockback
 {
     [SerializeField] private EnemyDataSO _enemyData;
     public EnemyDataSO EnemyData => _enemyData;
-
+    protected WaveController _waveController;
     protected bool _isDead = false;
     protected AgentMovement _agentMovement;
     protected EnemyAnimation _enemyAnimation;
     protected EnemyAttack _enemyAttack;
     protected BoxCollider2D _boxCollider;
-
-    //Á×¾úÀ»¶§ Ã³¸®ÇÒ °Í°ú
-    //¾×Æ¼ºê »óÅÂ¸¦ °ü¸®ÇÒ ¾Ö°¡ ÇÊ¿ä
+    protected int _level = 1;
 
     protected EnemyAIBrain _enemyBrain;
 
-    #region ÀÎÅÍÆäÀÌ½º ±¸ÇöºÎ
     public int Health { get; private set; }
+    public int Damage 
+    { 
+        get
+        {
+            int totalValue;
+            totalValue = _enemyData.damage  + _enemyData.damage * (_level % 10) + _level/2;
+            return totalValue;
+        } 
+    }
     [field: SerializeField] public UnityEvent OnDie { get; set; }
     [field: SerializeField] public UnityEvent OnGetHit { get; set; }
 
@@ -39,8 +45,9 @@ public class Enemy : PoolableMono, IHittable
 
         if (Health <= 0)
         {
-            Debug.Log("enemy Á×À½");
+            Debug.Log("enemy ï¿½ï¿½ï¿½ï¿½");
             _isDead = true;
+            _waveController.KillWaveMonster();
             _agentMovement.StopImmediatelly();
             _agentMovement.enabled = false;
             OnDie?.Invoke();
@@ -53,12 +60,14 @@ public class Enemy : PoolableMono, IHittable
     private bool _isActive = false;
     private void Awake()
     {
+        _waveController = GameObject.Find("WaveController").GetComponent<WaveController>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _agentMovement = GetComponent<AgentMovement>();
         _enemyAnimation = transform.GetComponentInChildren<EnemyAnimation>();
         _enemyAttack = GetComponent<EnemyAttack>();
         _enemyBrain = GetComponent<EnemyAIBrain>();
         _enemyAttack.attackDelay = _enemyData.attackDelay;
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -72,7 +81,7 @@ public class Enemy : PoolableMono, IHittable
     {
         if (!_isDead && _isActive)
         {
-            //¿©±â¿¡ ½ÇÁ¦ÀûÀÎ °ø°ÝÀ» ¼öÇàÇÏ´Â ÄÚµå
+            //ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Úµï¿½
             _enemyAttack.Attack(_enemyData.damage);
         }
     }
@@ -80,7 +89,6 @@ public class Enemy : PoolableMono, IHittable
     public override void Reset()
     {
         _isActive = false;
-        Health = _enemyData.maxHealth;
         _isDead = false;
         _agentMovement.enabled = true;
         _boxCollider.enabled = true;
@@ -89,14 +97,18 @@ public class Enemy : PoolableMono, IHittable
     }
     private void Start()
     {
-        Health = _enemyData.maxHealth;
+        Health = Health = _enemyData.maxHealth;
     }
 
     public void Die()
     {
         PoolManager.Instance.Push(this);
     }
-
+    public void SetEnemyStat(int level)
+    {
+        _level = level;
+        Health = _enemyData.maxHealth + _enemyData.maxHealth * (_level % 10) / 2;
+    }
     public void Knockback(Vector2 dir, float power, float duration)
     {
         if (!_isDead && !_isActive)

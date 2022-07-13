@@ -34,7 +34,7 @@ public abstract class UpgradePanel : MonoBehaviour
         SetUpgradeButton();
     }
 
-    public virtual void UpgradeItem()
+    public void ClickUpgradeBtn()
     {
         if (DataManager.Inst.CurrentPlayer.gold <= _currentData.needGold) return;
 
@@ -45,9 +45,12 @@ public abstract class UpgradePanel : MonoBehaviour
 
         _currentData.needGold = (int)(_currentData.needGold * 1.5f);
 
+        UpgradeItem();
         SetUI();
         SetUpgradeButton();
     }
+
+    public abstract void UpgradeItem();
 
     public virtual void SetUpgradeButton()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 public class AgentMovement : MonoBehaviour
 {
     public float slowSwamp = 2f;
@@ -60,10 +61,12 @@ public class AgentMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Inst.gameState == GameManager.GameState.Throwing)
+            _currentVelocity = 0f;
         OnVelocityChange?.Invoke(_currentVelocity);
 
         if (!_isKnockback)
-            _rigidbody.AddForce(new Vector2(_movementDirection.x * _currentVelocity, 0));
+            _rigidbody.velocity = new Vector2(_movementDirection.x * _currentVelocity, _rigidbody.velocity.y);
     }
 
     public void SwampStateEnemyRun()

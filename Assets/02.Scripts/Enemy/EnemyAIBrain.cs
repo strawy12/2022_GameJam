@@ -15,6 +15,7 @@ public class EnemyAIBrain : MonoBehaviour
     public Transform target;
     protected virtual void Awake()
     {
+        target = GameObject.Find("Player").transform;
         _actionData = transform.Find("AI").GetComponent<AIActionData>();
     }
 
@@ -29,6 +30,7 @@ public class EnemyAIBrain : MonoBehaviour
 
     public void Move(Vector2 moveDirection)
     {
+        if (GameManager.Inst.gameState == GameManager.GameState.Throwing) return;
         OnMovementKeyPress?.Invoke(moveDirection);
     }
     public void SetAttackState(bool state)
@@ -37,7 +39,9 @@ public class EnemyAIBrain : MonoBehaviour
     }
     protected virtual void Update()
     {
-        if (target == null || isPeaceMaker)
+        if (GameManager.Inst.gameState == GameManager.GameState.Throwing) return;
+
+        if (target == null)
         {
             OnMovementKeyPress?.Invoke(Vector2.zero);
         }

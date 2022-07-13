@@ -7,7 +7,7 @@ public class GenerateNextTowerPanel : MonoBehaviour
     [SerializeField] private NextTowerPanel _nextTowerPanelTemp;
     [SerializeField] private int _generateCnt = 4;
 
-    private void Start()
+    private void Awake()
     {
         Generate();
     }
