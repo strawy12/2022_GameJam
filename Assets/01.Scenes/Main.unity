@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 163385650}
   - component: {fileID: 163385649}
   - component: {fileID: 163385653}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Golem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,6 +402,9 @@ MonoBehaviour:
   _throwLine: {fileID: 2036684969}
   _throwPos: {fileID: 899186984}
   _armTransform: {fileID: 671115912}
+  OnThrowStart:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &163385652
 Transform:
   m_ObjectHideFlags: 0
