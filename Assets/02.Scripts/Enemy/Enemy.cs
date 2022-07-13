@@ -47,6 +47,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
             _waveController.KillWaveMonster();
             _agentMovement.StopImmediatelly();
             _agentMovement.enabled = false;
+            GameManager.Inst.SetGold(_enemyData.dropCoin * _level / 2);
             OnDie?.Invoke();
             _enemyAttack.Reset();
         }
