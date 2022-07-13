@@ -2,14 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-<<<<<<< HEAD
-
-public class Enemy : PoolableMono, IHittable, IKnockback
-=======
 using static Constant;
 
 public class Enemy : PoolableMono, IHittable, IKnockback, IShake
->>>>>>> OIF
 {
     [SerializeField] private EnemyDataSO _enemyData;
     public EnemyDataSO EnemyData => _enemyData;
