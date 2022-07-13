@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StoneTower : Tower
 {
-    [SerializeField] private Animator anim;
+    //[SerializeField] private Animator anim;
     [SerializeField] private LayerMask _whatIsEnemy;
+
+    public UnityEvent OnBrokeTower;
 
     protected override void Awake()
     {
         base.Awake();
-        anim.SetBool("isExplore", false);
+        //anim.SetBool("isExplore", false);
     }
 
     public override void UseSkill()
@@ -29,17 +32,9 @@ public class StoneTower : Tower
         }
 
         yield return new WaitForSeconds(1f);
-        FadeTower(1f);
+        FadeTower(0.1f);
+        
     }
-
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 2.5f);
-    }
-
     protected override void SpawnEffect()
     {
         Vector2 rayPos = transform.position;
@@ -52,6 +47,12 @@ public class StoneTower : Tower
             effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
             effect.StartAnim();
         }
+    }
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 2.5f);
     }
 #endif
 }

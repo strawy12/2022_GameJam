@@ -1379,7 +1379,7 @@ AudioSource:
   m_GameObject: {fileID: 2489170102244405635}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5763930671011225742, guid: 82946dd0188c37840a1c74a5c6a26a6a, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1480,8 +1480,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pitchRandomness: 0.2
   _hitClip: {fileID: 0}
-  _deathClip: {fileID: 0}
+  _deathClip: {fileID: 8300000, guid: 04cb1374cbb0d1347a314e4208aa7b32, type: 3}
   _attackSound: {fileID: 8300000, guid: fb4f0468d41b1664ea699756b5418846, type: 3}
+  _arrowShootSound: {fileID: 0}
 --- !u!1 &2625361695802576085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3538,7 +3539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ea3a39f494e6747ab953dd9e966a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 2
+  slowSwamp: 2
+  maxSpeed: 10
   acceleration: 50
   deAcceleration: 50
   OnVelocityChange:
@@ -3616,6 +3618,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1860684700720962483}
         m_TargetAssemblyTypeName: EnemyAnimation, Assembly-CSharp
         m_MethodName: PlayDeathAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4560448542951545909}
+        m_TargetAssemblyTypeName: EnemySound, Assembly-CSharp
+        m_MethodName: PlayDeathSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
