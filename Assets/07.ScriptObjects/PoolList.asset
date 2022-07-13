@@ -21,7 +21,19 @@ MonoBehaviour:
     poolCnt: 30
   - prefab: {fileID: 2476525707465858343, guid: 0fc37bff1cd6a6b4fa9a1d51fc2c08c9, type: 3}
     poolCnt: 30
-  - prefab: {fileID: 7662393971064421792, guid: c1f7017c3cd68f64f9dbade9b03fcb0b, type: 3}
+  - prefab: {fileID: 3610986288559409942, guid: c1f7017c3cd68f64f9dbade9b03fcb0b, type: 3}
+    poolCnt: 10
+  - prefab: {fileID: 5359026806604783647, guid: 5f7cf199a4e87e4448d2a2d15d818bf0, type: 3}
+    poolCnt: 10
+  - prefab: {fileID: 4356527430529145242, guid: 27304d9882f46784ca4596c846822f84, type: 3}
+    poolCnt: 10
+  - prefab: {fileID: 8455632279133716252, guid: afa76c56b699c814ea4e9ea8b946d1c1, type: 3}
+    poolCnt: 10
+  - prefab: {fileID: 7710940042887351674, guid: 675623cdf94fbf64d990bb51abe524fc, type: 3}
+    poolCnt: 10
+  - prefab: {fileID: -805298637847678045, guid: 60f5e68f9ab34944f88cebc869a61a35, type: 3}
+    poolCnt: 30
+  - prefab: {fileID: 9173671696485567779, guid: 3e703bed807d0fe4db7d94b9afe9a9ab, type: 3}
     poolCnt: 10
   - prefab: {fileID: 3071846291266924090, guid: 5f7cf199a4e87e4448d2a2d15d818bf0, type: 3}
     poolCnt: 10

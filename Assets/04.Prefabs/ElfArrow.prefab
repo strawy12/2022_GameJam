@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9064465342958939391}
   - component: {fileID: -805298637847678045}
   - component: {fileID: -5423844029932765635}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ElfArrow
   m_TagString: Arrow
   m_Icon: {fileID: 0}
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2562869089639138326}
   m_LocalRotation: {x: 0, y: 0, z: 0.048413906, w: 0.9988274}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0.1853, y: 0.0426, z: 0}
+  m_LocalScale: {x: 1.07709, y: 0.6565, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1320579803
+  m_SortingLayer: 2
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 32e1ddf24e7a3c04e9766a6926ad8504, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

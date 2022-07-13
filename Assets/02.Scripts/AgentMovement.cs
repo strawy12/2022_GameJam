@@ -5,6 +5,8 @@ using UnityEngine.Events;
 using DG.Tweening;
 public class AgentMovement : MonoBehaviour
 {
+    public float slowSwamp = 2f;
+
     private Rigidbody2D _rigidbody;
 
     [Range(0, 10)]
@@ -31,7 +33,8 @@ public class AgentMovement : MonoBehaviour
 
     public void MoveAgent(Vector2 movementInput)
     {
-        if (movementInput.sqrMagnitude > 0)
+
+         if (movementInput.sqrMagnitude > 0)
         {
             if (Vector2.Dot(movementInput, _movementDirection) < 0)
             {
@@ -66,6 +69,11 @@ public class AgentMovement : MonoBehaviour
             _rigidbody.velocity = new Vector2(_movementDirection.x * _currentVelocity, _rigidbody.velocity.y);
     }
 
+    public void SwampStateEnemyRun()
+    {
+        _rigidbody.AddForce(new Vector2(_movementDirection.x * _currentVelocity - slowSwamp, 0));
+    }
+
 
     //넉백구현할 때 사용할 거다.
     public void StopImmediatelly()
@@ -84,6 +92,7 @@ public class AgentMovement : MonoBehaviour
     }
     public IEnumerator KnockbackCorutine(Vector2 dir, float power, float duration)
     {
+        Debug.Log("dd");
         _rigidbody.AddForce(dir.normalized * power, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
         ResetKnockbackParam();

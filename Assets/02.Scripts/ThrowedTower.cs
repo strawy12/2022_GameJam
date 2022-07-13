@@ -143,6 +143,7 @@ public class ThrowedTower : MonoBehaviour
 
     private void GenerateTower()
     {
+        
         _currentTower = GetTower();
         _currentTower.transform.SetParent(_throwPos);
         _currentTower.transform.localPosition = Vector3.zero;
@@ -185,7 +186,7 @@ public class ThrowedTower : MonoBehaviour
         {
             if (data.isLock)
                 continue;
-
+                
             string towerName = data.prefabName;
             towerList.Add(towerName);
         }

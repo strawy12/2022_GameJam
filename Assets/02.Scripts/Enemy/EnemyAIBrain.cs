@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class EnemyAIBrain : MonoBehaviour
 {
+    public bool isPeaceMaker = false;
+
     [field: SerializeField] public UnityEvent<Vector2> OnMovementKeyPress { get; set; }
     [field: SerializeField] public UnityEvent OnAttackButtonPress { get; set; }
     [SerializeField] protected AIState _currentState;

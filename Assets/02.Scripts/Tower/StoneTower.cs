@@ -5,26 +5,40 @@ using UnityEngine;
 public class StoneTower : Tower
 {
     [SerializeField] private Animator anim;
-    [SerializeField] private BoxCollider2D _exploreCol;
+    [SerializeField] private LayerMask _whatIsEnemy;
 
     protected override void Awake()
     {
         base.Awake();
         anim.SetBool("isExplore", false);
-        _exploreCol.enabled = false;
-    }
-
-    IEnumerator ExPlosionStoneTower()
-    {
-        anim.SetBool("isExplore", true);
-        _exploreCol.enabled = true;
-        yield return new WaitForSeconds(1f);
-        
-        DestroyTower();
     }
 
     public override void UseSkill()
     {
         StartCoroutine(ExPlosionStoneTower());
     }
+
+    private IEnumerator ExPlosionStoneTower()
+    {
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 2.5f, _whatIsEnemy);
+
+        foreach (var hitMonster in cols)
+        {
+            IHittable hit = hitMonster.GetComponent<IHittable>();
+            hit?.GetHit(4, transform.gameObject);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        DestroyTower();
+    }
+
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 2.5f);
+    }
+#endif
 }

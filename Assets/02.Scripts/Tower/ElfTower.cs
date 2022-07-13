@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElfTower : Tower
 {
-    // πˆ∏± ƒ⁄µÂ
+    // ÔøΩÔøΩÔøΩÔøΩ ÔøΩ⁄µÔøΩ
     [SerializeField] private ElfArrow _elfArrowPref;
 
     [SerializeField] private float _duration;
@@ -15,12 +15,15 @@ public class ElfTower : Tower
     protected override void Awake()
     {
         base.Awake();
+        GameManager.Inst.isGround = false;
     }
+
 
     IEnumerator ElfTowerSkill()
     {
         float time = _duration;
         Vector2 shootPos = transform.position;
+
         while (time > 0)
         {
             ElfArrow arrow = PoolManager.Instance.Pop("ElfArrow") as ElfArrow;
@@ -35,10 +38,5 @@ public class ElfTower : Tower
     public override void UseSkill()
     {
         StartCoroutine(ElfTowerSkill());
-    }
-
-    private void OnMouseDown()
-    {
-        UseSkill(); //»≠∏È¿ª ¥©∏£∏È Ω∫≈≥∑Œ ∫Ø∞Ê
     }
 }

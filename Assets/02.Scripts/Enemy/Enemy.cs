@@ -13,12 +13,9 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     protected EnemyAttack _enemyAttack;
     protected BoxCollider2D _boxCollider;
     protected int _level = 1;
-    //Á×¾úÀ»¶§ Ã³¸®ÇÒ °Í°ú
-    //¾×Æ¼ºê »óÅÂ¸¦ °ü¸®ÇÒ ¾Ö°¡ ÇÊ¿ä
 
     protected EnemyAIBrain _enemyBrain;
 
-    #region ÀÎÅÍÆäÀÌ½º ±¸ÇöºÎ
     public int Health { get; private set; }
     public int Damage 
     { 
@@ -35,6 +32,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     public bool IsEnemy => true;
 
     public Vector3 HitPoint { get; private set; }
+
     public virtual void GetHit(int damage, GameObject damageDealer)
     {
         if (_isDead) return;
@@ -42,8 +40,12 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         Health -= damage;
         HitPoint = damageDealer.transform.position;
         OnGetHit?.Invoke();
+
+        Debug.Log(Health);
+
         if (Health <= 0)
         {
+            Debug.Log("enemy ï¿½ï¿½ï¿½ï¿½");
             _isDead = true;
             _waveController.KillWaveMonster();
             _agentMovement.StopImmediatelly();
@@ -67,12 +69,19 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         _enemyAttack.attackDelay = _enemyData.attackDelay;
         
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            Debug.Log("Ground");
+        }
+    }
 
     public virtual void PerformAttack()
     {
         if (!_isDead && _isActive)
         {
-            //¿©±â¿¡ ½ÇÁ¦ÀûÀÎ °ø°ÝÀ» ¼öÇàÇÏ´Â ÄÚµå
+            //ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Úµï¿½
             _enemyAttack.Attack(_enemyData.damage);
         }
     }
@@ -90,6 +99,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     {
         Health = Health = _enemyData.maxHealth;
     }
+
     public void Die()
     {
         PoolManager.Instance.Push(this);

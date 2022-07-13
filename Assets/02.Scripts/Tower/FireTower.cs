@@ -6,12 +6,19 @@ public class FireTower : Tower
 {
     public bool isBoom = false;
 
-    [SerializeField] private BoxCollider2D _fireBoomCol;
+    [SerializeField] private LayerMask _whatIsEnemy;
 
     protected override void Awake()
     {
         base.Awake();
-        _fireBoomCol.enabled = false;
+    }
+
+    private void Update()
+    {
+        if (isBoom)
+        {
+            StartCoroutine(ExPlosionFireTower());
+        }
     }
 
     public override void UseSkill()
@@ -19,26 +26,35 @@ public class FireTower : Tower
         StartCoroutine(StartedMonsterCheck());
     }
 
-    IEnumerator StartedMonsterCheck()
+    IEnumerator StartedMonsterCheck() // 1초뒤 시작되게
     {
         yield return new WaitForSeconds(1f);
-        _fireBoomCol.enabled = true;
         isBoom = true;
+        Debug.Log("일단 스타트몬스터쳌");
     }
 
-    IEnumerator ExPlosionFireTower()
+    IEnumerator ExPlosionFireTower() // 스킬
     {
-        Debug.Log("몬스터닿음");
-        // 범위 내 몬스터 죽이기
-        return null;
-    }
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 5f, _whatIsEnemy);
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.collider.CompareTag("Enemy") && isBoom)
+        if (cols.Length >= 2)
         {
-            StartCoroutine(ExPlosionFireTower());
+            foreach (var hitMonster in cols)
+            {
+                IHittable hit = hitMonster.GetComponent<IHittable>();
+                hit?.GetHit(6, transform.gameObject);
+            }
+
             DestroyTower();
+            yield return new WaitForSeconds(0.1f);
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 5f);
+    }
+#endif
 }
