@@ -7,6 +7,7 @@ public class PeaceMakerTower : Tower
     public bool isSkill = false;
 
     [SerializeField] private LayerMask _whatIsEnemy;
+    [SerializeField] private Animator deletePeaceMakerTower;
 
     protected override void Awake()
     {
@@ -41,6 +42,8 @@ public class PeaceMakerTower : Tower
         yield return new WaitForSeconds(3f);
 
         isSkill = false;
+        deletePeaceMakerTower.Play("PeaceMakerDust");
+        yield return new WaitForSeconds(0.5f);
 
         DestroyTower();
     }
@@ -48,11 +51,6 @@ public class PeaceMakerTower : Tower
     public override void UseSkill()
     {
         StartCoroutine(PeaceMakerAbilityTower());
-    }
-
-    private void ColiderCheck()
-    {
-
     }
 
 #if UNITY_EDITOR
