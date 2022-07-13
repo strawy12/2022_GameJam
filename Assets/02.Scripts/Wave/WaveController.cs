@@ -14,8 +14,8 @@ public class WaveController : MonoBehaviour
             return _isWave;
         }
     }
-    private int _waveLevel = 1;
-    private int _waveIndex = 0;
+    private int _waveLevel = 1; // 이거랑
+    private int _waveIndex = 0; // 이거 가지고 있어야함
     private int _waveMonsterCount = 0;
     private int _randomIndex = 0;
     public int TotalWave

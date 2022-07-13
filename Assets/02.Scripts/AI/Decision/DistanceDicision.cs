@@ -9,7 +9,7 @@ public class DistanceDicision : AIDecision
 
     public override bool MakeDecision()
     {
-        float calc = Vector2.Distance(_enemyAIBrain.target.position, transform.position);
+        float calc = Mathf.Abs(_enemyAIBrain.target.position.x - transform.position.x);
         if (calc <= distance)
         {
             if (_aIActionData.targetSpotted == false)
