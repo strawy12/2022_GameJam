@@ -30,7 +30,8 @@ public class GameManager : MonoSingleton<GameManager>
         Game,
         UI,
         Throwing,
-        ThrowReady
+        ThrowReady,
+        Tutorial
     }
 
     public GameState gameState;
@@ -46,6 +47,13 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Start()
     {
+        if(DataManager.Inst.CurrentPlayer.isTutorial == false)
+        {
+            gameState = GameState.Tutorial;
+            GetComponent<TutorialManager>().StartTutorial();
+            return;
+        }
+
         UIManager.Inst.GoUpgradeUI();
     }
     private void CreatePool()
