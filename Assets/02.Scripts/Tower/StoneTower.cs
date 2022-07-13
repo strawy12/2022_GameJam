@@ -33,8 +33,8 @@ public class StoneTower : Tower
         OnBrokeTower.Invoke();
         yield return new WaitForSeconds(1f);
         FadeTower(0.1f);
-        
     }
+
     protected override void SpawnEffect()
     {
         Vector2 rayPos = transform.position;
@@ -47,6 +47,8 @@ public class StoneTower : Tower
             effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
             effect.StartAnim();
         }
+
+        ShakeObject(hit.point);
     }
 #if UNITY_EDITOR
     private void OnDrawGizmos()

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static Constant;
 
-public class Enemy : PoolableMono, IHittable, IKnockback
+public class Enemy : PoolableMono, IHittable, IKnockback, IShake
 {
     [SerializeField] private EnemyDataSO _enemyData;
     public EnemyDataSO EnemyData => _enemyData;
@@ -29,32 +30,15 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     }
     [field: SerializeField] public UnityEvent OnDie { get; set; }
     [field: SerializeField] public UnityEvent OnGetHit { get; set; }
+    [field: SerializeField] public UnityEvent OnShake { get; set; }
 
     public bool IsEnemy => true;
 
     public Vector3 HitPoint { get; private set; }
 
-    public virtual void GetHit(int damage, GameObject damageDealer)
-    {
-        if (_isDead || _isStiff) return;
-        Health -= damage;
-        StartCoroutine(StiffCoroutine());
-        HitPoint = damageDealer.transform.position;
-        OnGetHit?.Invoke();
-
-        if (Health <= 0)
-        {
-            _isDead = true;
-            _waveController.KillWaveMonster();
-            _agentMovement.StopImmediatelly();
-            _agentMovement.enabled = false;
-            OnDie?.Invoke();
-            _enemyAttack.Reset();
-        }
-    }
-
     [SerializeField]
     private bool _isActive = false;
+
     private void Awake()
     {
         _waveController = GameObject.Find("WaveController").GetComponent<WaveController>();
@@ -65,6 +49,56 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         _enemyBrain = GetComponent<EnemyAIBrain>();
         _enemyAttack.attackDelay = _enemyData.attackDelay;
     }
+    public virtual void GetHit(int damage, GameObject damageDealer)
+    {
+        if (_isDead || _isStiff) return;
+
+        bool isCritical = IsCritical();
+
+        if (isCritical)
+        {
+            damage = (int)(damage * CRITICAL_DAMAGE_FACTOR);
+        }
+
+        Health -= damage;
+
+        SpawnDamagePopup(damage, isCritical);
+
+        StartCoroutine(StiffCoroutine());
+        HitPoint = damageDealer.transform.position;
+        OnGetHit?.Invoke();
+
+        if (Health <= 0)
+        {
+            _isDead = true;
+            _waveController.KillWaveMonster();
+            _agentMovement.StopImmediatelly();
+            _agentMovement.enabled = false;
+            GameManager.Inst.SetGold(_enemyData.dropCoin * _level / 2);
+            OnDie?.Invoke();
+            _enemyAttack.Reset();
+        }
+    }
+
+    protected void SpawnDamagePopup(int damage,bool isCritical)
+    {
+        DamagePopup popup = PoolManager.Instance.Pop("DamagePopup") as DamagePopup;
+
+        popup.Setup(damage, transform.position, isCritical);
+    }
+
+    private bool IsCritical()
+    {
+        float critical = UnityEngine.Random.value;
+        bool isCritical = false;
+
+        if (critical <= (DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.Critical) / CRITICAL_MAX_PERCENT))
+        {
+            isCritical = true;
+        }
+        return isCritical;
+    }
+
 
     public virtual void PerformAttack()
     {
@@ -112,5 +146,10 @@ public class Enemy : PoolableMono, IHittable, IKnockback
                 _agentMovement.KnockBack(dir, power, duration);
             }
         }
+    }
+
+    public void StartShake()
+    {
+        OnShake?.Invoke();
     }
 }

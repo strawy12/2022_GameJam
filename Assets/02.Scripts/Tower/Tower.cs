@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.Events;
-using static Constant;
 
 public abstract class Tower : PoolableMono
 {
@@ -31,7 +29,6 @@ public abstract class Tower : PoolableMono
     private bool _isGround;
     public Action OnEndThrow;
     protected Sequence seq;
-
     protected virtual void Awake()
     {
         StartInit();
@@ -110,7 +107,7 @@ public abstract class Tower : PoolableMono
                     break;
                 case ETowerType.ActiveType:
                     _isGround = true;
-                    FadeTower(1.5f);
+                    FadeTower(1f);
                     break;
                 case ETowerType.FixingType:
                     UseSkill();
@@ -142,24 +139,27 @@ public abstract class Tower : PoolableMono
         {
             IHittable hittable = collision.GetComponent<IHittable>();
             float damage = (_towerData.damage * DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.DamageFactor));
-            if (IsCritical())
-                damage *= CRITICAL_DAMAGE_FACTOR;
+           
             hittable?.GetHit((int)damage, gameObject);
             IKnockback knockback = collision.GetComponent<IKnockback>();
             knockback?.Knockback(Vector2.one, _towerData.knockbackPower, 1f);
         }
     }
-    private bool IsCritical()
-    {
-        float critical = UnityEngine.Random.value;
-        bool isCritical = false;
-
-        if (critical <= (DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.Critical) / CRITICAL_MAX_PERCENT))
-        {
-            isCritical = true;
-        }
-        return isCritical;
-    }
+    
 
     protected abstract void SpawnEffect();
+    protected void ShakeObject(Vector2 hitPoint)
+    {
+        Collider2D[] hits = Physics2D.OverlapBoxAll(hitPoint, new Vector2(20f, 3f), 0f, LayerMask.GetMask("Enemy"));
+
+        foreach(var hit in hits)
+        {
+            IShake shakeObj = hit.GetComponent<IShake>();
+
+            if(shakeObj != null)
+            {
+                shakeObj.StartShake();
+            }
+        }
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class PeaceMakerTower : Tower
-{
+{ 
     public bool isSkill = false;
 
     [SerializeField] private LayerMask _whatIsEnemy;
@@ -55,7 +55,9 @@ public class PeaceMakerTower : Tower
     {
         base.DestroyTower();
     }
-
+    protected override void SpawnEffect()
+    {
+    }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -63,10 +65,7 @@ public class PeaceMakerTower : Tower
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
 
-    protected override void SpawnEffect()
-    {
-        throw new System.NotImplementedException();
-    }
+
 #endif
 }
 
