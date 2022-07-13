@@ -53,6 +53,9 @@ public class FireTower : Tower
             FadeTower(1f);
         }
     }
+    protected override void SpawnEffect()
+    {
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -61,8 +64,6 @@ public class FireTower : Tower
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
 
-    protected override void SpawnEffect()
-    {
-    }
+
 #endif
 }

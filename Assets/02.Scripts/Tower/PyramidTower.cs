@@ -37,6 +37,6 @@ public class PyramidTower : Tower
             effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
             effect.StartAnim();
         }
-        
+        ShakeObject(hit.point);
     }
 }

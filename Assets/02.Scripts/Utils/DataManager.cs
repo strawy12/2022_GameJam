@@ -27,7 +27,7 @@ public class DataManager : MonoSingleton<DataManager>
 
         DontDestroyOnLoad(this);
 
-        SAVE_PATH = Application.dataPath + "/Save";
+        SAVE_PATH = Application.persistentDataPath + "/Save";
 
         if (!Directory.Exists(SAVE_PATH))
         {

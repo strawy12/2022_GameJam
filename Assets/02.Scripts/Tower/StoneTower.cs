@@ -32,14 +32,6 @@ public class StoneTower : Tower
         FadeTower(1f);
     }
 
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 2.5f);
-    }
-
     protected override void SpawnEffect()
     {
         Vector2 rayPos = transform.position;
@@ -52,6 +44,16 @@ public class StoneTower : Tower
             effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
             effect.StartAnim();
         }
+
+        ShakeObject(hit.point);
     }
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 2.5f);
+    }
+
+    
 #endif
 }
