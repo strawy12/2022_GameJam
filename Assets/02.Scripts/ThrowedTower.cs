@@ -203,6 +203,5 @@ public class ThrowedTower : MonoBehaviour
                 _nextTowerList.Add(tower);
             }
         }
-
     }
 }
