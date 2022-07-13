@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class AgentMovement : MonoBehaviour
 {
-    public bool isPeaceMaker = false;
+    public float slowSwamp = 2f;
 
     private Rigidbody2D _rigidbody;
 
@@ -66,6 +66,11 @@ public class AgentMovement : MonoBehaviour
             _rigidbody.AddForce(new Vector2(_movementDirection.x * _currentVelocity, 0));
     }
 
+    public void SwampStateEnemyRun()
+    {
+        _rigidbody.AddForce(new Vector2(_movementDirection.x * _currentVelocity - slowSwamp, 0));
+    }
+
 
     //넉백구현할 때 사용할 거다.
     public void StopImmediatelly()
@@ -84,6 +89,7 @@ public class AgentMovement : MonoBehaviour
     }
     public IEnumerator KnockbackCorutine(Vector2 dir, float power, float duration)
     {
+        Debug.Log("dd");
         _rigidbody.AddForce(dir.normalized * power, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
         ResetKnockbackParam();

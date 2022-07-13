@@ -11,21 +11,30 @@ public class PyramidTower : Tower
         base.Awake();
     }
 
-    IEnumerator ExPlosionEffect()
+    void Update()
     {
-        _swampObj.Init(transform.position.x, transform.position.y - .9f);
-        Instantiate(_swampObj); // 게임매니저 풀로 피라미드Swamp늪생성
-        yield return new WaitForSeconds(1f);
+        // 터치아직안함
+        if (Input.GetMouseButtonDown(0) && !GameManager.Inst.isGround)
+        {
+            UseSkill();
+        }
+    }
+
+
+    IEnumerator SpawnSwamp()
+    {
+        PyramidSwamp swamp = PoolManager.Instance.Pop("PyramidSwamp") as PyramidSwamp;
+        swamp.transform.position = new Vector2(transform.position.x, -7);
+        swamp.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(.7f);
         DestroyTower();
     }
 
     public override void UseSkill()
     {
-        StartCoroutine(ExPlosionEffect());
+        StartCoroutine(SpawnSwamp());
     }
 
-    private void OnMouseDown()
-    {
-        UseSkill();
-    }
+
 }

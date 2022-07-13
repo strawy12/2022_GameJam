@@ -169,7 +169,7 @@ MonoBehaviour:
   isSkill: 0
   _whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 128
 --- !u!1 &8455632279304909129
 GameObject:
   m_ObjectHideFlags: 0
