@@ -23,7 +23,7 @@ MonoBehaviour:
     prefabName: StoneTower
     damage: 4
     weight: 2
-    isLock: 0
+    isLock: 1
     knockbackPower: 3
     towerType: 1
   - itemNum: 1
@@ -37,7 +37,7 @@ MonoBehaviour:
     prefabName: FireTower
     damage: 1
     weight: 1
-    isLock: 1
+    isLock: 0
     knockbackPower: 0
     towerType: 2
   - itemNum: 2

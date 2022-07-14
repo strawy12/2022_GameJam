@@ -20,9 +20,26 @@ public class UIManager : MonoSingleton<UIManager>
 
     [SerializeField] private List<StatInfoPanel> _statInfoPanelList;
 
+    private GameManager.GameState _beforeState = GameManager.GameState.Game;
     private void Start()
     {
         _goldPanel.SetText();
+    }
+
+    public void OnUI()
+    {
+        _beforeState = GameManager.Inst.gameState;
+        GameManager.Inst.gameState = GameManager.GameState.UI;
+        Time.timeScale = 0f;
+    }
+
+    public void OffUI()
+    {
+        GameManager.GameState state = GameManager.Inst.gameState;
+        GameManager.Inst.gameState = _beforeState;
+        _beforeState = state;
+        Time.timeScale = 1f;
+
     }
 
     public void AddUpgradePanel(UpgradePanel panel)

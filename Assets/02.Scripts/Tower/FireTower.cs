@@ -24,7 +24,6 @@ public class FireTower : Tower
     {
         yield return new WaitForSeconds(1f);
         _isCheck = true;
-        _isBoom = true;
         OnUseSkill?.Invoke();
 
     }
@@ -38,6 +37,7 @@ public class FireTower : Tower
         }
         else if (_isCheck && !_isBoom)
         {
+            EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
             StartCoroutine(ExPlosionFireTower());
         }
     }
