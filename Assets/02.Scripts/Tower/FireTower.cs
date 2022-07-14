@@ -18,6 +18,8 @@ public class FireTower : Tower
     public override void UseSkill()
     {
         StartCoroutine(StartedMonsterCheck());
+
+        Invoke("DestroyTower", 7f);
     }
 
     IEnumerator StartedMonsterCheck() // 1초뒤 시작되게

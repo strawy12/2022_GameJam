@@ -42,8 +42,8 @@ public class EnemyProjectile : PoolableMono
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            //IHittable hittable = collision.gameObject.GetComponent<IHittable>();
-            //hittable?.GetHit(_damage, gameObject);
+            IHittable hittable = collision.gameObject.GetComponent<IHittable>();
+            hittable?.GetHit(_damage, gameObject);
             Debug.Log("GetHit_Player");
         }
     }

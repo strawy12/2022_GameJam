@@ -11,9 +11,9 @@ public class MeleeEnemyAttack : EnemyAttack
         {
             _enemyBrain.SetAttackState(true);
 
-            //IHittable hitable = GetTarget().GetComponent<IHittable>();
+            IHittable hitable = GetTarget().GetComponent<IHittable>();
 
-            // hitable?.GetHit(damage: damage, damageDealer: gameObject);
+            hitable?.GetHit(damage: damage, damageDealer: gameObject);
             AttackFeedback?.Invoke();
             StartCoroutine(WaitBeforeAttackCoroutine());
         }
