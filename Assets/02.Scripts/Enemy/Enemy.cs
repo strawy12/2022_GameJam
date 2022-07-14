@@ -78,7 +78,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback, IShake
             _agentMovement.enabled = false;
             GameManager.Inst.SetGold(_enemyData.dropCoin * _level / 2);
             PoolParticle particle = PoolManager.Instance.Pop(_dieParticle.gameObject.name) as PoolParticle;
-            particle.SetParticleVelocity(transform.position,damageDealer.transform.position);
+            particle.SetParticleVelocity(new Vector2(transform.position.x,transform.position.y + 1f),damageDealer.transform.position);
             Effect effect = PoolManager.Instance.Pop(_dieEffect.gameObject.name) as Effect;
             effect.transform.position = transform.position; 
             effect.StartAnim();

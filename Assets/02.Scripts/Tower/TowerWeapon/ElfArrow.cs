@@ -6,7 +6,7 @@ public class ElfArrow : PoolableMono
 {
     private Vector2 _targetDir;
     private float _arrowForce;
-
+    private int _damage;
     private Rigidbody2D _arrowRigidbody;
     private SpriteRenderer _spriteRenderer;
     private Sequence seq;
@@ -16,11 +16,11 @@ public class ElfArrow : PoolableMono
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Init(Vector2 dir, float force)
+    public void Init(Vector2 dir, float force, int damage)
     {
         _targetDir = dir;
         _arrowForce = force;
-
+        _damage = damage;
         float seta = Mathf.Atan2(_targetDir.y, _targetDir.x);
         float rot = seta * Mathf.Rad2Deg;
 
@@ -39,7 +39,7 @@ public class ElfArrow : PoolableMono
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             IHittable monsterHit = collision.GetComponent<IHittable>();
-            monsterHit.GetHit(2, transform.gameObject);
+            monsterHit.GetHit(_damage, transform.gameObject);
             PoolManager.Instance.Push(this);
         }
 

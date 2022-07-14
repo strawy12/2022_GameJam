@@ -24,7 +24,6 @@ public class FireTower : Tower
     {
         yield return new WaitForSeconds(1f);
         _isCheck = true;
-        _isBoom = true;
         OnUseSkill?.Invoke();
 
     }
@@ -38,32 +37,28 @@ public class FireTower : Tower
         }
         else if (_isCheck && !_isBoom)
         {
+            Debug.Log("Check");
             StartCoroutine(ExPlosionFireTower());
         }
     }
 
     private IEnumerator ExPlosionFireTower()
     {
-        _isBoom = true;
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 5f, _whatIsEnemy);
 
-        if (cols.Length >= 2)
+        foreach (var hitMonster in cols)
         {
-            foreach (var hitMonster in cols)
-            {
-                IHittable hit = hitMonster.GetComponent<IHittable>();
-                hit?.GetHit(6, transform.gameObject);
-                Debug.Log("boom");
-            }
-            yield return new WaitForSeconds(0.01f);
-            DestroyTower();
+            Debug.Log("hit");
+            IHittable hit = hitMonster.GetComponent<IHittable>();
+            hit?.GetHit(_towerData.damage, transform.gameObject);
         }
+        yield return new WaitForSeconds(0.01f);
+        _isBoom = true;
+        Effect effect = PoolManager.Instance.Pop("ExplosionAnim") as Effect;
+        effect.transform.position = transform.position;
+        effect.StartAnim();
+        DestroyTower();
     }
-    protected override void SpawnEffect()
-    {
-
-    }
-
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {

@@ -15,9 +15,9 @@ MonoBehaviour:
   enemyName: GoblinKnight
   prefab: {fileID: 5619880941258787303, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
   poolPrefab: {fileID: 5619880941258787304, guid: 375faaf4f154ec64bbee7bd32e9528ca, type: 3}
-  maxHealth: 7
+  maxHealth: 3
   knockbackRegist: 1
-  damage: 4
+  dropCoin: 2
+  damage: 3
   attackDelay: 1.5
   hitRange: 1.5
-  knockbackPower: 5

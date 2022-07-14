@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6685863785894033055}
   - component: {fileID: 6685863785894033054}
   - component: {fileID: 6685863785894033053}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GoblinTypeADieParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3911,7 +3911,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 64
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5

@@ -173,6 +173,17 @@ public class ThrowedTower : MonoBehaviour
         _isReloading = false;
     }
 
+    public void DestroyTower()
+    {
+        PoolManager.Instance.Push(_currentTower);
+        foreach (var tower in _nextTowerList)
+        {
+            PoolManager.Instance.Push(tower);
+        }
+        _nextTowerList.Clear();
+        _currentTower = null;
+    }
+
     public void GenerateTower()
     {
 

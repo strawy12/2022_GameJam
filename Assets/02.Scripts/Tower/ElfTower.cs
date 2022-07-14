@@ -32,7 +32,7 @@ public class ElfTower : Tower
             OnSkillShot?.Invoke();
             ElfArrow arrow = PoolManager.Instance.Pop("ElfArrow") as ElfArrow;
             arrow.transform.position = shootPos + new Vector2(_shootPosOffset * Random.Range(-1f, 1f), 0f);
-            arrow.Init(Vector2.down, _shootForce);
+            arrow.Init(Vector2.down, _shootForce, _towerData.damage*2);
             yield return new WaitForSeconds(_shootDelay);
         }
     }
@@ -66,11 +66,5 @@ public class ElfTower : Tower
     private void OnApplicationQuit()
     {
         EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
-
-    }
-
-    protected override void SpawnEffect()
-    {
-        
     }
 }

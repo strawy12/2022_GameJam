@@ -150,9 +150,21 @@ public abstract class Tower : PoolableMono
             knockback?.Knockback(Vector2.one, _towerData.knockbackPower, 1f);
         }
     }
-    
 
-    protected abstract void SpawnEffect();
+
+    protected virtual void SpawnEffect() {
+        Vector2 rayPos = transform.position;
+        rayPos.y = 10f;
+        var hit = Physics2D.Raycast(rayPos, Vector2.down, 999f, LayerMask.GetMask("Ground"));
+        Debug.DrawRay(rayPos, Vector2.down * 999f, Color.red, 10f);
+        if (hit.collider != null)
+        {
+            Effect effect = PoolManager.Instance.Pop(_effectPrefab.name) as Effect;
+            effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
+            effect.StartAnim();
+        }
+        ShakeObject(hit.point); 
+    }
     protected void ShakeObject(Vector2 hitPoint)
     {
         Collider2D[] hits = Physics2D.OverlapBoxAll(hitPoint, new Vector2(20f, 3f), 0f, LayerMask.GetMask("Enemy"));

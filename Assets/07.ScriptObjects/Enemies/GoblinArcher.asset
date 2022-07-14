@@ -15,8 +15,9 @@ MonoBehaviour:
   enemyName: GoblinArcher
   prefab: {fileID: 2476525707465858344, guid: 0fc37bff1cd6a6b4fa9a1d51fc2c08c9, type: 3}
   poolPrefab: {fileID: 2476525707465858343, guid: 0fc37bff1cd6a6b4fa9a1d51fc2c08c9, type: 3}
-  maxHealth: 4
+  maxHealth: 2
   knockbackRegist: 1
-  damage: 3
+  dropCoin: 2
+  damage: 2
   attackDelay: 1
   hitRange: 2

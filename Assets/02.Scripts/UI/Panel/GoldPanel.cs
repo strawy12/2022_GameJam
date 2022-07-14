@@ -7,10 +7,6 @@ public class GoldPanel : MonoBehaviour
 {
     [SerializeField] private Text _goldText;
 
-    private void Awake()
-    {
-        _goldText = GetComponent<Text>();
-    }
     public void SetText()
     {
         long gold = DataManager.Inst.CurrentPlayer.gold;

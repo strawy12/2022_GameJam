@@ -29,7 +29,7 @@ public class PoolParticle : PoolableMono
     public void SetParticleVelocity(Vector2 pos, Vector2 targetPos)
     {
         var vm = _particle.velocityOverLifetime;
-        vm.x = pos.x - targetPos.x;
+        vm.x = (pos.x - targetPos.x);
         OnEnableParticle(pos);
     }
 }

@@ -55,17 +55,12 @@ public class PeaceMakerTower : Tower
     {
         base.DestroyTower();
     }
-    protected override void SpawnEffect()
-    {
-    }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
-
-
 #endif
 }
 
