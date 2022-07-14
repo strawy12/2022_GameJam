@@ -104,11 +104,11 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void EffectOnOff()
     {
-            audioMixer.SetFloat("Effect", !_effectToggle.isOn ? -20f : -80f);
+            audioMixer.SetFloat("Effect", !_effectToggle.isOn ? 0f : -80f);
     }
     public void BgmOnOff()
     {
-        audioMixer.SetFloat("Music", !_bgmToggle.isOn? -20f : -80f);
+        audioMixer.SetFloat("Music", !_bgmToggle.isOn? 0f : -80f);
     }
 
     public float ShowRoundUI(int round)
