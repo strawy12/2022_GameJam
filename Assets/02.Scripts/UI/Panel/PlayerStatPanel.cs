@@ -16,13 +16,15 @@ public class PlayerStatPanel : UpgradePanel
         switch (statData.statType)
         {
             case PlayerStatData.EPlayerStat.DamageFactor:
-                infoText = $"Atk Factor : {statData.value.ToString()}";
+                infoText = string.Format("Atk Factor : x {0:N2}", statData.value);
                 break;
             case PlayerStatData.EPlayerStat.Critical:
-                infoText = $"Critical Percent : {statData.value.ToString()}%";
+
+                
+                infoText = string.Format("Critical Percent : {0:N2}%", statData.value);
                 break;
             case PlayerStatData.EPlayerStat.MaxHp:
-                infoText = $"Max Hp : {statData.value.ToString()}";
+                infoText = string.Format("Max Hp : {0}", ((int)statData.value).ToString());
                 break;
         }
 
@@ -31,5 +33,24 @@ public class PlayerStatPanel : UpgradePanel
 
     public override void UpgradeItem()
     {
+        PlayerStatData statData = _currentData as PlayerStatData;
+        switch (statData.statType)
+        {
+            case PlayerStatData.EPlayerStat.DamageFactor:
+                statData.value *= 1.1f;
+                break;
+            case PlayerStatData.EPlayerStat.Critical:
+                if(statData.value == 0f)
+                {
+                    statData.value = 1f;
+                }
+                statData.value *= 1.1f;
+                break;
+            case PlayerStatData.EPlayerStat.MaxHp:
+                statData.value *= 1.1f;
+                break;
+        }
+
+        UIManager.Inst.SetStatInfoPanel(statData.statType);
     }
 }

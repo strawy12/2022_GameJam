@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MobileControl : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerClickHandler
+public class MobileControl : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerDownHandler
 {
 
     public void OnDrag(PointerEventData eventData)
@@ -16,7 +16,7 @@ public class MobileControl : MonoBehaviour, IDragHandler, IEndDragHandler, IPoin
                 break;
         }
     }
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         switch (GameManager.Inst.gameState)
         {

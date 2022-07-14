@@ -21,7 +21,7 @@ public class PlayerData
         towerDataList = new List<TowerData>();
         statDataList = new List<PlayerStatData>();
         currentRound = 0;
-        gold = 10000000;
+        gold = 0;
 
     }
 

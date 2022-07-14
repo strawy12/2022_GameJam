@@ -55,11 +55,15 @@ public class Enemy : PoolableMono, IHittable, IKnockback, IShake
     {
         if (_isDead || _isStiff) return;
 
-        bool isCritical = IsCritical();
+        float playerCritical = DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.Critical);
+
+        bool isCritical = IsCritical(playerCritical > 100 ? 100 : playerCritical);
 
         if (isCritical)
         {
-            damage = (int)(damage * CRITICAL_DAMAGE_FACTOR);
+            float criticalFactor = playerCritical > 100f ? playerCritical - 100f : 1.5f;
+
+            damage = (int)(damage * criticalFactor);
         }
 
         Health -= damage;
@@ -94,12 +98,12 @@ public class Enemy : PoolableMono, IHittable, IKnockback, IShake
         popup.Setup(damage, transform.position, isCritical);
     }
 
-    private bool IsCritical()
+    private bool IsCritical(float playerCritical)
     {
         float critical = UnityEngine.Random.value;
         bool isCritical = false;
 
-        if (critical <= (DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.Critical) / CRITICAL_MAX_PERCENT))
+        if (critical <= (playerCritical / CRITICAL_MAX_PERCENT))
         {
             isCritical = true;
         }

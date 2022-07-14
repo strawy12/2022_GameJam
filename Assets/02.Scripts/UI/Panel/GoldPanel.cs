@@ -7,22 +7,18 @@ public class GoldPanel : MonoBehaviour
 {
     [SerializeField] private Text _goldText;
 
-    private void Awake()
-    {
-        _goldText = GetComponent<Text>();
-    }
     public void SetText()
     {
         long gold = DataManager.Inst.CurrentPlayer.gold;
         string text;
         if (gold > 9999999999)
         {
-            text = "Gold : 9999999999+";
+            text = "9999999999+";
         }
 
         else
         {
-            text = $"Gold : {gold.ToString()}";
+            text = gold.ToString();
         }
 
         _goldText.text = text;
