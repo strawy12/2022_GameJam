@@ -146,7 +146,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback, IShake
     public void SetEnemyStat(int level)
     {
         _level = level;
-        Health = _enemyData.maxHealth + _enemyData.maxHealth * (_level % 10) / 2;
+        Health = _enemyData.maxHealth + _enemyData.maxHealth * (_level/3);
     }
     public void Knockback(Vector2 dir, float power, float duration)
     {
