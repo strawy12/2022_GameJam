@@ -37,11 +37,7 @@ public class FireTower : Tower
         }
         else if (_isCheck && !_isBoom)
         {
-<<<<<<< HEAD
-            Debug.Log("Check");
-=======
             EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
->>>>>>> OIF
             StartCoroutine(ExPlosionFireTower());
         }
     }
@@ -52,7 +48,6 @@ public class FireTower : Tower
 
         foreach (var hitMonster in cols)
         {
-            Debug.Log("hit");
             IHittable hit = hitMonster.GetComponent<IHittable>();
             hit?.GetHit((int)_towerData.damage, transform.gameObject);
         }
