@@ -178,7 +178,7 @@ MonoBehaviour:
   _destroyParticle: {fileID: 5200363949797058679, guid: fc836718fd87a1b4b8a37ccc0499e287, type: 3}
   _elfArrowPref: {fileID: -805298637847678045, guid: 60f5e68f9ab34944f88cebc869a61a35, type: 3}
   _duration: 0.5
-  _shootDelay: 1
+  _shootDelay: 0.1
   _shootPosOffset: 0.5
   _shootForce: 200
   OnBrokeTower:
