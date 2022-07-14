@@ -19,7 +19,6 @@ public abstract class Tower : PoolableMono
 
     protected Rigidbody2D _rigidbody;
     private Collider2D _collider;
-
     private SpriteRenderer _spriteRenderer;
 
     protected bool _isStop = false;
@@ -120,7 +119,7 @@ public abstract class Tower : PoolableMono
     public void GroundOverlap()
     {
         Vector2 origin = new Vector2(transform.position.x + _offestVec.x, transform.position.y + _offestVec.y);
-        Collider2D col = Physics2D.OverlapBox(origin, _overlapSize, _spriteRenderer.transform.position.z, _isWhatGround);
+        Collider2D col = Physics2D.OverlapBox(origin, _overlapSize, _spriteRenderer.transform.rotation.z, _isWhatGround);
         if(col != null)
         {
                 _isStop = true;
