@@ -23,16 +23,17 @@ public class DamagePopup : PoolableMono
         if (isCritical)
         {
             _textMesh.color = Color.red;
-            _textMesh.fontSize = 12f;
+            _textMesh.fontSize = 40f;
         }
         else
         {
             _textMesh.color = _defaultColor;
+            _textMesh.fontSize = 30f;
         }
-
+        _textMesh.DOFade(1f, 0f);
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOMoveY(transform.position.y + 0.7f, 1f));
-        seq.Join(_textMesh.DOFade(0, 1f));
+        seq.Join(_textMesh.DOFade(0f, 1f));
         seq.AppendCallback(() =>
         {
             PoolManager.Instance.Push(this);
