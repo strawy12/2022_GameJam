@@ -36,7 +36,7 @@ public abstract class UpgradePanel : MonoBehaviour
 
     public void ClickUpgradeBtn()
     {
-        if (DataManager.Inst.CurrentPlayer.gold < _currentData.needGold) return;
+        if ((int)DataManager.Inst.CurrentPlayer.gold < (int)_currentData.needGold) return;
 
         // 수정 필요할거같은 코드
         _currentData.itemLevel++;
@@ -55,6 +55,6 @@ public abstract class UpgradePanel : MonoBehaviour
 
     public virtual void SetUpgradeButton()
     {
-        _upgradeBtn.interactable = DataManager.Inst.CurrentPlayer.gold >= _currentData.needGold;
+        _upgradeBtn.interactable = (int)DataManager.Inst.CurrentPlayer.gold >= (int)_currentData.needGold;
     }
 }
