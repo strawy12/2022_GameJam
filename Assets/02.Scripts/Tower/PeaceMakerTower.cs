@@ -25,7 +25,6 @@ public class PeaceMakerTower : Tower
             foreach (var hitMonster in cols)
             {
                 AgentMovement monsterAgent = hitMonster.GetComponent<AgentMovement>();
-                Debug.Log("∏ÿ√„");
                 //EnemyAIBrain monsterAI = hitMonster.GetComponent<EnemyAIBrain>();
 
                 monsterAgent.StopImmediatelly();

@@ -44,7 +44,6 @@ public class EnemyProjectile : PoolableMono
         {
             IHittable hittable = collision.gameObject.GetComponent<IHittable>();
             hittable?.GetHit(_damage, gameObject);
-            Debug.Log("GetHit_Player");
         }
     }
     public override void Reset()

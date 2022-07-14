@@ -43,7 +43,6 @@ public class ElfTower : Tower
     }
     public override void UseSkill()
     {
-        Debug.Log("useElf");
         if (gameObject.activeSelf == false) return;
         if (isUsed) return;
         StartCoroutine(ElfTowerSkill());
