@@ -1471,11 +1471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5227e3318b1364c8cd97307935f688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _virtualCam: {fileID: 1085626473}
-  _followDelay: 0.25
-  _endCameraStayTime: 1
-  _currentCam: {fileID: 0}
-  _isFollowing: 0
 --- !u!114 &269573821
 MonoBehaviour:
   m_ObjectHideFlags: 0
