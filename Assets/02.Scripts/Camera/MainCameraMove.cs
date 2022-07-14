@@ -25,8 +25,10 @@ public class MainCameraMove : MonoBehaviour
         else
         {
             StopAllCoroutines();
+
+
             if (dir > 0 && transform.position.x >= _maxPosX) return;
-            if (dir < 0 && transform.position.x <= _minPosX) return;
+            if (dir < 0 && transform.position.x <= _minPosX ) return;
 
             _currentDir = dir;
 
