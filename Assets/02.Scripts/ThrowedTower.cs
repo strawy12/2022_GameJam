@@ -150,8 +150,6 @@ public class ThrowedTower : MonoBehaviour
         _currentTower.Rigid.velocity = (-_throwDir * _force);
         _force = 0f;
         _throwLine.ClearLine();
-
-
     }
 
     private void Release()
@@ -175,7 +173,6 @@ public class ThrowedTower : MonoBehaviour
 
     private void GenerateTower()
     {
-
         _currentTower = GetTower();
 
         _currentTower.transform.SetParent(_throwPos);
