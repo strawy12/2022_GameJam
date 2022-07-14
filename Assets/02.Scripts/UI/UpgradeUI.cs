@@ -13,8 +13,8 @@ public class UpgradeUI : MonoBehaviour
     private RectTransform _currentContent;
     private ScrollRect _scrollRect;
 
-    [SerializeField] private Text _openButtonText;
-
+    [SerializeField] private Button _openButton;
+    [SerializeField] private Sprite _openSprite, _closeSprite;
     public UnityEvent OnOpen;
     public UnityEvent OnClose;
 
@@ -52,14 +52,14 @@ public class UpgradeUI : MonoBehaviour
     public Tween OpenUI()
     {
         _isOpen = true;
-        _openButtonText.text = "<";
+        _openButton.image.sprite = _openSprite;
         OnOpen?.Invoke();
         return rectTransform.DOAnchorPosX(0f, 0.5f);
     }
     public Tween CloseUI()
     {
         _isOpen = false;
-        _openButtonText.text = ">";
+        _openButton.image.sprite = _closeSprite;
         OnClose?.Invoke();
         return rectTransform.DOAnchorPosX(-rectTransform.rect.width, 0.5f);
     }

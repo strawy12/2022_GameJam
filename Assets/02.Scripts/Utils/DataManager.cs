@@ -45,16 +45,6 @@ public class DataManager : MonoSingleton<DataManager>
             string stringJson = File.ReadAllText(SAVE_PATH + SAVE_FILE);
             _player = JsonUtility.FromJson<PlayerData>(stringJson);
 
-            if(_player.versionCheck == false)
-            {
-                _player = new PlayerData();
-
-                InitTowerDataList();
-                InitStatDataList();
-                SaveToJson();
-                return;
-            }
-
             SetTowerItemSprite();
             SetStatItemSprite();
         }
@@ -82,6 +72,15 @@ public class DataManager : MonoSingleton<DataManager>
 
         SaveToJson();
         Application.Quit();
+    }
+
+    private void OnDestroy()
+    {
+        SaveToJson();
+    }
+    private void OnApplicationQuit()
+    {
+        SaveToJson();
     }
 
     private void SetStatItemSprite()
