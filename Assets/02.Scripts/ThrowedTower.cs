@@ -96,7 +96,6 @@ public class ThrowedTower : MonoBehaviour
         if (_isReloading) return;
 
         GameManager.Inst.gameState = GameManager.GameState.ThrowReady;
-        GameManager.Inst.MainCameraMove.SetCameraPos(new Vector3(13f, 0f, -10f));
 
         _animator.speed = 0;
         _isPressed = true;
@@ -150,7 +149,6 @@ public class ThrowedTower : MonoBehaviour
     private void StartThrow()
     {
         _currentTower.StartThrow();
-        GameManager.Inst.StartFollow(_currentTower.transform);
 
         _currentTower.Collider.enabled = true;
         _currentTower.Rigid.isKinematic = false;

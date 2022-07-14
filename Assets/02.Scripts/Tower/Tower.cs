@@ -144,7 +144,6 @@ public abstract class Tower : PoolableMono
                 }
                 OnEndThrow?.Invoke();
             Debug.Log("Ground");
-                GameManager.Inst.EndFollow();
                 SpawnEffect();
         }
     }

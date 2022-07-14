@@ -176,8 +176,8 @@ MonoBehaviour:
   _effectPrefab: {fileID: 7483502199802290256, guid: 588337f3fb032d145b4a39413f6ed8c2, type: 3}
   _throwEffect: {fileID: 8039882792692684960, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
   _destroyParticle: {fileID: 5200363949797058679, guid: fc836718fd87a1b4b8a37ccc0499e287, type: 3}
-  _offestVec: {x: 0, y: -0.1}
-  _overlapSize: {x: 1, y: 5}
+  _offestVec: {x: 0, y: -1.15}
+  _overlapSize: {x: 2.84, y: 9.81}
   _isWhatGround:
     serializedVersion: 2
     m_Bits: 64
@@ -418,7 +418,7 @@ Transform:
   m_GameObject: {fileID: 7546534500933312729}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 3071846291266924069}
   m_RootOrder: 0

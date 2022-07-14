@@ -7,23 +7,6 @@ using static Define;
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private PoolListSO _initList = null;
-    [SerializeField] private FollowCamera _followCamera;
-
-    private MainCameraMove _mainCameraMove;
-
-    public MainCameraMove MainCameraMove
-    {
-        get
-        {
-            if (_mainCameraMove == null)
-                _mainCameraMove = Define.MainCam.GetComponent<MainCameraMove>();
-
-            return _mainCameraMove;
-        }
-    }
-
-
-    public FollowCamera FollowCamera => _followCamera;
 
     public enum GameState
     {
@@ -42,7 +25,6 @@ public class GameManager : MonoSingleton<GameManager>
         CreatePool();
 
         gameState = GameState.Game;
-        _mainCameraMove = Define.MainCam.GetComponent<MainCameraMove>();
     }
 
     private void Start()
@@ -58,7 +40,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             UIManager.Inst.OnClickBackBtn();
         }
@@ -78,20 +60,10 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager.Inst.GoldEvent();
     }
 
-    public void StartFollow(Transform target)
-    {
-        _followCamera.SetTarget(target);
-        _followCamera.StartFollow();
-    }
 
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    public void EndFollow()
-    {
-        _followCamera.EndFollow();
     }
 
 

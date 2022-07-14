@@ -92,7 +92,6 @@ public class UIManager : MonoSingleton<UIManager>
     public void OpenUpgradeUI()
     {
         Sequence seq = DOTween.Sequence();
-        seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(-2.1f, 0, -10f), 0.75f));
         seq.Join(_nextTowerUI.DOFade(0f, 0.75f));
         seq.Append(_upgradeUI.OpenUI());
     }
@@ -102,7 +101,6 @@ public class UIManager : MonoSingleton<UIManager>
         Sequence seq = DOTween.Sequence();
 
         seq.Append(_upgradeUI.CloseUI());
-        seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(13f, 0, -10f), 0.75f));
         seq.Join(_nextTowerUI.DOFade(1f, 0.75f));
     }
 
