@@ -173,7 +173,7 @@ public class ThrowedTower : MonoBehaviour
         _isReloading = false;
     }
 
-    private void GenerateTower()
+    public void GenerateTower()
     {
 
         _currentTower = GetTower();

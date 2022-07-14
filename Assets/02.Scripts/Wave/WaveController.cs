@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class WaveController : MonoBehaviour
 {
     public List<WaveDataSO> waves;
+    public UnityEvent OnStartWave;
     public UnityEvent OnEndWave;
     private bool _isWave = false;
     public bool IsWave
@@ -35,11 +36,22 @@ public class WaveController : MonoBehaviour
     {
         if (_isWave) return;
         nextUIPanel.SetActive(false);
-        UIManager.Inst.GoGameScene();
         _isWave = true;
+        float delay = UIManager.Inst.ShowRoundUI(TotalWave);
+
+        StartCoroutine(StartWaveDelay(delay));
+    }
+
+    private IEnumerator StartWaveDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        UIManager.Inst.GoGameScene();
         _waveMonsterCount = waves[_waveIndex].RemainMonsterCnt;
+        OnStartWave?.Invoke();
         StartCoroutine(SpawnMonsterCoroutine());
     }
+
     private IEnumerator SpawnMonsterCoroutine()
     {
         foreach (PatternData pattern in waves[_waveIndex].patterns)
