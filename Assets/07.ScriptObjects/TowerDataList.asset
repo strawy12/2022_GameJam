@@ -23,7 +23,7 @@ MonoBehaviour:
     prefabName: StoneTower
     damage: 6
     weight: 2
-    isLock: 1
+    isLock: 0
     knockbackPower: 3
     towerType: 1
   - itemNum: 1
@@ -63,7 +63,7 @@ MonoBehaviour:
     prefabName: ElfTower
     damage: 3
     weight: 1
-    isLock: 0
+    isLock: 1
     knockbackPower: 0
     towerType: 0
   - itemNum: 4

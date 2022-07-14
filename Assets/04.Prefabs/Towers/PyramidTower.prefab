@@ -127,7 +127,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00700593, y: -1.6505047}
+  m_Offset: {x: -0.021066189, y: -1.3271186}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -138,7 +138,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1357846, y: 2.9489906}
+  m_Size: {x: 6.5068073, y: 3.5957627}
   m_EdgeRadius: 0
 --- !u!1 &5990812534282451761
 GameObject:
@@ -459,6 +459,11 @@ MonoBehaviour:
   _effectPrefab: {fileID: 3508577413298797006, guid: f0f773d820a2cec40bcebf65b5070eab, type: 3}
   _throwEffect: {fileID: 5080168907425406462}
   _destroyParticle: {fileID: 5622212975319648690, guid: a68b481053c1435479971535a27c5dcc, type: 3}
+  _offestVec: {x: 0, y: 0.4}
+  _overlapSize: {x: 1, y: 3}
+  _isWhatGround:
+    serializedVersion: 2
+    m_Bits: 64
   _swampObj: {fileID: 9173671696485567779, guid: 3e703bed807d0fe4db7d94b9afe9a9ab, type: 3}
   OnBrokeTower:
     m_PersistentCalls:

@@ -60,10 +60,10 @@ public class FireTower : Tower
         DestroyTower();
     }
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 5f);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireSphere(transform.position, 5f);
+    //}
 #endif
 }

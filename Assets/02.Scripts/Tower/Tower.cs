@@ -11,6 +11,9 @@ public abstract class Tower : PoolableMono
     [SerializeField] protected GameObject _effectPrefab; 
     [SerializeField] private ParticleSystem _throwEffect;
     [SerializeField] private PoolParticle _destroyParticle;
+    [SerializeField] private Vector2 _offestVec;
+    [SerializeField] private Vector2 _overlapSize;
+    [SerializeField] private LayerMask _isWhatGround;
     protected TowerData _towerData;
     protected Transform _baseTrm;
 
@@ -58,12 +61,17 @@ public abstract class Tower : PoolableMono
     }
     private void Update()
     {
-        if (_isThrow == false) return;
-
-        float angle = Mathf.Atan2(_rigidbody.velocity.y, _rigidbody.velocity.x) * Mathf.Rad2Deg - 90f;
-        ChangeAngle(angle);
+        if(!_isStop)
+        {
+            GroundOverlap();
+        }
+        if (_isThrow)
+        {
+            float angle = Mathf.Atan2(_rigidbody.velocity.y, _rigidbody.velocity.x) * Mathf.Rad2Deg - 90f;
+            ChangeAngle(angle);
+        }
     }
-
+    
     public virtual void DestroyTower()
     {
         if(_destroyParticle !=null)
@@ -96,41 +104,50 @@ public abstract class Tower : PoolableMono
     {
 
     }
+
+    
+
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !_isStop)
-        {
-            _isStop = true;
-            _rigidbody.velocity = Vector3.zero;
-            _rigidbody.isKinematic = true;
-            _throwEffect.Stop();
-            _isThrow = false;
-            switch (_towerData.towerType)
-            {
-                case ETowerType.PassiveType:
-                    UseSkill();
-                    break;
-                case ETowerType.ActiveType:
-                    _isGround = true;
-                    DestroyTower();
-                    break;
-                case ETowerType.FixingType:
-                    UseSkill();
-                    break;
-                default:
-                    break;
-            }
-            OnEndThrow?.Invoke();
-            GameManager.Inst.EndFollow();
-
-            SpawnEffect();
-        }
+       
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             OnTriggerEnemy(collision);
         }
     }
 
+
+    public void GroundOverlap()
+    {
+        Vector2 origin = new Vector2(transform.position.x + _offestVec.x, transform.position.y + _offestVec.y);
+        Collider2D col = Physics2D.OverlapBox(origin, _overlapSize, _spriteRenderer.transform.position.z, _isWhatGround);
+        if(col != null)
+        {
+                _isStop = true;
+                _rigidbody.velocity = Vector3.zero;
+                _rigidbody.isKinematic = true;
+                _throwEffect.Stop();
+                _isThrow = false;
+                switch (_towerData.towerType)
+                {
+                    case ETowerType.PassiveType:
+                        UseSkill();
+                        break;
+                    case ETowerType.ActiveType:
+                        _isGround = true;
+                        DestroyTower();
+                        break;
+                    case ETowerType.FixingType:
+                        UseSkill();
+                        break;
+                    default:
+                        break;
+                }
+                OnEndThrow?.Invoke();
+                GameManager.Inst.EndFollow();
+                SpawnEffect();
+        }
+    }
     public void FadeTower(float delay)
     {
         seq = DOTween.Sequence();
@@ -178,4 +195,12 @@ public abstract class Tower : PoolableMono
             }
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(new Vector2(transform.position.x + _offestVec.x, transform.position.y + _offestVec.y), _overlapSize);
+    }
+#endif
 }

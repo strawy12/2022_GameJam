@@ -73,6 +73,12 @@ MonoBehaviour:
   _towerType: 2
   _effectPrefab: {fileID: 3661847801536907546}
   _throwEffect: {fileID: 3661847801536907544}
+  _destroyParticle: {fileID: 0}
+  _offestVec: {x: -0.3, y: 0}
+  _overlapSize: {x: 1, y: 6}
+  _isWhatGround:
+    serializedVersion: 2
+    m_Bits: 64
   isSkill: 0
   _whatIsEnemy:
     serializedVersion: 2
@@ -333,7 +339,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.17236148, y: -0.49553895}
+  m_Offset: {x: 0.11612034, y: -0.36899638}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -344,7 +350,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1083777, y: 5.258922}
+  m_Size: {x: 2.3456817, y: 5.512007}
   m_EdgeRadius: 0
 --- !u!1 &7526877952871115301
 GameObject:

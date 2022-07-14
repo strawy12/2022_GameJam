@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: GoblinShilder
   prefab: {fileID: 3479278817573744496, guid: a8097bff2d8b62249bff27557998139e, type: 3}
   poolPrefab: {fileID: 3479278817573744511, guid: a8097bff2d8b62249bff27557998139e, type: 3}
-  maxHealth: 5
+  maxHealth: 4
   knockbackRegist: 1
   dropCoin: 2
   damage: 1

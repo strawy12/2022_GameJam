@@ -176,6 +176,11 @@ MonoBehaviour:
   _effectPrefab: {fileID: 7483502199802290256, guid: 588337f3fb032d145b4a39413f6ed8c2, type: 3}
   _throwEffect: {fileID: 8039882792692684960, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
   _destroyParticle: {fileID: 5200363949797058679, guid: fc836718fd87a1b4b8a37ccc0499e287, type: 3}
+  _offestVec: {x: 0, y: -0.1}
+  _overlapSize: {x: 1, y: 5.5}
+  _isWhatGround:
+    serializedVersion: 2
+    m_Bits: 64
   _elfArrowPref: {fileID: -805298637847678045, guid: 60f5e68f9ab34944f88cebc869a61a35, type: 3}
   _duration: 0.5
   _shootDelay: 0.1
@@ -211,6 +216,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isUsed: 0
 --- !u!1 &3284670025926744218
 GameObject:
   m_ObjectHideFlags: 0
