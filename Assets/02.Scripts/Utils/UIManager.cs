@@ -20,9 +20,26 @@ public class UIManager : MonoSingleton<UIManager>
 
     [SerializeField] private List<StatInfoPanel> _statInfoPanelList;
 
+    private GameManager.GameState _beforeState = GameManager.GameState.Game;
     private void Start()
     {
         _goldPanel.SetText();
+    }
+
+    public void OnUI()
+    {
+        _beforeState = GameManager.Inst.gameState;
+        GameManager.Inst.gameState = GameManager.GameState.UI;
+        Time.timeScale = 0f;
+    }
+
+    public void OffUI()
+    {
+        GameManager.GameState state = GameManager.Inst.gameState;
+        GameManager.Inst.gameState = _beforeState;
+        _beforeState = state;
+        Time.timeScale = 1f;
+
     }
 
     public void AddUpgradePanel(UpgradePanel panel)
@@ -87,11 +104,11 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void EffectOnOff()
     {
-            audioMixer.SetFloat("Effect", !_effectToggle.isOn ? -20f : -80f);
+            audioMixer.SetFloat("Effect", !_effectToggle.isOn ? 0f : -80f);
     }
     public void BgmOnOff()
     {
-        audioMixer.SetFloat("Music", !_bgmToggle.isOn? -20f : -80f);
+        audioMixer.SetFloat("Music", !_bgmToggle.isOn? 0f : -80f);
     }
 
     public float ShowRoundUI(int round)

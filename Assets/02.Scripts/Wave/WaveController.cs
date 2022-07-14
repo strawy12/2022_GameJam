@@ -7,6 +7,10 @@ public class WaveController : MonoBehaviour
     public List<WaveDataSO> waves;
     public UnityEvent OnStartWave;
     public UnityEvent OnEndWave;
+
+    [SerializeField] private List<Enemy> _enemyList;
+    [SerializeField] private WaveDataSO _randomWaveBase;
+
     private bool _isWave = false;
     public bool IsWave
     {
@@ -23,15 +27,47 @@ public class WaveController : MonoBehaviour
     {
         get
         {
-            return _waveLevel * waves.Count + _waveIndex;
+            return _waveLevel * (_waveIndex + 1);
         }
     }
     public GameObject nextUIPanel;
     public UnityEvent OnFailedWave;
+
+    private WaveDataSO _currentWave;
     private void Awake()
     {
         OnEndWave.AddListener(UIManager.Inst.GoUpgradeUI);
     }
+
+    private WaveDataSO GenerateRandomWave()
+    {
+        WaveDataSO waveData = _randomWaveBase;
+
+        int patternCnt = Random.Range(1, 5);
+        waveData.patterns = new List<PatternData>();
+        for (int i = 0; i < patternCnt; i++)
+        {
+            PatternData pattern = new PatternData();
+            pattern.enemies = new List<Enemy>();
+
+            for (int j = 0; j < _enemyList.Count; j++)
+            {
+                if (Random.Range(0, 2) == 0)
+                {
+                    pattern.enemies.Add(_enemyList[j]);
+                }
+            }
+            if (pattern.enemies.Count == 0) continue;
+
+            pattern.count = Random.Range(0, 50);
+            pattern.spawnDelay = Random.Range(0.5f, 1f);
+
+            waveData.patterns.Add(pattern);
+        }
+
+        return waveData;
+    }
+
     public void StartWave()
     {
         if (_isWave) return;
@@ -40,6 +76,14 @@ public class WaveController : MonoBehaviour
         float delay = UIManager.Inst.ShowRoundUI(TotalWave);
         OnStartWave?.Invoke();
 
+        if (Random.Range(1, 2) == 0)
+        {
+            _currentWave = waves[_waveIndex];
+        }
+        else
+        {
+            _currentWave = GenerateRandomWave();
+        }
         StartCoroutine(StartWaveDelay(delay));
     }
 
@@ -48,13 +92,13 @@ public class WaveController : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         UIManager.Inst.GoGameScene();
-        _waveMonsterCount = waves[_waveIndex].RemainMonsterCnt;
+        _waveMonsterCount = _currentWave.RemainMonsterCnt;
         StartCoroutine(SpawnMonsterCoroutine());
     }
 
     private IEnumerator SpawnMonsterCoroutine()
     {
-        foreach (PatternData pattern in waves[_waveIndex].patterns)
+        foreach (PatternData pattern in _currentWave.patterns)
         {
             for (int i = 0; i < pattern.count; i++)
             {
