@@ -17,7 +17,7 @@ public class ElfTower : Tower
 
     public UnityEvent OnBrokeTower;
     public UnityEvent OnSkillShot;
-
+    public bool isUsed = false;
     protected override void Awake()
     {
         base.Awake();
@@ -25,6 +25,7 @@ public class ElfTower : Tower
 
     IEnumerator ElfTowerSkill()
     {
+        isUsed = true;
         Vector2 shootPos = transform.position;
 
         for (int i = 0; i < 8; i++)
@@ -44,7 +45,7 @@ public class ElfTower : Tower
     {
         Debug.Log("useElf");
         if (gameObject.activeSelf == false) return;
-
+        if (isUsed) return;
         StartCoroutine(ElfTowerSkill());
     }
 
@@ -56,6 +57,8 @@ public class ElfTower : Tower
 
     public override void Reset()
     {
+        isUsed = false;
+        StopAllCoroutines();
         base.Reset();
     }
     private void OnDestroy()
