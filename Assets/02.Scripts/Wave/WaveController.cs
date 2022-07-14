@@ -69,7 +69,7 @@ public class WaveController : MonoBehaviour
             }
             if (pattern.enemies.Count == 0) continue;
 
-            pattern.count = Random.Range(0, 50);
+            pattern.count = Random.Range(0, 20);
             pattern.spawnDelay = Random.Range(0.5f, 1f);
 
             waveData.patterns.Add(pattern);

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3071846290757723196}
   - component: {fileID: 3071846290757723197}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3966066385417541964}
   - component: {fileID: 335201936076536681}
   - component: {fileID: 3071846291266924090}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ElfTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 8089983702493251542}
   - component: {fileID: 2112470572156369801}
   - component: {fileID: 5374404115982178792}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TowerVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6510313536763935216}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BaseTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 8247377260293113025}
   - component: {fileID: 5010691560003020781}
   - component: {fileID: 2964424149745839531}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VisualSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,6 +510,10 @@ PrefabInstance:
     - target: {fileID: 8039882792692684962, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
       propertyPath: m_Name
       value: TowerShootParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039882792692684962, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8039882792692684967, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
       propertyPath: m_RootOrder

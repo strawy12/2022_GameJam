@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4982331495858128873}
   - component: {fileID: 5618719871257244707}
   - component: {fileID: 478463855840140147}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VisualSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7399369344559548150}
   - component: {fileID: 5907870149497306908}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: MiniMapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 6807894661149383342}
   - component: {fileID: 311783882725782483}
   - component: {fileID: 473467416116330240}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TowerVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 8551557667904443493}
   - component: {fileID: 8551557667904443498}
   - component: {fileID: 7662393971064421792}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StoneTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,6 +445,10 @@ PrefabInstance:
     - target: {fileID: 8039882792692684962, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
       propertyPath: m_Name
       value: TowerShootParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039882792692684962, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8039882792692684967, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
       propertyPath: m_RootOrder

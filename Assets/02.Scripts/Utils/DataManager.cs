@@ -45,8 +45,18 @@ public class DataManager : MonoSingleton<DataManager>
             string stringJson = File.ReadAllText(SAVE_PATH + SAVE_FILE);
             _player = JsonUtility.FromJson<PlayerData>(stringJson);
 
+            if(_player.versionCheck == false)
+            {
+                _player = new PlayerData();
+
+                InitTowerDataList();
+                InitStatDataList();
+                SaveToJson();
+                return;
+            }
+
+            SetTowerItemSprite();
             SetStatItemSprite();
-            InitTowerDataList();
         }
         else
         {
@@ -54,6 +64,7 @@ public class DataManager : MonoSingleton<DataManager>
 
             InitTowerDataList();
             InitStatDataList();
+
         }
         SaveToJson();
     }
@@ -65,6 +76,10 @@ public class DataManager : MonoSingleton<DataManager>
     public void DataReset()
     {
         _player = new PlayerData();
+
+        InitTowerDataList();
+        InitStatDataList();
+
         SaveToJson();
         Application.Quit();
     }

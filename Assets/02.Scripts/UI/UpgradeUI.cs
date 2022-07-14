@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class UpgradeUI : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class UpgradeUI : MonoBehaviour
     private CanvasGroup _canvasGroup;
     private RectTransform _currentContent;
     private ScrollRect _scrollRect;
+
+    [SerializeField] private Text _openButtonText;
+
+    public UnityEvent OnOpen;
+    public UnityEvent OnClose;
 
     private bool _isOpen;
 
@@ -46,11 +52,15 @@ public class UpgradeUI : MonoBehaviour
     public Tween OpenUI()
     {
         _isOpen = true;
+        _openButtonText.text = "<";
+        OnOpen?.Invoke();
         return rectTransform.DOAnchorPosX(0f, 0.5f);
     }
     public Tween CloseUI()
     {
         _isOpen = false;
+        _openButtonText.text = ">";
+        OnClose?.Invoke();
         return rectTransform.DOAnchorPosX(-rectTransform.rect.width, 0.5f);
     }
 

@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6dad0f89301144892eecd6b235cdc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectToShake: {fileID: 0}
+  _objectToShake: {fileID: 3603732652246611141}
   _duration: 2
   _strength: 1
   _randomness: 90

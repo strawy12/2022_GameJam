@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5033185915613416177}
   - component: {fileID: 2848071449781038313}
   - component: {fileID: 4368174981598726565}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TowerVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5625714844350770128}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BaseTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 390463380921032081}
   - component: {fileID: 924650714775584381}
   - component: {fileID: 6463205792653180237}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VisualSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 2433312747664129143}
   - component: {fileID: 2290779184826932098}
   - component: {fileID: 7028934211899046651}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FireTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,6 +411,10 @@ PrefabInstance:
     - target: {fileID: 8039882792692684962, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
       propertyPath: m_Name
       value: TowerShootParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039882792692684962, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8039882792692684967, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
       propertyPath: m_RootOrder

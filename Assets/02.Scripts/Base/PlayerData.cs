@@ -12,6 +12,8 @@ public class PlayerData
     public int waveIndex;
     public int waveLevel;
     public long gold;
+    public bool versionCheck;
+
     public PlayerData()
     {
 
@@ -21,6 +23,7 @@ public class PlayerData
         waveIndex = 0;
         waveLevel = 0;
         gold = 0;
+        versionCheck = true;
 
     }
 
