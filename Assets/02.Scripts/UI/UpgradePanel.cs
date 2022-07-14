@@ -41,9 +41,9 @@ public abstract class UpgradePanel : MonoBehaviour
         // 수정 필요할거같은 코드
         _currentData.itemLevel++;
 
-        GameManager.Inst.SetGold(-_currentData.needGold);
+        GameManager.Inst.SetGold(-(int)_currentData.needGold);
 
-        _currentData.needGold = (int)(_currentData.needGold * 1.5f);
+        _currentData.needGold = (_currentData.needGold * 1.5f);
 
         UpgradeItem();
         SetUI();

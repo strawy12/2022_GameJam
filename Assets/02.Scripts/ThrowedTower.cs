@@ -38,6 +38,7 @@ public class ThrowedTower : MonoBehaviour
 
     public UnityEvent OnThrowStart;
     public UnityEvent OnSmile;
+    private float _throwChargingDelay = 0f;
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class ThrowedTower : MonoBehaviour
         if (_isReloading) return;
         if (_isPressed)
         {
+            _throwChargingDelay += Time.deltaTime;
             bool canThrow = true;
             Vector2 mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
 
@@ -74,7 +76,7 @@ public class ThrowedTower : MonoBehaviour
             _force = Vector2.Distance(_startMousePos, mousePos) * _forceOffset;
             _force = Mathf.Clamp(_force, 0f, _maxForce);
 
-            if (_force < _maxForce * 0.2f)
+            if (_force < 20f)
             {
                 canThrow = false;
             }
@@ -107,6 +109,7 @@ public class ThrowedTower : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (_throwChargingDelay < 0.1f) return;
         if (GameManager.Inst.gameState != GameManager.GameState.Game &&
             GameManager.Inst.gameState != GameManager.GameState.ThrowReady) return;
 
@@ -124,13 +127,13 @@ public class ThrowedTower : MonoBehaviour
         }
 
         _isReloading = true;
-
+        _throwChargingDelay = 0f;
         _animator.speed = 1;
         _animator.SetTrigger(_hashThrow);
         OnThrowStart?.Invoke();
 
         float range = Random.value;
-        if (range < 0.2f)
+        if (range < 0.5f)
             OnSmile?.Invoke();
 
 
@@ -178,7 +181,9 @@ public class ThrowedTower : MonoBehaviour
 
     public void DestroyTower()
     {
-        PoolManager.Instance.Push(_currentTower);
+        if (_currentTower != null)
+            PoolManager.Instance.Push(_currentTower);
+
         foreach (var tower in _nextTowerList)
         {
             PoolManager.Instance.Push(tower);
@@ -256,7 +261,7 @@ public class ThrowedTower : MonoBehaviour
                 _nextTowerList.Add(tower);
             }
 
-            if(cnt++ > 100000)
+            if (cnt++ > 100000)
             {
                 Debug.LogError("모두 IsLock이 켜져있는거 같습니다");
                 return;
