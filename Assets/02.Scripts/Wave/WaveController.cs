@@ -19,15 +19,25 @@ public class WaveController : MonoBehaviour
             return _isWave;
         }
     }
-    private int _waveLevel = 1; // 이거랑
-    private int _waveIndex = 0; // 이거 가지고 있어야함
+    public int WaveLevel
+    {
+        get => DataManager.Inst.CurrentPlayer.waveLevel;
+        set => DataManager.Inst.CurrentPlayer.waveLevel = value;
+    }
+
+    public int WaveIndex
+    {
+        get => DataManager.Inst.CurrentPlayer.waveIndex;
+        set => DataManager.Inst.CurrentPlayer.waveIndex = value;
+    }
+
     private int _waveMonsterCount = 0;
     private int _randomIndex = 0;
     public int TotalWave
     {
         get
         {
-            return _waveLevel * (_waveIndex + 1);
+            return WaveLevel * (WaveIndex + 1);
         }
     }
     public GameObject nextUIPanel;
@@ -76,9 +86,9 @@ public class WaveController : MonoBehaviour
         float delay = UIManager.Inst.ShowRoundUI(TotalWave);
         OnStartWave?.Invoke();
 
-        if (Random.Range(1, 2) == 0)
+        if (Random.Range(0, 2) == 0)
         {
-            _currentWave = waves[_waveIndex];
+            _currentWave = waves[WaveIndex];
         }
         else
         {
@@ -105,7 +115,7 @@ public class WaveController : MonoBehaviour
                 _randomIndex = Random.Range(0, pattern.enemies.Count);
                 Enemy e = PoolManager.Instance.Pop(pattern.enemies[_randomIndex].gameObject.name) as Enemy;
                 e.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, 0));
-                e.SetEnemyStat(_waveLevel);
+                e.SetEnemyStat(WaveLevel);
                 yield return new WaitForSeconds(pattern.spawnDelay);
             }
         }
@@ -126,14 +136,14 @@ public class WaveController : MonoBehaviour
         _isWave = false;
         if (TotalWave - 1 > 0)
         {
-            if (_waveIndex - 1 < 0)
+            if (WaveIndex - 1 < 0)
             {
-                _waveLevel--;
-                _waveIndex = waves.Count - 1;
+                WaveLevel--;
+                WaveIndex = waves.Count - 1;
             }
             else
             {
-                _waveIndex--;
+                WaveIndex--;
             }
         }
         OnFailedWave?.Invoke();
@@ -149,10 +159,10 @@ public class WaveController : MonoBehaviour
     {
         _isWave = false;
         EndWave();
-        _waveIndex++;
-        if (_waveIndex > waves.Count - 1)
-            _waveIndex = 0;
-        _waveLevel++;
+        WaveIndex++;
+        if (WaveIndex > waves.Count - 1)
+            WaveIndex = 0;
+        WaveLevel++;
     }
 
 }

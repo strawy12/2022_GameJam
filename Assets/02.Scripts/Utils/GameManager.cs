@@ -56,6 +56,14 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager.Inst.GoUpgradeUI();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Inst.OnClickBackBtn();
+        }
+    }
+
     private void CreatePool()
     {
         foreach (PoolingPair pair in _initList.list)
@@ -76,6 +84,10 @@ public class GameManager : MonoSingleton<GameManager>
         _followCamera.StartFollow();
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 
     public void EndFollow()
     {

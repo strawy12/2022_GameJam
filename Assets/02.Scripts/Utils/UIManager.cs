@@ -15,6 +15,10 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private RoundPanel _roundPanel;
     [SerializeField] private RoundPanel _failRoundPanel;
+
+    [SerializeField] private GameObject _quitPanel;
+    [SerializeField] private GameObject _settingPanel;
+
     private List<NextTowerPanel> _nextTowerPanelList = new List<NextTowerPanel>();
     private List<UpgradePanel> _upgradePanelList = new List<UpgradePanel>();
 
@@ -123,5 +127,26 @@ public class UIManager : MonoSingleton<UIManager>
     public void SetStatInfoPanel(PlayerStatData.EPlayerStat type)
     {
         _statInfoPanelList.Find(x => x.StatType == type).SetInfo();
+    }
+
+    public void OnClickBackBtn()
+    {
+        if(_quitPanel.activeSelf)
+        {
+            _quitPanel.SetActive(false);
+            return;
+        }
+
+        if(_settingPanel.activeSelf)
+        {
+            _settingPanel.SetActive(false);
+            OffUI();
+        }
+
+        else
+        {
+            _settingPanel.SetActive(true);
+            OnUI();
+        }
     }
 }

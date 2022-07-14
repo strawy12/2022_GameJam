@@ -4,23 +4,22 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    public float effectSoundVolume;
-    public float bgmSoundVolume;
 
     public bool isTutorial;
 
     public List<TowerData> towerDataList;
     public List<PlayerStatData> statDataList;
-    public int currentRound;
+    public int waveIndex;
+    public int waveLevel;
     public long gold;
-    public PlayerData(float soundVolume)
+    public PlayerData()
     {
-        effectSoundVolume = soundVolume;
-        bgmSoundVolume = soundVolume;
+
         isTutorial = false;
         towerDataList = new List<TowerData>();
         statDataList = new List<PlayerStatData>();
-        currentRound = 0;
+        waveIndex = 0;
+        waveLevel = 0;
         gold = 0;
 
     }
