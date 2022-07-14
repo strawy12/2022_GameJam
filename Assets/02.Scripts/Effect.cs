@@ -22,7 +22,10 @@ public class Effect : PoolableMono
     {
         PoolManager.Instance.Push(this);
     }
-
+    public void SetLifeTime(float duration)
+    {
+        Invoke("EndAnim", duration);
+    }
     public override void Reset()
     {
 

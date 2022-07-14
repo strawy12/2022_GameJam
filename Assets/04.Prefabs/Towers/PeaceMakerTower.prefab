@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerType: 2
-  _effectPrefab: {fileID: 3661847801536907546}
+  _effectPrefab: {fileID: 6571444346209281385, guid: 9de204c1ee40856418c5d33da951c08e, type: 3}
   _throwEffect: {fileID: 3661847801536907544}
   _destroyParticle: {fileID: 0}
   _offestVec: {x: 0, y: 0}
@@ -83,6 +83,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   deletePeaceMakerTower: {fileID: 1274571147390150150, guid: 9de204c1ee40856418c5d33da951c08e, type: 3}
+  _skillEffect: {fileID: 2753423784154333710, guid: 3e54b934a75b5404ea0427fd9ae0b77e, type: 3}
   OnUseSkill:
     m_PersistentCalls:
       m_Calls:
@@ -442,11 +443,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
---- !u!1 &3661847801536907546 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8039882792692684962, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
-  m_PrefabInstance: {fileID: 6719962048653824440}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3661847801536907551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8039882792692684967, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}

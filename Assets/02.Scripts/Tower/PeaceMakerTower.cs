@@ -9,6 +9,7 @@ public class PeaceMakerTower : Tower
 
     [SerializeField] private LayerMask _whatIsEnemy;
     [SerializeField] private Animator deletePeaceMakerTower;
+    [SerializeField] private GameObject _skillEffect;
     public UnityEvent OnUseSkill;
 
     protected override void Awake()
@@ -48,6 +49,10 @@ public class PeaceMakerTower : Tower
     public override void UseSkill()
     {
         StartCoroutine(PeaceMakerAbilityTower());
+        Effect effect = PoolManager.Instance.Pop(_skillEffect.gameObject.name) as Effect;
+        effect.transform.position = transform.position;
+        effect.SetLifeTime(3f);
+        effect.StartAnim();
     }
 
     public override void DestroyTower()
