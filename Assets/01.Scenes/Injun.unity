@@ -865,6 +865,9 @@ MonoBehaviour:
   OnThrowStart:
     m_PersistentCalls:
       m_Calls: []
+  OnSmile:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &163385652
 Transform:
   m_ObjectHideFlags: 0
@@ -3832,6 +3835,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _enemyList: []
+  _randomWaveBase: {fileID: 0}
   nextUIPanel: {fileID: 1346273976}
   OnFailedWave:
     m_PersistentCalls:
@@ -8072,6 +8077,7 @@ MonoBehaviour:
   audioMixer: {fileID: 0}
   _roundPanel: {fileID: 2125988033}
   _failRoundPanel: {fileID: 1432887637}
+  _statInfoPanelList: []
 --- !u!114 &1607702449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8993,9 +8999,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSpeed: 100
-  _minPosX: -1
-  _maxPosX: 85
   _deceleration: 50
+  _limitCamCol: {fileID: 0}
 --- !u!1 &1850289783
 GameObject:
   m_ObjectHideFlags: 0
@@ -9489,9 +9494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSpeed: 5
-  _minPosX: 0
-  _maxPosX: 0
   _deceleration: 0
+  _limitCamCol: {fileID: 0}
 --- !u!114 &1933132869
 MonoBehaviour:
   m_ObjectHideFlags: 0
