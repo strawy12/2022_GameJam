@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Golem : MonoBehaviour,IHittable
 {
-    [SerializeField] private int maxHealth;
     [SerializeField] private Animator golemHitAnim;
+    [SerializeField] private BarUI _hpBar;
     
     public int Health { get; private set; }
+    public int MaxHealth => (int)DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.MaxHp);
 
     public UnityEvent OnPlayerDead;
     public UnityEvent OnHit;
@@ -22,6 +23,7 @@ public class Golem : MonoBehaviour,IHittable
         golemHitAnim?.Play("GolemHit");
         Health -= damage;
         OnHit?.Invoke();
+        _hpBar.SetGuageUI(Health / MaxHealth);
         if (Health <= 0)
         {
             Death();
@@ -29,11 +31,13 @@ public class Golem : MonoBehaviour,IHittable
     }
     private void Start()
     {
-        Health = maxHealth;
+        Health = MaxHealth;
+        _hpBar.SetGuageUI(Health / MaxHealth);
     }
     public void ResetHP()
     {
-        Health = maxHealth;
+        Health = MaxHealth;
+        _hpBar.SetGuageUI(Health / MaxHealth);
     }
 
     public void Death()
