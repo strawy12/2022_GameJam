@@ -77,7 +77,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback, IShake
         if (Health <= 0)
         {
             _isDead = true;
-            _waveController.KillWaveMonster();
+            _waveController.KillWaveMonster(this);
             _agentMovement.StopImmediatelly();
             _agentMovement.enabled = false;
             GameManager.Inst.SetGold(_enemyData.dropCoin * _level / 2);
@@ -162,5 +162,14 @@ public class Enemy : PoolableMono, IHittable, IKnockback, IShake
     public void StartShake()
     {
         OnShake?.Invoke();
+    }
+
+    public void WaveDeath()
+    {
+        _isDead = true;
+        _agentMovement.StopImmediatelly();
+        _agentMovement.enabled = false;
+        _enemyAttack.Reset();
+        Die();
     }
 }

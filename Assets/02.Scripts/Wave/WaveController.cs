@@ -116,13 +116,15 @@ public class WaveController : MonoBehaviour
                 Enemy e = PoolManager.Instance.Pop(pattern.enemies[_randomIndex].gameObject.name) as Enemy;
                 e.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, 0));
                 e.SetEnemyStat(WaveLevel);
+                OnFailedWave.AddListener(e.WaveDeath);
                 yield return new WaitForSeconds(pattern.spawnDelay);
             }
         }
     }
 
-    public void KillWaveMonster()
+    public void KillWaveMonster(Enemy e)
     {
+        OnFailedWave.RemoveListener(e.WaveDeath);
         _waveMonsterCount--;
         if (_waveMonsterCount <= 0)
         {
