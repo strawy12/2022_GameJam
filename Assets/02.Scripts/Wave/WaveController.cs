@@ -9,7 +9,7 @@ public class WaveController : MonoBehaviour
     private bool _isWave = false;
     public bool IsWave
     {
-        get 
+        get
         {
             return _isWave;
         }
@@ -19,14 +19,14 @@ public class WaveController : MonoBehaviour
     private int _waveMonsterCount = 0;
     private int _randomIndex = 0;
     public int TotalWave
-    { 
-        get 
+    {
+        get
         {
-            return _waveLevel * waves.Count + _waveIndex;  
-        } 
+            return _waveLevel * waves.Count + _waveIndex;
+        }
     }
     public GameObject nextUIPanel;
-
+    public UnityEvent OnFailedWave;
     private void Awake()
     {
         OnEndWave.AddListener(UIManager.Inst.GoUpgradeUI);
@@ -48,7 +48,7 @@ public class WaveController : MonoBehaviour
             {
                 _randomIndex = Random.Range(0, pattern.enemies.Count);
                 Enemy e = PoolManager.Instance.Pop(pattern.enemies[_randomIndex].gameObject.name) as Enemy;
-                e.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0,0,0));
+                e.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, 0));
                 e.SetEnemyStat(_waveLevel);
                 yield return new WaitForSeconds(pattern.spawnDelay);
             }
@@ -59,10 +59,30 @@ public class WaveController : MonoBehaviour
     {
         Debug.Log(_waveMonsterCount);
         _waveMonsterCount--;
-        if(_waveMonsterCount <= 0)
+        if (_waveMonsterCount <= 0)
         {
             EndWave();
         }
+    }
+
+    public void FailWave()
+    {
+        _isWave = false;
+        if (TotalWave - 1 > 0)
+        {
+            if (_waveIndex - 1 < 0)
+            {
+                _waveLevel--;
+                _waveIndex = waves.Count - 1;
+            }
+            else
+            {
+                _waveIndex--;
+            }
+        }
+        OnFailedWave?.Invoke();
+        OnEndWave?.Invoke();
+        nextUIPanel.SetActive(true);
     }
     public void EndWave()
     {
@@ -71,9 +91,7 @@ public class WaveController : MonoBehaviour
         nextUIPanel.SetActive(true);
         _waveIndex++;
         if (_waveIndex > waves.Count - 1)
-        {
             _waveIndex = 0;
-            _waveLevel++;
-        }
+        _waveLevel++;
     }
 }
