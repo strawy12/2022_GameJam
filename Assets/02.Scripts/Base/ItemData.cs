@@ -11,7 +11,7 @@ public class ItemData
 
     public int itemLevel;
 
-    public int needGold;
+    public double needGold;
 
     [TextArea]
     public string itemExplanation;

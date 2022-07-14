@@ -133,7 +133,7 @@ public class ThrowedTower : MonoBehaviour
         OnThrowStart?.Invoke();
 
         float range = Random.value;
-        if (range < 0.2f)
+        if (range < 0.5f)
             OnSmile?.Invoke();
 
 
@@ -181,7 +181,9 @@ public class ThrowedTower : MonoBehaviour
 
     public void DestroyTower()
     {
-        PoolManager.Instance.Push(_currentTower);
+        if (_currentTower != null)
+            PoolManager.Instance.Push(_currentTower);
+
         foreach (var tower in _nextTowerList)
         {
             PoolManager.Instance.Push(tower);
@@ -259,7 +261,7 @@ public class ThrowedTower : MonoBehaviour
                 _nextTowerList.Add(tower);
             }
 
-            if(cnt++ > 100000)
+            if (cnt++ > 100000)
             {
                 Debug.LogError("모두 IsLock이 켜져있는거 같습니다");
                 return;

@@ -69,7 +69,7 @@ public class WaveController : MonoBehaviour
             }
             if (pattern.enemies.Count == 0) continue;
 
-            pattern.count = Random.Range(0, 20);
+            pattern.count = Random.Range(1, 20);
             pattern.spawnDelay = Random.Range(0.5f, 1f);
 
             waveData.patterns.Add(pattern);
@@ -133,6 +133,7 @@ public class WaveController : MonoBehaviour
     public void FailWave()
     {
         _isWave = false;
+        GameManager.Inst.gameState = GameManager.GameState.UI;
         if (TotalWave - 1 > 0)
         {
             if (WaveIndex - 1 < 0)
