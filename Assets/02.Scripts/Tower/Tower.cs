@@ -142,9 +142,13 @@ public abstract class Tower : PoolableMono
                     default:
                         break;
                 }
-                OnEndThrow?.Invoke();
-            Debug.Log("Ground");
-                SpawnEffect();
+              
+
+            Define.MainCam.DOShakePosition(0.5f, 1.5f, 10);
+            GameManager.Inst.gameState = GameManager.GameState.Game;
+
+            OnEndThrow?.Invoke();
+            SpawnEffect();
         }
     }
     public void FadeTower(float delay)
