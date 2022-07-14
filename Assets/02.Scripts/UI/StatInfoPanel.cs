@@ -10,6 +10,11 @@ public class StatInfoPanel : MonoBehaviour
 
     public PlayerStatData.EPlayerStat StatType => _statType;
 
+    private void Start()
+    {
+        SetInfo();
+    }
+
     public void SetInfo()
     {
         float value = DataManager.Inst.CurrentPlayer.GetStat(_statType);
@@ -26,7 +31,7 @@ public class StatInfoPanel : MonoBehaviour
                 }
                 else
                 {
-                    _infoText.text = string.Format("150% / {0:N2}% ", (150f + (value - 100f)));
+                    _infoText.text = string.Format("150% / {0:N2}% ", value);
                 }
                 break;
             case PlayerStatData.EPlayerStat.MaxHp:
