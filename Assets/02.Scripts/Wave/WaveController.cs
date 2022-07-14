@@ -38,6 +38,7 @@ public class WaveController : MonoBehaviour
         nextUIPanel.SetActive(false);
         _isWave = true;
         float delay = UIManager.Inst.ShowRoundUI(TotalWave);
+        OnStartWave?.Invoke();
 
         StartCoroutine(StartWaveDelay(delay));
     }
@@ -48,7 +49,6 @@ public class WaveController : MonoBehaviour
 
         UIManager.Inst.GoGameScene();
         _waveMonsterCount = waves[_waveIndex].RemainMonsterCnt;
-        OnStartWave?.Invoke();
         StartCoroutine(SpawnMonsterCoroutine());
     }
 
