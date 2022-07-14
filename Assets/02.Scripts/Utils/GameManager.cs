@@ -55,6 +55,7 @@ public class GameManager : MonoSingleton<GameManager>
         //}
         UIManager.Inst.GoUpgradeUI();
     }
+
     private void CreatePool()
     {
         foreach (PoolingPair pair in _initList.list)

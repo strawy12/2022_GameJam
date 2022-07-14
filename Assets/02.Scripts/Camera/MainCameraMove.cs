@@ -7,13 +7,18 @@ public class MainCameraMove : MonoBehaviour
 {
     [SerializeField] private float _maxSpeed = 5f;
 
-    [SerializeField] private float _minPosX;
-    [SerializeField] private float _maxPosX;
-
     [SerializeField] private float _deceleration;
+
+    [SerializeField] private BoxCollider2D _limitCamCol;
 
     private float _currentSpeed;
     private float _currentDir = 0f;
+
+    private Camera _mainCam;
+    private void Awake()
+    {
+        _mainCam = Define.MainCam;
+    }
 
     public void CameraMove(float dir)
     {
@@ -25,14 +30,36 @@ public class MainCameraMove : MonoBehaviour
         else
         {
             StopAllCoroutines();
-            if (dir > 0 && transform.position.x >= _maxPosX) return;
-            if (dir < 0 && transform.position.x <= _minPosX) return;
+
+            if (LimitCheck(dir)) return;
 
             _currentDir = dir;
 
             _currentDir = Mathf.Clamp(_currentDir, -_maxSpeed, _maxSpeed);
             transform.Translate(Vector3.right * Time.deltaTime * _currentDir);
         }
+    }
+
+    private bool LimitCheck(float dir)
+    {
+        float posX = _mainCam.orthographicSize * _mainCam.aspect;
+
+        if (dir > 0 && transform.position.x + posX >= _limitCamCol.bounds.max.x) return true;
+        if (dir < 0 && transform.position.x - posX <= _limitCamCol.bounds.min.x) return true;
+
+
+        return false;
+    }
+
+    private bool LimitCheck()
+    {
+        float posX = _mainCam.orthographicSize * _mainCam.aspect;
+
+        if (transform.position.x + posX >= _limitCamCol.bounds.max.x) return true;
+        if (transform.position.x - posX <= _limitCamCol.bounds.min.x) return true;
+
+
+        return false;
     }
 
     public void StopImmediately()
@@ -48,9 +75,9 @@ public class MainCameraMove : MonoBehaviour
 
         while (speed > 0)
         {
-            if (transform.position.x <= _minPosX || transform.position.x >= _maxPosX) yield break;
+            if (LimitCheck()) yield break;
 
-            transform.Translate(Vector3.right * _currentDir * Time.deltaTime );
+            transform.Translate(Vector3.right * _currentDir * Time.deltaTime);
             speed -= _deceleration * Time.deltaTime;
 
             _currentDir = speed * (isLeft ? -1f : 1f);

@@ -10,5 +10,4 @@ public static class Constant
     public const string CLICK_SCREEN = "CK_SC";
 
     public const float CRITICAL_MAX_PERCENT = 100f;
-    public const float CRITICAL_DAMAGE_FACTOR = 2f;
 }

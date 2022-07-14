@@ -13,12 +13,12 @@ public class GoldPanel : MonoBehaviour
         string text;
         if (gold > 9999999999)
         {
-            text = "Gold : 9999999999+";
+            text = "9999999999+";
         }
 
         else
         {
-            text = $"Gold : {gold.ToString()}";
+            text = gold.ToString();
         }
 
         _goldText.text = text;
