@@ -41,6 +41,7 @@ public class WaveController : MonoBehaviour
         }
     }
     public GameObject nextUIPanel;
+    public UnityEvent OnClearWave;
     public UnityEvent OnFailedWave;
 
     private WaveDataSO _currentWave;
@@ -161,6 +162,7 @@ public class WaveController : MonoBehaviour
     {
         _isWave = false;
         EndWave();
+        OnClearWave?.Invoke();
         WaveIndex++;
         if (WaveIndex > waves.Count - 1)
             WaveIndex = 0;

@@ -31,7 +31,9 @@ public abstract class EnemyAttack : MonoBehaviour
 
     public void Reset()
     {
-        StartCoroutine(WaitBeforeAttackCoroutine());
+        StopAllCoroutines();
+        _waitBeforeNextAttack = false;
+       // StartCoroutine(WaitBeforeAttackCoroutine());
     }
 
     public void EndOfAttackAnimation()

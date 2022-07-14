@@ -24,4 +24,16 @@ public class RoundPanel : MonoBehaviour
         seq.AppendCallback(() => OnCompleteShowPanel?.Invoke());
         return duration;
     }
+
+    public void ShowUI()
+    { 
+        _roundImageTrm.localScale = Vector3.zero;
+        float duration = 0f;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(_canvasGroup.DOFade(1f, 0.5f)); duration += 0.5f;
+        seq.Append(_roundImageTrm.DOScale(Vector3.one, 0.75f)); duration += 0.75f;
+        seq.AppendInterval(1f); duration += 1f;
+        seq.Append(_canvasGroup.DOFade(0f, 0.3f)); duration += 0.3f;
+        seq.AppendCallback(() => OnCompleteShowPanel?.Invoke());
+    }
 }

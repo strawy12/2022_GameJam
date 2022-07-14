@@ -133,7 +133,7 @@ public class ThrowedTower : MonoBehaviour
         OnThrowStart?.Invoke();
 
         float range = Random.value;
-        if (range < 0.5f)
+        if (range < 0.3f)
             OnSmile?.Invoke();
 
 

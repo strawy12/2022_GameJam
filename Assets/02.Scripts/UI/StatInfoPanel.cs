@@ -31,11 +31,11 @@ public class StatInfoPanel : MonoBehaviour
                 }
                 else
                 {
-                    _infoText.text = string.Format("150% / {0:N2}% ", value);
+                    _infoText.text = string.Format("150% / {0:N1}%", value);
                 }
                 break;
             case PlayerStatData.EPlayerStat.MaxHp:
-                _infoText.text = string.Format("{0}", ((int)value).ToString());
+                _infoText.text = string.Format("Max Hp : {0}", ((int)value).ToString());
 
                 break;
         }

@@ -29,7 +29,7 @@ public abstract class UpgradePanel : MonoBehaviour
         _itemImage.sprite = _currentData.itemSprite;
         _nameText.text = $"Lv.{_currentData.itemLevel.ToString()} {_currentData.itemName}";
         _explanationText.text = _currentData.itemExplanation;
-        _upgradeBtn.text = $"강화\n<size=16>{_currentData.needGold}</size>";
+        _upgradeBtn.text = $"강화\n<size=16>{(long)_currentData.needGold}</size>";
         
         SetUpgradeButton();
     }

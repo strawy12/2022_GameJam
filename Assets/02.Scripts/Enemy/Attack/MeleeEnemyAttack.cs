@@ -7,6 +7,8 @@ public class MeleeEnemyAttack : EnemyAttack
 
     public override void Attack(int damage)
     {
+        if (!gameObject.activeSelf) return;
+
         if (!_waitBeforeNextAttack)
         {
             _enemyBrain.SetAttackState(true);
@@ -15,6 +17,7 @@ public class MeleeEnemyAttack : EnemyAttack
 
             hitable?.GetHit(damage: damage, damageDealer: gameObject);
             AttackFeedback?.Invoke();
+
             StartCoroutine(WaitBeforeAttackCoroutine());
         }
     }
