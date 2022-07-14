@@ -47,12 +47,12 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Start()
     {
-        if(DataManager.Inst.CurrentPlayer.isTutorial == false)
-        {
-            gameState = GameState.Tutorial;
-            GetComponent<TutorialManager>().StartTutorial();
-            return;
-        }
+        //if(DataManager.Inst.CurrentPlayer.isTutorial == false)
+        //{
+        //    gameState = GameState.Tutorial;
+        //    GetComponent<TutorialManager>().StartTutorial();
+        //    return;
+        //}
 
         UIManager.Inst.GoUpgradeUI();
     }

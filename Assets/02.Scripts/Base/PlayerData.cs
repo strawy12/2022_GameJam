@@ -12,7 +12,7 @@ public class PlayerData
     public List<TowerData> towerDataList;
     public List<PlayerStatData> statDataList;
     public int currentRound;
-    public int gold;
+    public long gold;
     public PlayerData(float soundVolume)
     {
         effectSoundVolume = soundVolume;

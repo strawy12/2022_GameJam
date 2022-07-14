@@ -13,6 +13,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     [SerializeField] private Toggle _effectToggle, _bgmToggle;
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private RoundPanel _roundPanel;
 
     private List<NextTowerPanel> _nextTowerPanelList = new List<NextTowerPanel>();
     private List<UpgradePanel> _upgradePanelList = new List<UpgradePanel>();
@@ -73,5 +74,10 @@ public class UIManager : MonoSingleton<UIManager>
     public void BgmOnOff()
     {
         audioMixer.SetFloat("Music", !_bgmToggle.isOn? -20f : -80f);
+    }
+
+    public float ShowRoundUI(int round)
+    {
+      return  _roundPanel.ShowNowRoundUI(round);
     }
 }
