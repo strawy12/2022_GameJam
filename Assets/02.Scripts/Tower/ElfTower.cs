@@ -32,7 +32,7 @@ public class ElfTower : Tower
             OnSkillShot?.Invoke();
             ElfArrow arrow = PoolManager.Instance.Pop("ElfArrow") as ElfArrow;
             arrow.transform.position = shootPos + new Vector2(_shootPosOffset * Random.Range(-1f, 1f), 0f);
-            arrow.Init(Vector2.down, _shootForce, _towerData.damage*2);
+            arrow.Init(Vector2.down, _shootForce, (int)(_towerData.damage*1.5f));
             yield return new WaitForSeconds(_shootDelay);
         }
     }

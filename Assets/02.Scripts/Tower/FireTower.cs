@@ -50,7 +50,7 @@ public class FireTower : Tower
         {
             Debug.Log("hit");
             IHittable hit = hitMonster.GetComponent<IHittable>();
-            hit?.GetHit(_towerData.damage, transform.gameObject);
+            hit?.GetHit((int)_towerData.damage, transform.gameObject);
         }
         yield return new WaitForSeconds(0.01f);
         _isBoom = true;
