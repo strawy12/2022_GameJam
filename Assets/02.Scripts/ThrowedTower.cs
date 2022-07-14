@@ -244,8 +244,11 @@ public class ThrowedTower : MonoBehaviour
             towerList.Add(towerName);
         }
 
-        while (_nextTowerList.Count < 7)
+        int cnt = 0;
+        while (_nextTowerList.Count < 6)
         {
+            Debug.Log(_nextTowerList.Count);
+
             var rnd = new System.Random();
             towerList = towerList.OrderBy(item => rnd.Next()).ToList();
 
@@ -254,6 +257,12 @@ public class ThrowedTower : MonoBehaviour
                 Tower tower = PoolManager.Instance.Pop(towerList[i]) as Tower;
                 tower.gameObject.SetActive(false);
                 _nextTowerList.Add(tower);
+            }
+
+            if(cnt++ > 100000)
+            {
+                Debug.LogError("모두 IsLock이 켜져있는거 같습니다");
+                return;
             }
         }
     }

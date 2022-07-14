@@ -12,7 +12,6 @@ public abstract class Tower : PoolableMono
     [SerializeField] private ParticleSystem _throwEffect;
     [SerializeField] private PoolParticle _destroyParticle;
     protected TowerData _towerData;
-
     protected Transform _baseTrm;
 
     protected Rigidbody2D _rigidbody;
@@ -44,10 +43,6 @@ public abstract class Tower : PoolableMono
         _towerData ??= DataManager.Inst.CurrentPlayer.GetTowerData((int)_towerType);
     }
 
-    private void Start()
-    {
-
-    }
 
     public override void Reset()
     {
@@ -56,6 +51,7 @@ public abstract class Tower : PoolableMono
         _isThrow = false;
         _rigidbody.constraints = 0;
         Collider.enabled = false;
+        _spriteRenderer.enabled = true;
         _spriteRenderer.DOFade(1, 0.01f);
         Rigid.isKinematic = true;
         _spriteRenderer.transform.localRotation = Quaternion.identity;
@@ -75,9 +71,13 @@ public abstract class Tower : PoolableMono
             PoolParticle particle = PoolManager.Instance.Pop(_destroyParticle.gameObject.name) as PoolParticle;
             particle.OnEnableParticle(transform.position);
         }
+        FadeTower(0f);
+        Invoke("PushTower", 3f);
+    }
+    public void PushTower()
+    {
         PoolManager.Instance.Push(this);
     }
-
     internal void ChangeAngle(float angle)
     {
         _spriteRenderer.transform.rotation = Quaternion.Euler(0f, 0f, angle);
@@ -112,7 +112,7 @@ public abstract class Tower : PoolableMono
                     break;
                 case ETowerType.ActiveType:
                     _isGround = true;
-                    FadeTower(0f);
+                    DestroyTower();
                     break;
                 case ETowerType.FixingType:
                     UseSkill();
@@ -135,8 +135,7 @@ public abstract class Tower : PoolableMono
     {
         seq = DOTween.Sequence();
         seq.AppendInterval(delay);
-        seq.Append(_spriteRenderer.DOFade(0, 0.1f));
-        seq.AppendCallback(DestroyTower);
+        seq.Append(_spriteRenderer.DOFade(0, 0.3f));
     }
     protected virtual void OnTriggerEnemy(Collider2D collision)
     {

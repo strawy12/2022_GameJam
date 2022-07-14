@@ -23,7 +23,7 @@ MonoBehaviour:
     prefabName: StoneTower
     damage: 6
     weight: 2
-    isLock: 1
+    isLock: 0
     knockbackPower: 3
     towerType: 1
   - itemNum: 1
