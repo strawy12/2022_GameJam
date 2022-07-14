@@ -9823,8 +9823,8 @@ MonoBehaviour:
   _settingPanel: {fileID: 2081745571}
   _statInfoPanelList:
   - {fileID: 1230303938}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 288925974}
+  - {fileID: 1595867389}
 --- !u!114 &1607702449
 MonoBehaviour:
   m_ObjectHideFlags: 0
