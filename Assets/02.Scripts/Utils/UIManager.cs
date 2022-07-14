@@ -18,6 +18,13 @@ public class UIManager : MonoSingleton<UIManager>
     private List<NextTowerPanel> _nextTowerPanelList = new List<NextTowerPanel>();
     private List<UpgradePanel> _upgradePanelList = new List<UpgradePanel>();
 
+    [SerializeField] private List<StatInfoPanel> _statInfoPanelList;
+
+    private void Start()
+    {
+        _goldPanel.SetText();
+    }
+
     public void AddUpgradePanel(UpgradePanel panel)
     {
         _upgradePanelList.Add(panel);
@@ -79,5 +86,10 @@ public class UIManager : MonoSingleton<UIManager>
     public float ShowRoundUI(int round)
     {
       return  _roundPanel.ShowNowRoundUI(round);
+    }
+
+    public void SetStatInfoPanel(PlayerStatData.EPlayerStat type)
+    {
+        _statInfoPanelList.Find(x => x.StatType == type).SetInfo();
     }
 }
