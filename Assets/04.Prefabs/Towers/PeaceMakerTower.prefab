@@ -73,8 +73,8 @@ MonoBehaviour:
   _effectPrefab: {fileID: 3661847801536907546}
   _throwEffect: {fileID: 3661847801536907544}
   _destroyParticle: {fileID: 0}
-  _offestVec: {x: -0.3, y: 0}
-  _overlapSize: {x: 2, y: 12}
+  _offestVec: {x: 0, y: 0}
+  _overlapSize: {x: 1, y: 1}
   _isWhatGround:
     serializedVersion: 2
     m_Bits: 64

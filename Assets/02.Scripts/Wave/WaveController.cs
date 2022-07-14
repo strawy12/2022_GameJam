@@ -133,6 +133,7 @@ public class WaveController : MonoBehaviour
     public void FailWave()
     {
         _isWave = false;
+        GameManager.Inst.gameState = GameManager.GameState.UI;
         if (TotalWave - 1 > 0)
         {
             if (WaveIndex - 1 < 0)

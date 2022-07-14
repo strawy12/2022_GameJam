@@ -376,8 +376,8 @@ MonoBehaviour:
   _effectPrefab: {fileID: 3508577413298797006, guid: f0f773d820a2cec40bcebf65b5070eab, type: 3}
   _throwEffect: {fileID: 5080168907425406462}
   _destroyParticle: {fileID: 5622212975319648690, guid: a68b481053c1435479971535a27c5dcc, type: 3}
-  _offestVec: {x: 0, y: 0.4}
-  _overlapSize: {x: 2, y: 6}
+  _offestVec: {x: 0, y: -0.2}
+  _overlapSize: {x: 2, y: 2}
   _isWhatGround:
     serializedVersion: 2
     m_Bits: 64

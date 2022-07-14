@@ -121,6 +121,7 @@ public abstract class Tower : PoolableMono
         {
                 _isStop = true;
                 _rigidbody.velocity = Vector3.zero;
+                _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
                 _rigidbody.isKinematic = true;
                 _throwEffect.Stop();
                 _isThrow = false;
@@ -131,6 +132,7 @@ public abstract class Tower : PoolableMono
                         break;
                     case ETowerType.ActiveType:
                         _isGround = true;
+                    DestroyTower();
                         break;
                     case ETowerType.FixingType:
                         UseSkill();
