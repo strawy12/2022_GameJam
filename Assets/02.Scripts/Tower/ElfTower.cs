@@ -51,6 +51,7 @@ public class ElfTower : Tower
     public override void DestroyTower()
     {
         EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
+        OnBrokeTower?.Invoke();
         base.DestroyTower();
     }
 
