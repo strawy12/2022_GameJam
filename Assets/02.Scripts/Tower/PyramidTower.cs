@@ -25,10 +25,6 @@ public class PyramidTower : Tower
         DestroyTower();
 
         swamp.gameObject.SetActive(true);
-
-        //deletePyramidTower.Play("PyramidDust");
-   
-
     }
 
     public override void UseSkill()

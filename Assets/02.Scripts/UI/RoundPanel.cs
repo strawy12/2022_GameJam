@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class RoundPanel : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Text _roundText;
     [SerializeField] private Transform _roundImageTrm;
-
+    public UnityEvent OnCompleteShowPanel;
     public float ShowNowRoundUI(int round)
     {
         _roundImageTrm.localScale = Vector3.zero; 
@@ -20,7 +21,7 @@ public class RoundPanel : MonoBehaviour
         seq.Append(_roundImageTrm.DOScale(Vector3.one, 0.75f)); duration += 0.75f;
         seq.AppendInterval(1f); duration += 1f;
         seq.Append(_canvasGroup.DOFade(0f, 0.3f)); duration += 0.3f;
-
+        seq.AppendCallback(() => OnCompleteShowPanel?.Invoke());
         return duration;
     }
 }

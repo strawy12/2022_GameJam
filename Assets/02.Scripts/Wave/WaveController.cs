@@ -73,7 +73,7 @@ public class WaveController : MonoBehaviour
         _waveMonsterCount--;
         if (_waveMonsterCount <= 0)
         {
-            EndWave();
+            ClearWave();
         }
     }
 
@@ -93,14 +93,18 @@ public class WaveController : MonoBehaviour
             }
         }
         OnFailedWave?.Invoke();
+        EndWave();
+    }
+
+    public void EndWave()
+    {
         OnEndWave?.Invoke();
         nextUIPanel.SetActive(true);
     }
-    public void EndWave()
+    public void ClearWave()
     {
         _isWave = false;
-        OnEndWave?.Invoke();
-        nextUIPanel.SetActive(true);
+        EndWave();
         _waveIndex++;
         if (_waveIndex > waves.Count - 1)
             _waveIndex = 0;

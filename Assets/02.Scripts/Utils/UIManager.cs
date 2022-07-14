@@ -14,7 +14,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private Toggle _effectToggle, _bgmToggle;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private RoundPanel _roundPanel;
-
+    [SerializeField] private RoundPanel _failRoundPanel;
     private List<NextTowerPanel> _nextTowerPanelList = new List<NextTowerPanel>();
     private List<UpgradePanel> _upgradePanelList = new List<UpgradePanel>();
 
@@ -79,5 +79,10 @@ public class UIManager : MonoSingleton<UIManager>
     public float ShowRoundUI(int round)
     {
       return  _roundPanel.ShowNowRoundUI(round);
+    }
+
+    public float ShowFailRoundUI(int round)
+    {
+        return _failRoundPanel.ShowNowRoundUI(round);
     }
 }

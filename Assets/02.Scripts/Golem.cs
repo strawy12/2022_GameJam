@@ -19,7 +19,7 @@ public class Golem : MonoBehaviour,IHittable
     }
     public void GetHit(int damage, GameObject damageDealer)
     {
-        golemHitAnim.Play("GolemHit");
+        golemHitAnim?.Play("GolemHit");
         Health -= damage;
         OnHit?.Invoke();
         if (Health <= 0)

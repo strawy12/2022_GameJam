@@ -35,14 +35,14 @@ public class FireTower : Tower
         if (!_isStop)
         {
             base.OnTriggerEnemy(collision);
-            Debug.Log("hit_Enemy no stop tower");
         }
         else if (_isCheck && !_isBoom)
         {
             StartCoroutine(ExPlosionFireTower());
         }
     }
-    IEnumerator ExPlosionFireTower() // ½ºÅ³
+
+    private IEnumerator ExPlosionFireTower()
     {
         _isBoom = true;
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 5f, _whatIsEnemy);
@@ -61,6 +61,7 @@ public class FireTower : Tower
     }
     protected override void SpawnEffect()
     {
+
     }
 
 #if UNITY_EDITOR
@@ -69,7 +70,5 @@ public class FireTower : Tower
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
-
-
 #endif
 }
