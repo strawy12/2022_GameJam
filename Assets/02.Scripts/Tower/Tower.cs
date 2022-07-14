@@ -9,11 +9,11 @@ public abstract class Tower : PoolableMono
     public enum ETower { Stone, Fire, PieceMaker, Elf, Pyramid }
     [SerializeField] private ETower _towerType;
     [SerializeField] protected GameObject _effectPrefab; 
-    [SerializeField] private ParticleSystem _throwEffect;
-    [SerializeField] private PoolParticle _destroyParticle;
-    [SerializeField] private Vector2 _offestVec;
-    [SerializeField] private Vector2 _overlapSize;
-    [SerializeField] private LayerMask _isWhatGround;
+    [SerializeField] protected ParticleSystem _throwEffect;
+    [SerializeField] protected PoolParticle _destroyParticle;
+    [SerializeField] protected Vector2 _offestVec;
+    [SerializeField] protected Vector2 _overlapSize;
+    [SerializeField] protected LayerMask _isWhatGround;
     protected TowerData _towerData;
     protected Transform _baseTrm;
 
@@ -74,12 +74,14 @@ public abstract class Tower : PoolableMono
     
     public virtual void DestroyTower()
     {
-        if(_destroyParticle !=null)
+        CancelInvoke();
+        if (_destroyParticle != null)
         {
             PoolParticle particle = PoolManager.Instance.Pop(_destroyParticle.gameObject.name) as PoolParticle;
             particle.OnEnableParticle(transform.position);
         }
         FadeTower(0f);
+        StopAllCoroutines();
         Invoke("PushTower", 3f);
     }
     public void PushTower()
@@ -109,13 +111,11 @@ public abstract class Tower : PoolableMono
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-       
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             OnTriggerEnemy(collision);
         }
     }
-
 
     public void GroundOverlap()
     {
@@ -135,7 +135,6 @@ public abstract class Tower : PoolableMono
                         break;
                     case ETowerType.ActiveType:
                         _isGround = true;
-                        DestroyTower();
                         break;
                     case ETowerType.FixingType:
                         UseSkill();
@@ -144,6 +143,7 @@ public abstract class Tower : PoolableMono
                         break;
                 }
                 OnEndThrow?.Invoke();
+            Debug.Log("Ground");
                 GameManager.Inst.EndFollow();
                 SpawnEffect();
         }
