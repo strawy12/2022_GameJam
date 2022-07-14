@@ -178,6 +178,7 @@ public abstract class Tower : PoolableMono
             Effect effect = PoolManager.Instance.Pop(_effectPrefab.name) as Effect;
             effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
             effect.StartAnim();
+            EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
         }
         ShakeObject(hit.point); 
     }

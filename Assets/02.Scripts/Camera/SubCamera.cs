@@ -14,6 +14,7 @@ public class SubCamera : MonoBehaviour
      
     public void ShowSubCamUI(Vector3 targetPos)
     {
+        _subCameraUI.DOKill();
         transform.position = targetPos;
         _subCameraUI.alpha = 1f;
 
