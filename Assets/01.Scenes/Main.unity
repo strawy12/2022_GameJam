@@ -3808,6 +3808,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   nextUIPanel: {fileID: 1346273976}
+  OnFailedWave:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &485993274
 Transform:
   m_ObjectHideFlags: 0
