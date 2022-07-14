@@ -60,12 +60,9 @@ public abstract class Tower : PoolableMono
     }
     private void Update()
     {
-        if(!_isStop)
+        if (_isThrow && !_isStop)
         {
             GroundOverlap();
-        }
-        if (_isThrow)
-        {
             float angle = Mathf.Atan2(_rigidbody.velocity.y, _rigidbody.velocity.x) * Mathf.Rad2Deg - 90f;
             ChangeAngle(angle);
         }
