@@ -11644,6 +11644,9 @@ MonoBehaviour:
   _upgradeUI: {fileID: 340045299}
   _goldPanel: {fileID: 1056053139}
   _nextTowerUI: {fileID: 283375922}
+  _effectToggle: {fileID: 0}
+  _bgmToggle: {fileID: 0}
+  audioMixer: {fileID: 0}
 --- !u!114 &1607702449
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,14 +52,25 @@ public class UIManager : MonoSingleton<UIManager>
     {
         GameManager.Inst.gameState = GameManager.GameState.UI;
 
-        Sequence seq = DOTween.Sequence();
-        seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(-2.1f,0,-10f), 0.75f));
-        seq.Join(_nextTowerUI.DOFade(0f, 0.75f));
-        seq.Append(_upgradeUI.OpenUI());
+        OpenUpgradeUI();
     }
+
     public void GoGameScene()
     {
         GameManager.Inst.gameState = GameManager.GameState.Game;
+
+        CloseUpgradeUI();
+    }
+    public void OpenUpgradeUI()
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.Append(GameManager.Inst.MainCameraMove.MoveCameraPos(new Vector3(-2.1f, 0, -10f), 0.75f));
+        seq.Join(_nextTowerUI.DOFade(0f, 0.75f));
+        seq.Append(_upgradeUI.OpenUI());
+    }
+
+    public void CloseUpgradeUI()
+    {
         Sequence seq = DOTween.Sequence();
 
         seq.Append(_upgradeUI.CloseUI());
