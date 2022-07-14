@@ -37,7 +37,11 @@ public class FireTower : Tower
         }
         else if (_isCheck && !_isBoom)
         {
+<<<<<<< HEAD
             Debug.Log("Check");
+=======
+            EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
+>>>>>>> OIF
             StartCoroutine(ExPlosionFireTower());
         }
     }

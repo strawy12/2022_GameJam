@@ -8,6 +8,7 @@ public class PatternData
     public List<Enemy> enemies;
     public int count;
     public float spawnDelay = 0.5f;
+
 }
 
 [CreateAssetMenu(menuName = "SO/Wave/WaveDataSO")]

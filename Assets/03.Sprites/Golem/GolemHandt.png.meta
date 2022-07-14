@@ -131,7 +131,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 160
+        y: 0
         width: 80
         height: 80
       alignment: 9
@@ -152,7 +152,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 160
+        y: 0
         width: 80
         height: 80
       alignment: 9
@@ -173,7 +173,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 160
-        y: 160
+        y: 0
         width: 80
         height: 80
       alignment: 9
@@ -193,8 +193,8 @@ TextureImporter:
       name: GolemHandt_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 80
+        x: 240
+        y: 0
         width: 80
         height: 80
       alignment: 9
@@ -214,8 +214,8 @@ TextureImporter:
       name: GolemHandt_4
       rect:
         serializedVersion: 2
-        x: 80
-        y: 80
+        x: 320
+        y: 0
         width: 80
         height: 80
       alignment: 9
@@ -235,8 +235,8 @@ TextureImporter:
       name: GolemHandt_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 80
+        x: 400
+        y: 0
         width: 80
         height: 80
       alignment: 9
@@ -256,7 +256,7 @@ TextureImporter:
       name: GolemHandt_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 480
         y: 0
         width: 80
         height: 80
@@ -277,7 +277,7 @@ TextureImporter:
       name: GolemHandt_7
       rect:
         serializedVersion: 2
-        x: 80
+        x: 560
         y: 0
         width: 80
         height: 80
