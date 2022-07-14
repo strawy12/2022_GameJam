@@ -1488,7 +1488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyData: {fileID: 11400000, guid: 32f8351bee8e1e24eab9f6e5894b21bb, type: 2}
-  _dieParticle: {fileID: 4366127357522287106, guid: f66dee54e22a608408857a5f05e439a5, type: 3}
+  _dieParticle: {fileID: 7162671696272787519, guid: f66dee54e22a608408857a5f05e439a5, type: 3}
   _dieEffect: {fileID: 786217160, guid: 636e7b280ca2b1548ae6224b627180e7, type: 3}
   <OnDie>k__BackingField:
     m_PersistentCalls:

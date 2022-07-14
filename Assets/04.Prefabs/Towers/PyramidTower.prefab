@@ -458,7 +458,7 @@ MonoBehaviour:
   _towerType: 4
   _effectPrefab: {fileID: 3508577413298797006, guid: f0f773d820a2cec40bcebf65b5070eab, type: 3}
   _throwEffect: {fileID: 5080168907425406462}
-  _destroyParticle: {fileID: 3327410511934936455, guid: a68b481053c1435479971535a27c5dcc, type: 3}
+  _destroyParticle: {fileID: 5622212975319648690, guid: a68b481053c1435479971535a27c5dcc, type: 3}
   _swampObj: {fileID: 9173671696485567779, guid: 3e703bed807d0fe4db7d94b9afe9a9ab, type: 3}
   OnBrokeTower:
     m_PersistentCalls:

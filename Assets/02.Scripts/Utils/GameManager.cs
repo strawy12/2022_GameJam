@@ -49,9 +49,9 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if(DataManager.Inst.CurrentPlayer.isTutorial == false)
         {
-            gameState = GameState.Tutorial;
-            GetComponent<TutorialManager>().StartTutorial();
-            return;
+            //gameState = GameState.Tutorial;
+            //GetComponent<TutorialManager>().StartTutorial();
+            //return;
         }
 
         UIManager.Inst.GoUpgradeUI();

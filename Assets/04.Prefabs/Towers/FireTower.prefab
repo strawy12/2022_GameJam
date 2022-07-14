@@ -375,7 +375,7 @@ MonoBehaviour:
   _towerType: 1
   _effectPrefab: {fileID: 0}
   _throwEffect: {fileID: 8039882792692684960, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
-  _destroyParticle: {fileID: 3780044184393783289, guid: f17e2650c20101e4ebb7bf22d08f5414, type: 3}
+  _destroyParticle: {fileID: 318136845430251937, guid: f17e2650c20101e4ebb7bf22d08f5414, type: 3}
   _isBoom: 0
   _isCheck: 0
   _whatIsEnemy:

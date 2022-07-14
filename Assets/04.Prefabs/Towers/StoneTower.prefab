@@ -407,7 +407,7 @@ MonoBehaviour:
   _towerType: 0
   _effectPrefab: {fileID: 7483502199802290256, guid: 588337f3fb032d145b4a39413f6ed8c2, type: 3}
   _throwEffect: {fileID: 8039882792692684960, guid: 1cd27adfb741f6d4c89ab17b0ba98179, type: 3}
-  _destroyParticle: {fileID: 5400867600471128695, guid: 7dfb983806758344ba51169975fb3858, type: 3}
+  _destroyParticle: {fileID: 3858343519335704138, guid: 7dfb983806758344ba51169975fb3858, type: 3}
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128

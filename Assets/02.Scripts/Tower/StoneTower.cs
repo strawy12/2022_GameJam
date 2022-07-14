@@ -32,8 +32,8 @@ public class StoneTower : Tower
         }
         OnBrokeTower.Invoke();
         yield return new WaitForSeconds(1f);
-        
-        FadeTower(0.1f);
+
+        DestroyTower();
     }
 
     protected override void SpawnEffect()

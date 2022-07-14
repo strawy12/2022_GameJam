@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PoolParticle : PoolableMono
 {
-    private ParticleSystem _particle;
+    protected ParticleSystem _particle;
 
-    private void Awake()
+    protected void Awake()
     {
         _particle = GetComponent<ParticleSystem>();
     }
 
-    public void OnEnableParticle(Vector2 pos)
+    public virtual void OnEnableParticle(Vector2 pos)
     {
         transform.position = pos;
         _particle.Play();
@@ -25,5 +25,11 @@ public class PoolParticle : PoolableMono
     public override void Reset()
     {
         _particle.Stop();
+    }
+    public void SetParticleVelocity(Vector2 pos, Vector2 targetPos)
+    {
+        var vm = _particle.velocityOverLifetime;
+        vm.x = pos.x - targetPos.x;
+        OnEnableParticle(pos);
     }
 }

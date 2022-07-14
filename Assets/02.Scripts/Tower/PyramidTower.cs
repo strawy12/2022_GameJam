@@ -22,7 +22,7 @@ public class PyramidTower : Tower
         swamp.ParticleStart();
         OnBrokeTower?.Invoke();
         yield return new WaitForSeconds(.01f);
-        FadeTower(0f);
+        DestroyTower();
 
         swamp.gameObject.SetActive(true);
 
