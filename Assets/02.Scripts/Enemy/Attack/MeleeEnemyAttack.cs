@@ -11,7 +11,7 @@ public class MeleeEnemyAttack : EnemyAttack
         {
             _enemyBrain.SetAttackState(true);
 
-            IHittable hitable = GetTarget().GetComponent<IHittable>();
+            IHittable hitable = GetTarget().GetComponentInParent<IHittable>();
 
             hitable?.GetHit(damage: damage, damageDealer: gameObject);
             AttackFeedback?.Invoke();
