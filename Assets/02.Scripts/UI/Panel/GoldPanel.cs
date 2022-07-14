@@ -13,16 +13,16 @@ public class GoldPanel : MonoBehaviour
     }
     public void SetText()
     {
-        int gold = DataManager.Inst.CurrentPlayer.gold;
+        long gold = DataManager.Inst.CurrentPlayer.gold;
         string text;
-        if (gold > 9999)
+        if (gold > 9999999999)
         {
-            text = "Gold : 9999+G";
+            text = "Gold : 9999999999+";
         }
 
         else
         {
-            text = $"Gold : {gold.ToString()}G";
+            text = $"Gold : {gold.ToString()}";
         }
 
         _goldText.text = text;
