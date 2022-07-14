@@ -60,6 +60,19 @@ public class FireTower : Tower
         effect.StartAnim();
         DestroyTower();
     }
+    public override void DestroyTower()
+    {
+        if(!_isBoom)
+        {
+            CancelInvoke();
+            FadeTower(0f);
+            StopAllCoroutines();
+            Invoke("PushTower", 3f);
+
+            return;
+        }
+        base.DestroyTower();
+    }
 #if UNITY_EDITOR
     //private void OnDrawGizmos()
     //{

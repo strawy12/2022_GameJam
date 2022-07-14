@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90413f006192c2047b657b61e8e73346, type: 3}
   m_Name: RandomWave
   m_EditorClassIdentifier: 
-  patterns: []
+  patterns:
+  - enemies:
+    - {fileID: 2476525707465858343, guid: 0fc37bff1cd6a6b4fa9a1d51fc2c08c9, type: 3}
+    - {fileID: 3479278817573744511, guid: a8097bff2d8b62249bff27557998139e, type: 3}
+    count: 28
+    spawnDelay: 0.9583545
+  - enemies:
+    - {fileID: 2476525707465858343, guid: 0fc37bff1cd6a6b4fa9a1d51fc2c08c9, type: 3}
+    count: 29
+    spawnDelay: 0.6281878

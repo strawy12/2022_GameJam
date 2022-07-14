@@ -10,6 +10,7 @@ public class FollowCamera : MonoBehaviour
     [SerializeField] private float _followDelay;
     [SerializeField] private float _endCameraStayTime;
     private Camera _currentCam;
+    private bool _isFollowing;
 
     private void Awake()
     {
@@ -23,28 +24,35 @@ public class FollowCamera : MonoBehaviour
 
     public void StartFollow()
     {
+        if (_isFollowing) return;
+        _isFollowing = true;
         StartCoroutine(FollowDelay());
     }
 
     private IEnumerator FollowDelay()
     {
         yield return new WaitForSeconds(_followDelay);
-        _virtualCam.enabled = true;
-        _currentCam.enabled = true;
+
+        if(GameManager.Inst.gameState == GameManager.GameState.Throwing)
+        {
+            _virtualCam.enabled = true;
+            _currentCam.enabled = true;
+        }
+
     }
 
 
     public void EndFollow()
     {
+        Debug.Log("5");
         StopAllCoroutines();
-
+        Debug.Log("2");
         Camera mainCam = Define.MainCam;
         mainCam.transform.position = _currentCam.transform.position + Vector3.down;
 
         _currentCam.enabled = false;
         _virtualCam.Follow = null ;
         _virtualCam.enabled = false;
-
         Sequence seq = DOTween.Sequence();
 
         seq.Append(mainCam.DOShakePosition(0.5f, 1.5f, 10));
@@ -53,6 +61,7 @@ public class FollowCamera : MonoBehaviour
         seq.AppendCallback(() => 
         {
             GameManager.Inst.gameState = GameManager.GameState.Game;
+            _isFollowing = false;
         });
         
     }

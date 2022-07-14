@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class StoneTower : Tower
 {
-    //[SerializeField] private Animator anim;
+
     [SerializeField] private LayerMask _whatIsEnemy;
 
     public UnityEvent OnBrokeTower;

@@ -123,7 +123,6 @@ public class WaveController : MonoBehaviour
 
     public void KillWaveMonster()
     {
-        Debug.Log(_waveMonsterCount);
         _waveMonsterCount--;
         if (_waveMonsterCount <= 0)
         {

@@ -21,7 +21,7 @@ public class PlayerData
         towerDataList = new List<TowerData>();
         statDataList = new List<PlayerStatData>();
         waveIndex = 0;
-        waveLevel = 0;
+        waveLevel = 1;
         gold = 0;
         versionCheck = true;
 

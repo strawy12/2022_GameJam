@@ -87,6 +87,7 @@ public class MainCameraMove : MonoBehaviour
 
     public Tween MoveCameraPos(Vector3 pos, float duration)
     {
+        transform.DOKill();
         return transform.DOMove(pos, duration);
     }
 
