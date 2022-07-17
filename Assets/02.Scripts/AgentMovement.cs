@@ -80,7 +80,7 @@ public class AgentMovement : MonoBehaviour
         _offsetSpeedValue = 1;
         _isSlowness = false;
     }
-    //넉백구현할 때 사용할 거다.
+
     public void StopImmediatelly()
     {
         _currentVelocity = 0;

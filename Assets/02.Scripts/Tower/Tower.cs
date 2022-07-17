@@ -11,33 +11,30 @@ public abstract class Tower : PoolableMono
     [SerializeField] protected GameObject _effectPrefab; 
     [SerializeField] protected ParticleSystem _throwEffect;
     [SerializeField] protected PoolParticle _destroyParticle;
-    [SerializeField] protected Vector2 _offestVec;
-    [SerializeField] protected Vector2 _overlapSize;
+    [SerializeField] protected Vector2 _groundCheckOverlapOffestVec;  
+    [SerializeField] protected Vector2 _groundCheckOverlapSize;
     [SerializeField] protected LayerMask _isWhatGround;
+    
     protected TowerData _towerData;
-    protected Transform _baseTrm;
 
     protected Rigidbody2D _rigidbody;
-    private Collider2D _collider;
-    private SpriteRenderer _spriteRenderer;
+    protected Collider2D _collider;
+    protected SpriteRenderer _spriteRenderer;
 
     protected bool _isStop = false;
-    private bool _isThrow;
 
     public TowerData Data => _towerData;
     public Rigidbody2D Rigid => _rigidbody;
     public Collider2D Collider => _collider;
-    private bool _isGround;
     public Action OnEndThrow;
     protected Sequence seq;
     protected virtual void Awake()
     {
-        StartInit();
+        AwakeInit();
     }
 
-    private void StartInit()
+    private void AwakeInit()
     {
-        _baseTrm ??= transform.Find("BaseTransform");
         _spriteRenderer ??= transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
         _collider ??= transform.Find("VisualSprite").GetComponent<Collider2D>();
         _rigidbody ??= GetComponent<Rigidbody2D>();
@@ -45,12 +42,14 @@ public abstract class Tower : PoolableMono
         _towerData ??= DataManager.Inst.CurrentPlayer.GetTowerData((int)_towerType);
     }
 
-
-    public override void Reset()
+    protected virtual void Start()
     {
         StartInit();
+    }
+
+    private void StartInit()
+    {
         _isStop = false;
-        _isThrow = false;
         _rigidbody.constraints = 0;
         Collider.enabled = false;
         _spriteRenderer.enabled = true;
@@ -58,16 +57,27 @@ public abstract class Tower : PoolableMono
         Rigid.isKinematic = true;
         _spriteRenderer.transform.localRotation = Quaternion.identity;
     }
+
+    public override void Reset()
+    {
+        AwakeInit();
+        StartInit();
+    }
     private void Update()
     {
-        if (_isThrow && !_isStop)
+        if (!_isStop)
         {
             GroundOverlap();
             float angle = Mathf.Atan2(_rigidbody.velocity.y, _rigidbody.velocity.x) * Mathf.Rad2Deg - 90f;
             ChangeAngle(angle);
         }
     }
-    
+
+    internal void ChangeAngle(float angle)
+    {
+        _spriteRenderer.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+    }
+
     public virtual void DestroyTower()
     {
         CancelInvoke();
@@ -76,34 +86,27 @@ public abstract class Tower : PoolableMono
             PoolParticle particle = PoolManager.Instance.Pop(_destroyParticle.gameObject.name) as PoolParticle;
             particle.OnEnableParticle(transform.position);
         }
-        FadeTower(0f);
-        StopAllCoroutines();
         Invoke("PushTower", 3f);
     }
     public void PushTower()
     {
+        StopAllCoroutines();
         PoolManager.Instance.Push(this);
     }
-    internal void ChangeAngle(float angle)
-    {
-        _spriteRenderer.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-    }
-
+   
     public abstract void UseSkill();
 
     public virtual void StartThrow()
     {
-        _isThrow = true;
         transform.SetParent(null);
         _throwEffect.Play();
         OnThrowTower();
     }
+
     protected virtual void OnThrowTower()
     {
 
     }
-
-    
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
@@ -115,61 +118,48 @@ public abstract class Tower : PoolableMono
 
     public void GroundOverlap()
     {
-        Vector2 origin = new Vector2(transform.position.x + _offestVec.x, transform.position.y + _offestVec.y);
-        Collider2D col = Physics2D.OverlapBox(origin, _overlapSize, _spriteRenderer.transform.rotation.z, _isWhatGround);
-        if(col != null)
+        Vector2 origin = new Vector2(transform.position.x + _groundCheckOverlapOffestVec.x, transform.position.y + _groundCheckOverlapOffestVec.y);
+        Collider2D col = Physics2D.OverlapBox(origin, _groundCheckOverlapSize, _spriteRenderer.transform.rotation.z, _isWhatGround);
+        if (col != null)
         {
-                _isStop = true;
-                _rigidbody.velocity = Vector3.zero;
-                _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-                _rigidbody.isKinematic = true;
-                _throwEffect.Stop();
-                _isThrow = false;
-                switch (_towerData.towerType)
-                {
-                    case ETowerType.PassiveType:
-                        UseSkill();
-                        break;
-                    case ETowerType.ActiveType:
-                        _isGround = true;
+            _isStop = true;
+            _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            _rigidbody.isKinematic = true;
+            _throwEffect.Stop();
+            switch (_towerData.towerType)
+            {
+                case ETowerType.PassiveType:
+                case ETowerType.FixingType:
+                    UseSkill();
+                    break;
+                case ETowerType.ActiveType:
                     DestroyTower();
-                        break;
-                    case ETowerType.FixingType:
-                        UseSkill();
-                        break;
-                    default:
-                        break;
-                }
-              
+                    break;
+                default:
+                    break;
+            }
 
             Define.MainCam.DOShakePosition(0.5f, 1.5f, 10);
             GameManager.Inst.gameState = GameManager.GameState.Game;
-
             OnEndThrow?.Invoke();
             SpawnEffect();
         }
     }
-    public void FadeTower(float delay)
-    {
-        seq = DOTween.Sequence();
-        seq.AppendInterval(delay);
-        seq.Append(_spriteRenderer.DOFade(0, 0.3f));
-    }
+
     protected virtual void OnTriggerEnemy(Collider2D collision)
     {
         if (!_isStop)
         {
             IHittable hittable = collision.GetComponent<IHittable>();
             float damage = (_towerData.damage * DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.DamageFactor));
-           
             hittable?.GetHit((int)damage, gameObject);
+
             IKnockback knockback = collision.GetComponent<IKnockback>();
             knockback?.Knockback(Vector2.one, _towerData.knockbackPower, 1f);
         }
     }
 
-
-    protected virtual void SpawnEffect() 
+    protected virtual void SpawnEffect() // ¹Ù´Ú¿¡ ºÙÀÌ Ä¥¶§ ÀÌÆåÆ®
     {
         Vector2 rayPos = transform.position;
         rayPos.y = 10f;
@@ -183,6 +173,7 @@ public abstract class Tower : PoolableMono
         }
         ShakeObject(hit.point); 
     }
+
     protected void ShakeObject(Vector2 hitPoint)
     {
         Collider2D[] hits = Physics2D.OverlapBoxAll(hitPoint, new Vector2(20f, 3f), 0f, LayerMask.GetMask("Enemy"));
@@ -199,10 +190,10 @@ public abstract class Tower : PoolableMono
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector2(transform.position.x + _offestVec.x, transform.position.y + _offestVec.y), _overlapSize);
+        Gizmos.DrawWireCube(new Vector2(transform.position.x + _groundCheckOverlapOffestVec.x, transform.position.y + _groundCheckOverlapOffestVec.y), _groundCheckOverlapSize);
     }
 #endif
 }

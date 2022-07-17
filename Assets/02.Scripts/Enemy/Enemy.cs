@@ -164,7 +164,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback, IShake
         OnShake?.Invoke();
     }
 
-    public void WaveDeath()
+    public void FailWaveDeath()
     {
         _isDead = true;
         _agentMovement.StopImmediatelly();

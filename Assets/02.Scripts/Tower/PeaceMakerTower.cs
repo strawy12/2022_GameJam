@@ -8,9 +8,9 @@ public class PeaceMakerTower : Tower
     public bool isSkill = false;
 
     [SerializeField] private LayerMask _whatIsEnemy;
-    [SerializeField] private Animator deletePeaceMakerTower;
     [SerializeField] private GameObject _skillEffect;
-    public UnityEvent OnUseSkill;
+    [SerializeField] private float _skillDuration = 3f; 
+    public UnityEvent OnUsedSkill;
 
     protected override void Awake()
     {
@@ -26,24 +26,18 @@ public class PeaceMakerTower : Tower
             foreach (var hitMonster in cols)
             {
                 AgentMovement monsterAgent = hitMonster.GetComponent<AgentMovement>();
-                //EnemyAIBrain monsterAI = hitMonster.GetComponent<EnemyAIBrain>();
-
                 monsterAgent.StopImmediatelly();
             }
         }
     }
 
-    IEnumerator PeaceMakerAbilityTower()
+    private IEnumerator PeaceMakerAbilityTower()
     {
         isSkill = true;
-        OnUseSkill.Invoke();
+        OnUsedSkill?.Invoke();
         yield return new WaitForSeconds(3f);
-
         isSkill = false;
-        deletePeaceMakerTower.Play("PeaceMakerDust");
-        yield return new WaitForSeconds(0.5f);
-
-        FadeTower(0.5f);
+        DestroyTower();
     }
 
     public override void UseSkill()
@@ -51,20 +45,16 @@ public class PeaceMakerTower : Tower
         StartCoroutine(PeaceMakerAbilityTower());
         Effect effect = PoolManager.Instance.Pop(_skillEffect.gameObject.name) as Effect;
         effect.transform.position = transform.position;
-        effect.SetLifeTime(3f);
-        effect.StartAnim();
+        effect.SetLifeTime(_skillDuration);
     }
 
-    public override void DestroyTower()
+#if UNITY_EDITOR
+    protected override void OnDrawGizmos()
     {
-        base.DestroyTower();
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 5f);
+        base.OnDrawGizmos();
     }
-//#if UNITY_EDITOR
-//    private void OnDrawGizmos()
-//    {
-//        Gizmos.color = Color.blue;
-//        Gizmos.DrawWireSphere(transform.position, 5f);
-//    }
-//#endif
+#endif
 }
 

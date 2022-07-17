@@ -246,7 +246,6 @@ public class ThrowedTower : MonoBehaviour
         int cnt = 0;
         while (_nextTowerList.Count < 6)
         {
-
             var rnd = new System.Random();
             towerList = towerList.OrderBy(item => rnd.Next()).ToList();
 

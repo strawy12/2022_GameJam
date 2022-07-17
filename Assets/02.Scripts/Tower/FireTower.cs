@@ -9,7 +9,7 @@ public class FireTower : Tower
     public bool _isCheck = false;
     [SerializeField] private LayerMask _whatIsEnemy;
 
-    public UnityEvent OnUseSkill;
+    public UnityEvent OnUsedSkill;
 
     protected override void Awake()
     {
@@ -26,10 +26,9 @@ public class FireTower : Tower
     {
         yield return new WaitForSeconds(1f);
         _isCheck = true;
-        OnUseSkill?.Invoke();
+        OnUsedSkill?.Invoke();
 
     }
-
 
     protected override void OnTriggerEnemy(Collider2D collision)
     {
@@ -55,29 +54,34 @@ public class FireTower : Tower
         }
         yield return new WaitForSeconds(0.01f);
         _isBoom = true;
-        Effect effect = PoolManager.Instance.Pop("ExplosionAnim") as Effect;
-        effect.transform.position = transform.position;
-        effect.StartAnim();
+        SpawnBoomEffect("ExplosionAnim"); 
         DestroyTower();
     }
+
+    private void SpawnBoomEffect(string name)
+    {
+        Effect effect = PoolManager.Instance.Pop(name) as Effect;
+        effect.transform.position = transform.position;
+        effect.StartAnim();
+    }
+
     public override void DestroyTower()
     {
         if(!_isBoom)
         {
             CancelInvoke();
-            FadeTower(0f);
             StopAllCoroutines();
             Invoke("PushTower", 3f);
-
             return;
         }
         base.DestroyTower();
     }
 #if UNITY_EDITOR
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireSphere(transform.position, 5f);
-    //}
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 5f);
+    }
 #endif
 }

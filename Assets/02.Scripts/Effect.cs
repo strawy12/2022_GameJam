@@ -25,6 +25,7 @@ public class Effect : PoolableMono
     public void SetLifeTime(float duration)
     {
         Invoke("EndAnim", duration);
+        StartAnim();
     }
     public override void Reset()
     {
