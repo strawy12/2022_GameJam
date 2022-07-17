@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PyramidSwamp : PoolableMono
 {
-    [SerializeField] private LayerMask _whatIsEnemy;
+    private int _damage;
+    public void SkillStart(int damage ) 
+    {
+        _damage = damage;
 
-    public void ParticleStart() 
-    { 
         StartCoroutine(MakePyramidSwamp());
     }
 
@@ -30,8 +31,6 @@ public class PyramidSwamp : PoolableMono
 
     public override void Reset()
     {
-        if (_whatIsEnemy != LayerMask.NameToLayer("Enemy"))
-            _whatIsEnemy = LayerMask.NameToLayer("Enemy");
     }
 }
 

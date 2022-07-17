@@ -15,6 +15,7 @@ public abstract class Tower : PoolableMono
     [SerializeField] protected Vector2 _offestVec;
     [SerializeField] protected Vector2 _overlapSize;
     [SerializeField] protected LayerMask _isWhatGround;
+
     protected TowerData _towerData;
     protected Transform _baseTrm;
 

@@ -24,7 +24,7 @@ public class StoneTower : Tower
             hit?.GetHit((int)_towerData.damage, transform.gameObject);
         }
 
-        yield return new WaitForSeconds(0.01f);
+        yield return null;
 
         DestroyTower();
     }
