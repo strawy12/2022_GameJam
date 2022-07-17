@@ -97,8 +97,6 @@ public class ThrowedTower : MonoBehaviour
         if (GameManager.Inst.gameState != GameManager.GameState.Game) return;
         if (_isReloading) return;
 
-        GameManager.Inst.gameState = GameManager.GameState.ThrowReady;
-
         _animator.speed = 0;
         _isPressed = true;
         _canThrow = true;
@@ -110,8 +108,7 @@ public class ThrowedTower : MonoBehaviour
     private void OnMouseUp()
     {
         if (_throwChargingDelay < 0.1f) return;
-        if (GameManager.Inst.gameState != GameManager.GameState.Game &&
-            GameManager.Inst.gameState != GameManager.GameState.ThrowReady) return;
+        if (GameManager.Inst.gameState != GameManager.GameState.Game) return;
 
         if (_isReloading) return;
         if (_isPressed == false) return;
@@ -138,7 +135,6 @@ public class ThrowedTower : MonoBehaviour
 
 
         _currentTower.OnEndThrow += Release;
-        GameManager.Inst.gameState = GameManager.GameState.Throwing;
         StartCoroutine(StartThrowDelay());
     }
 

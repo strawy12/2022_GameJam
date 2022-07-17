@@ -60,8 +60,6 @@ public class AgentMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.Inst.gameState == GameManager.GameState.Throwing)
-            _currentVelocity = 0f;
         OnVelocityChange?.Invoke(_currentVelocity);
 
         if (!_isKnockback)

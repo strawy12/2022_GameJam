@@ -16,7 +16,7 @@ public class TowerPanel : UpgradePanel
         base.Init(data);
 
     }
-
+    
     public override void SetUI()
     {
         if (_towerData.isLock)
