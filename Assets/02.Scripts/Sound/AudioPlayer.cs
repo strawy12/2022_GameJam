@@ -28,6 +28,7 @@ public class AudioPlayer : MonoBehaviour
     {
         _audioSource.Stop();
         _audioSource.clip = clip;
+        Debug.Log("»ç¿îµå!");
         _audioSource.Play();
     }
 }

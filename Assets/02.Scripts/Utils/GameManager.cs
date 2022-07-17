@@ -33,7 +33,6 @@ public class GameManager : MonoSingleton<GameManager>
         //    GetComponent<TutorialManager>().StartTutorial();
         //    return;
         //}
-        UIManager.Inst.GoUpgradeUI();
     }
 
     private void Update()

@@ -143,7 +143,7 @@ MonoBehaviour:
   _pitchRandomness: 0.2
   _brokeClip: {fileID: 8300000, guid: 1e03c024c04bf5c4b93ad3917a44c317, type: 3}
   skillClip: {fileID: 0}
-  _attackClip: {fileID: 0}
+  _attackClip: {fileID: 8300000, guid: 1e03c024c04bf5c4b93ad3917a44c317, type: 3}
 --- !u!1 &1126025617525345591
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4368174981598726565}
         m_TargetAssemblyTypeName: TowerSound, Assembly-CSharp
-        m_MethodName: PlayBrokeSound
+        m_MethodName: PlayAttackSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
