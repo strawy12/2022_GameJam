@@ -20,10 +20,6 @@ public class MobileControl : MonoBehaviour, /*IDragHandler, IEndDragHandler,*/ I
     {
         switch (GameManager.Inst.gameState)
         {
-            case GameManager.GameState.Throwing:
-                EventManager.TriggerEvent(Constant.CLICK_SCREEN);
-                break;
-
             //case GameManager.GameState.Game:
             //case GameManager.GameState.UI:
             //    GameManager.Inst.MainCameraMove.StopImmediately();

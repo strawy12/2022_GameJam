@@ -12,8 +12,6 @@ public class GameManager : MonoSingleton<GameManager>
     {
         Game,
         UI,
-        Throwing,
-        ThrowReady,
         Tutorial
     }
 
