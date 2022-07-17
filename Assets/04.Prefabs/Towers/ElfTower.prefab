@@ -181,12 +181,7 @@ MonoBehaviour:
   _isWhatGround:
     serializedVersion: 2
     m_Bits: 64
-  _elfArrowPref: {fileID: -805298637847678045, guid: 60f5e68f9ab34944f88cebc869a61a35, type: 3}
-  _duration: 0.5
-  _shootDelay: 0.1
-  _shootPosOffset: 0.5
-  _shootForce: 200
-  OnBrokeTower:
+  OnGroundTower:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5374404115982178792}
@@ -201,6 +196,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _elfArrowPref: {fileID: -805298637847678045, guid: 60f5e68f9ab34944f88cebc869a61a35, type: 3}
+  _duration: 0.5
+  _shootDelay: 0.1
+  _shootPosOffset: 0.5
+  _shootForce: 200
   OnSkillShot:
     m_PersistentCalls:
       m_Calls:
@@ -358,9 +358,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pitchRandomness: 0.2
-  _brokeClip: {fileID: 8300000, guid: b6aa13e1818ac3e4382582694f1ba9ae, type: 3}
+  _brokeClip: {fileID: 8300000, guid: 21cf2bd8befd3fe45a778c49b2523af2, type: 3}
   skillClip: {fileID: 8300000, guid: a9d97b91fd592e14db29e97449632371, type: 3}
   _attackClip: {fileID: 0}
+  _onGroundClip: {fileID: 0}
 --- !u!1 &5046635459087269594
 GameObject:
   m_ObjectHideFlags: 0

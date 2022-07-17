@@ -27,7 +27,6 @@ public class FireTower : Tower
         yield return new WaitForSeconds(1f);
         _isCheck = true;
         OnUsedSkill?.Invoke();
-
     }
 
     protected override void OnTriggerEnemy(Collider2D collision)
@@ -52,10 +51,12 @@ public class FireTower : Tower
             IHittable hit = hitMonster.GetComponent<IHittable>();
             hit?.GetHit((int)_towerData.damage, transform.gameObject);
         }
-        yield return new WaitForSeconds(0.01f);
+        OnUsedSkill?.Invoke();
         _isBoom = true;
         SpawnBoomEffect("ExplosionAnim"); 
         DestroyTower();
+
+        yield return null;
     }
 
     private void SpawnBoomEffect(string name)

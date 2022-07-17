@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using DG.Tweening;
 
 public abstract class Tower : PoolableMono
 {
     public enum ETower { Stone, Fire, PieceMaker, Elf, Pyramid }
     [SerializeField] private ETower _towerType;
-    [SerializeField] protected GameObject _effectPrefab; 
+    [SerializeField] protected GameObject _effectPrefab;
     [SerializeField] protected ParticleSystem _throwEffect;
     [SerializeField] protected PoolParticle _destroyParticle;
     [SerializeField] protected Vector2 _groundCheckOverlapOffestVec;  
@@ -27,6 +28,8 @@ public abstract class Tower : PoolableMono
     public Rigidbody2D Rigid => _rigidbody;
     public Collider2D Collider => _collider;
     public Action OnEndThrow;
+    public UnityEvent OnGroundTower;
+
     protected Sequence seq;
     protected virtual void Awake()
     {
@@ -138,7 +141,6 @@ public abstract class Tower : PoolableMono
                 default:
                     break;
             }
-
             Define.MainCam.DOShakePosition(0.5f, 1.5f, 10);
             GameManager.Inst.gameState = GameManager.GameState.Game;
             OnEndThrow?.Invoke();
@@ -152,6 +154,7 @@ public abstract class Tower : PoolableMono
         {
             IHittable hittable = collision.GetComponent<IHittable>();
             float damage = (_towerData.damage * DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.DamageFactor));
+
             hittable?.GetHit((int)damage, gameObject);
 
             IKnockback knockback = collision.GetComponent<IKnockback>();
@@ -171,18 +174,18 @@ public abstract class Tower : PoolableMono
             effect.StartAnim();
             EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
         }
-        ShakeObject(hit.point); 
+        ShakeObject(hit.point);
     }
 
     protected void ShakeObject(Vector2 hitPoint)
     {
         Collider2D[] hits = Physics2D.OverlapBoxAll(hitPoint, new Vector2(20f, 3f), 0f, LayerMask.GetMask("Enemy"));
 
-        foreach(var hit in hits)
+        foreach (var hit in hits)
         {
             IShake shakeObj = hit.GetComponent<IShake>();
 
-            if(shakeObj != null)
+            if (shakeObj != null)
             {
                 shakeObj.StartShake();
             }

@@ -51,16 +51,16 @@ public class UpgradeUI : MonoBehaviour
 
     public Tween OpenUI()
     {
+        OnOpen?.Invoke();
         _isOpen = true;
         _openButton.image.sprite = _openSprite;
-        OnOpen?.Invoke();
         return rectTransform.DOAnchorPosX(0f, 0.5f);
     }
     public Tween CloseUI()
     {
+        OnClose?.Invoke();
         _isOpen = false;
         _openButton.image.sprite = _closeSprite;
-        OnClose?.Invoke();
         return rectTransform.DOAnchorPosX(-rectTransform.rect.width, 0.5f);
     }
 

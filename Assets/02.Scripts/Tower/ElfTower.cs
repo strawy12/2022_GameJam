@@ -15,7 +15,6 @@ public class ElfTower : Tower
     [SerializeField] private float _shootPosOffset;
     [SerializeField] private float _shootForce;
 
-    public UnityEvent OnBrokeTower;
     public UnityEvent OnSkillShot;
     public bool isUsed = false;
     protected override void Awake()
@@ -51,7 +50,6 @@ public class ElfTower : Tower
     public override void DestroyTower()
     {
         EventManager.StopListening(Constant.CLICK_SCREEN, UseSkill);
-        OnBrokeTower?.Invoke();
         base.DestroyTower();
     }
 

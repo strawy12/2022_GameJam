@@ -6,18 +6,29 @@ public class ButtonSound : AudioPlayer
 {
     [SerializeField] private AudioClip _startGame,
                                        _normalButton,
-                                       _upgrageButton,
-                                       _toggleButton;
+                                       _upgrageSuccessButton,
+                                       _upgrageFailedButton,
+                                       _toggleButton,
+                                       _openButton;
 
     public void ButtonClick()
     {
         PlayClip(_normalButton);
     }
 
-    public void UpgrageButton()
+    public void OpenButton()
     {
-        PlayClip(_upgrageButton);
-    } 
+        PlayClip(_openButton);
+    }
+
+    public void UpgrageSuccessButton()
+    {
+        PlayClip(_upgrageSuccessButton);
+    }
+    public void UpgrageFailedButton()
+    {
+        PlayClip(_upgrageFailedButton);
+    }
     public void StartButton()
     {
         PlayClip(_startGame);
