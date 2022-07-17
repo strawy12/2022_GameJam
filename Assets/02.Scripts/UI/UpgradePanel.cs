@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public abstract class UpgradePanel : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public abstract class UpgradePanel : MonoBehaviour
     [SerializeField] protected UpgradeButton _upgradeBtn;
 
     protected ItemData _currentData;
+
+    public UnityEvent OnUpgradeSuccess;
+    public UnityEvent OnUpgradeFailed;
 
     public virtual void Init(ItemData data)
     {
@@ -36,7 +40,13 @@ public abstract class UpgradePanel : MonoBehaviour
 
     public void ClickUpgradeBtn()
     {
-        if ((int)DataManager.Inst.CurrentPlayer.gold < (int)_currentData.needGold) return;
+        if ((int)DataManager.Inst.CurrentPlayer.gold < (int)_currentData.needGold)
+        {
+            OnUpgradeFailed?.Invoke();
+            return;
+        }
+
+        OnUpgradeSuccess?.Invoke();
 
         // 수정 필요할거같은 코드
         _currentData.itemLevel++;
@@ -53,8 +63,5 @@ public abstract class UpgradePanel : MonoBehaviour
 
     public abstract void UpgradeItem();
 
-    public virtual void SetUpgradeButton()
-    {
-        _upgradeBtn.interactable = (int)DataManager.Inst.CurrentPlayer.gold >= (int)_currentData.needGold;
-    }
+    public virtual void SetUpgradeButton() { }
 }

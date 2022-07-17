@@ -250,9 +250,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pitchRandomness: 0.2
-  _brokeClip: {fileID: 8300000, guid: 867d0a8dc90c99640a638e348b23d7f0, type: 3}
+  _brokeClip: {fileID: 8300000, guid: 9cbf3413632000a458a97061e416008d, type: 3}
   skillClip: {fileID: 0}
   _attackClip: {fileID: 0}
+  _onGroundClip: {fileID: 0}
 --- !u!1 &8551557667904443496
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,10 +331,7 @@ MonoBehaviour:
   _isWhatGround:
     serializedVersion: 2
     m_Bits: 64
-  _whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 128
-  OnBrokeTower:
+  OnGroundTower:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 473467416116330240}
@@ -348,6 +346,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1001 &5426104127062870840
 PrefabInstance:
   m_ObjectHideFlags: 0

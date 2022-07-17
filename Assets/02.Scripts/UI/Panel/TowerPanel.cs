@@ -66,14 +66,13 @@ public class TowerPanel : UpgradePanel
         TowerData data = _currentData as TowerData;
         if (data.isLock)
         {
-
-
             _upgradeBtn.interactable = false;
             _upgradeBtn.text = "X";
         }
         else
         {
-            base.SetUpgradeButton();
+            _upgradeBtn.interactable = true;
+
         }
     }
 

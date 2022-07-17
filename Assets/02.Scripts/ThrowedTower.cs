@@ -37,7 +37,6 @@ public class ThrowedTower : MonoBehaviour
     private int _hashThrow = Animator.StringToHash("Throw");
 
     public UnityEvent OnThrowStart;
-    public UnityEvent OnSmile;
     private float _throwChargingDelay = 0f;
 
     private void Awake()
@@ -131,11 +130,6 @@ public class ThrowedTower : MonoBehaviour
         _animator.speed = 1;
         _animator.SetTrigger(_hashThrow);
         OnThrowStart?.Invoke();
-
-        float range = Random.value;
-        if (range < 0.3f)
-            OnSmile?.Invoke();
-
 
         _currentTower.OnEndThrow += Release;
         GameManager.Inst.gameState = GameManager.GameState.Throwing;

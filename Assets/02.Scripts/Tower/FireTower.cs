@@ -26,8 +26,6 @@ public class FireTower : Tower
     {
         yield return new WaitForSeconds(1f);
         _isCheck = true;
-        OnUseSkill?.Invoke();
-
     }
 
 
@@ -53,12 +51,14 @@ public class FireTower : Tower
             IHittable hit = hitMonster.GetComponent<IHittable>();
             hit?.GetHit((int)_towerData.damage, transform.gameObject);
         }
-        yield return new WaitForSeconds(0.01f);
+        OnUseSkill?.Invoke();
         _isBoom = true;
         Effect effect = PoolManager.Instance.Pop("ExplosionAnim") as Effect;
         effect.transform.position = transform.position;
         effect.StartAnim();
         DestroyTower();
+
+        yield return null;
     }
     public override void DestroyTower()
     {

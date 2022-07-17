@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using DG.Tweening;
 
 public abstract class Tower : PoolableMono
 {
     public enum ETower { Stone, Fire, PieceMaker, Elf, Pyramid }
     [SerializeField] private ETower _towerType;
-    [SerializeField] protected GameObject _effectPrefab; 
+    [SerializeField] protected GameObject _effectPrefab;
     [SerializeField] protected ParticleSystem _throwEffect;
     [SerializeField] protected PoolParticle _destroyParticle;
     [SerializeField] protected Vector2 _offestVec;
@@ -29,6 +30,8 @@ public abstract class Tower : PoolableMono
     public Collider2D Collider => _collider;
     private bool _isGround;
     public Action OnEndThrow;
+    public UnityEvent OnGroundTower;
+
     protected Sequence seq;
     protected virtual void Awake()
     {
@@ -67,7 +70,7 @@ public abstract class Tower : PoolableMono
             ChangeAngle(angle);
         }
     }
-    
+
     public virtual void DestroyTower()
     {
         CancelInvoke();
@@ -103,7 +106,7 @@ public abstract class Tower : PoolableMono
 
     }
 
-    
+
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
@@ -117,30 +120,32 @@ public abstract class Tower : PoolableMono
     {
         Vector2 origin = new Vector2(transform.position.x + _offestVec.x, transform.position.y + _offestVec.y);
         Collider2D col = Physics2D.OverlapBox(origin, _overlapSize, _spriteRenderer.transform.rotation.z, _isWhatGround);
-        if(col != null)
+        if (col != null)
         {
-                _isStop = true;
-                _rigidbody.velocity = Vector3.zero;
-                _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-                _rigidbody.isKinematic = true;
-                _throwEffect.Stop();
-                _isThrow = false;
-                switch (_towerData.towerType)
-                {
-                    case ETowerType.PassiveType:
-                        UseSkill();
-                        break;
-                    case ETowerType.ActiveType:
-                        _isGround = true;
+            _isStop = true;
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            _rigidbody.isKinematic = true;
+            _throwEffect.Stop();
+            _isThrow = false;
+            Debug.Log(11);
+            OnGroundTower?.Invoke();
+            switch (_towerData.towerType)
+            {
+                case ETowerType.PassiveType:
+                    UseSkill();
+                    break;
+                case ETowerType.ActiveType:
+                    _isGround = true;
                     DestroyTower();
-                        break;
-                    case ETowerType.FixingType:
-                        UseSkill();
-                        break;
-                    default:
-                        break;
-                }
-              
+                    break;
+                case ETowerType.FixingType:
+                    UseSkill();
+                    break;
+                default:
+                    break;
+            }
+
 
             Define.MainCam.DOShakePosition(0.5f, 1.5f, 10);
             GameManager.Inst.gameState = GameManager.GameState.Game;
@@ -161,7 +166,7 @@ public abstract class Tower : PoolableMono
         {
             IHittable hittable = collision.GetComponent<IHittable>();
             float damage = (_towerData.damage * DataManager.Inst.CurrentPlayer.GetStat(PlayerStatData.EPlayerStat.DamageFactor));
-           
+
             hittable?.GetHit((int)damage, gameObject);
             IKnockback knockback = collision.GetComponent<IKnockback>();
             knockback?.Knockback(Vector2.one, _towerData.knockbackPower, 1f);
@@ -169,7 +174,7 @@ public abstract class Tower : PoolableMono
     }
 
 
-    protected virtual void SpawnEffect() 
+    protected virtual void SpawnEffect()
     {
         Vector2 rayPos = transform.position;
         rayPos.y = 10f;
@@ -181,17 +186,17 @@ public abstract class Tower : PoolableMono
             effect.StartAnim();
             EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
         }
-        ShakeObject(hit.point); 
+        ShakeObject(hit.point);
     }
     protected void ShakeObject(Vector2 hitPoint)
     {
         Collider2D[] hits = Physics2D.OverlapBoxAll(hitPoint, new Vector2(20f, 3f), 0f, LayerMask.GetMask("Enemy"));
 
-        foreach(var hit in hits)
+        foreach (var hit in hits)
         {
             IShake shakeObj = hit.GetComponent<IShake>();
 
-            if(shakeObj != null)
+            if (shakeObj != null)
             {
                 shakeObj.StartShake();
             }

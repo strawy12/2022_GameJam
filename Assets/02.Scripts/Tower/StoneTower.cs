@@ -8,7 +8,6 @@ public class StoneTower : Tower
 
     [SerializeField] private LayerMask _whatIsEnemy;
 
-    public UnityEvent OnBrokeTower;
 
     public override void UseSkill()
     {
@@ -24,7 +23,7 @@ public class StoneTower : Tower
             IHittable hit = hitMonster.GetComponent<IHittable>();
             hit?.GetHit((int)_towerData.damage, transform.gameObject);
         }
-        OnBrokeTower?.Invoke();
+
         yield return new WaitForSeconds(0.01f);
 
         DestroyTower();
