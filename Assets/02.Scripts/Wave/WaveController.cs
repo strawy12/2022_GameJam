@@ -175,7 +175,7 @@ public class WaveController : MonoBehaviour
             WaveIndex = 0;
         WaveLevel++;
     }
-    public IEnumerator RefeatWaveCoroutine(float delay, int level, int index)
+    private IEnumerator RefeatWaveCoroutine(float delay, int level, int index)
     {
         yield return new WaitForSeconds(delay);
         UIManager.Inst.GoGameScene();
