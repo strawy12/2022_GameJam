@@ -11,6 +11,7 @@ public class WaveController : MonoBehaviour
     [SerializeField] private List<Enemy> _enemyList;
     [SerializeField] private WaveDataSO _randomWaveBase;
 
+    private bool _isRefeat = false;
     private bool _isWave = false;
     public bool IsWave
     {
@@ -104,10 +105,10 @@ public class WaveController : MonoBehaviour
 
         UIManager.Inst.GoGameScene();
         _waveMonsterCount = _currentWave.RemainMonsterCnt;
-        StartCoroutine(SpawnMonsterCoroutine());
+        StartCoroutine(SpawnMonsterCoroutine(WaveLevel));
     }
 
-    private IEnumerator SpawnMonsterCoroutine()
+    private IEnumerator SpawnMonsterCoroutine(int level)
     {
         foreach (PatternData pattern in _currentWave.patterns)
         {
@@ -116,7 +117,7 @@ public class WaveController : MonoBehaviour
                 _randomIndex = Random.Range(0, pattern.enemies.Count);
                 Enemy e = PoolManager.Instance.Pop(pattern.enemies[_randomIndex].gameObject.name) as Enemy;
                 e.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, 0));
-                e.SetEnemyStat(WaveLevel);
+                e.SetEnemyStat(level);
                 OnFailedWave.AddListener(e.FailWaveDeath); //일단 이렇게 ㄱㄱ
                 yield return new WaitForSeconds(pattern.spawnDelay);
             }
@@ -158,15 +159,52 @@ public class WaveController : MonoBehaviour
         OnEndWave?.Invoke();
         nextUIPanel.SetActive(true);
     }
+
     public void ClearWave()
     {
         _isWave = false;
         EndWave();
         OnClearWave?.Invoke();
+        if(_isRefeat)
+        {
+            _isRefeat = false;
+            return;
+        }
         WaveIndex++;
         if (WaveIndex > waves.Count - 1)
             WaveIndex = 0;
         WaveLevel++;
     }
+    public IEnumerator RefeatWaveCoroutine(float delay, int level, int index)
+    {
+        yield return new WaitForSeconds(delay);
+        UIManager.Inst.GoGameScene();
+        _waveMonsterCount = waves[index].RemainMonsterCnt;
+        StartCoroutine(SpawnMonsterCoroutine(level));
+    }
 
+    public void RefeatWave()
+    {
+        if (_isWave) return;
+
+        nextUIPanel.SetActive(false);
+        _isWave = true;
+        _isRefeat = true;
+        int level = WaveLevel;
+        int index = WaveIndex;
+        float delay = UIManager.Inst.ShowRoundUI(TotalWave - 1);
+        OnStartWave?.Invoke();
+
+        if(index - 1 < 0)
+        {
+            level--;
+            index = waves.Count - 1;
+        }
+        else
+        {
+            index = index- 1;
+        }
+        StartCoroutine(RefeatWaveCoroutine(delay, level, index));
+
+    }
 }

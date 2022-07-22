@@ -77,6 +77,7 @@ public class FireTower : Tower
         }
         base.DestroyTower();
     }
+
 #if UNITY_EDITOR
     protected override void OnDrawGizmos()
     {
@@ -85,4 +86,5 @@ public class FireTower : Tower
         Gizmos.DrawWireSphere(transform.position, 5f);
     }
 #endif
+
 }

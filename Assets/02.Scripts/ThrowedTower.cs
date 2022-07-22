@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 public class ThrowedTower : MonoBehaviour
 {
-    [SerializeField] private float _reloadDelay;
+    [SerializeField] private float _reloadDelay; 
     [SerializeField] private float _maxForce;
     [SerializeField] private float _forceOffset;
     [SerializeField] private float _throwStartDelay;
