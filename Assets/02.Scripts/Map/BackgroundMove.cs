@@ -13,8 +13,6 @@ public class BackgroundMove : MonoBehaviour
     {
         _meshRenderer = GetComponent<MeshRenderer>();
 
-        EventManager.StartListening(Constant.START_THROW_TOWER, () => _isThrowing = true);
-        EventManager.StartListening(Constant.END_THROW_TOWER, () => _isThrowing = false);
     }
 
 
@@ -27,15 +25,4 @@ public class BackgroundMove : MonoBehaviour
         _meshRenderer.material.SetTextureOffset("_BaseMap", _offset);
     }
 
-    private void OnDestroy()
-    {
-        EventManager.StopListening(Constant.START_THROW_TOWER, () => _isThrowing = true);
-        EventManager.StopListening(Constant.END_THROW_TOWER, () => _isThrowing = false);
-    }
-
-    private void OnApplicationQuit()
-    {
-        EventManager.StopListening(Constant.START_THROW_TOWER, () => _isThrowing = true);
-        EventManager.StopListening(Constant.END_THROW_TOWER, () => _isThrowing = false);
-    }
 }

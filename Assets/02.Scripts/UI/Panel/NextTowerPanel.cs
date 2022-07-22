@@ -15,7 +15,6 @@ public class NextTowerPanel : MonoBehaviour
         _towerImage = transform.Find("TowerImage").GetComponent<Image>();
         _currentIndex = transform.GetSiblingIndex() - 1;
 
-        UIManager.Inst.AddNextTowerPanel(this);
     }
 
 

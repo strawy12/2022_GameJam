@@ -14,17 +14,19 @@ public class TowerData : ItemData
 {
     [Header("타워 정보")]
     public string prefabName;
+
     public float damage;
-    public float weight;
-    public bool isLock;
+    public float cooltime;
     public float knockbackPower;
+
+    public bool isLock;
     public ETowerType towerType;
         
     public TowerData(TowerData data) : base(data)
     {
         prefabName = data.prefabName;
         damage = data.damage;
-        weight = data.weight;
+        cooltime = data.cooltime;
         isLock = data.isLock;
         towerType = data.towerType;
         knockbackPower = data.knockbackPower;

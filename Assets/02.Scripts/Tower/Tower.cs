@@ -29,7 +29,7 @@ public abstract class Tower : PoolableMono
     public TowerData Data => _towerData;
     public Rigidbody2D Rigid => _rigidbody;
     public Collider2D Collider => _collider;
-    private bool _isGround;
+    protected bool _isGround;
     public Action OnEndThrow;
     public UnityEvent OnGroundTower;
 
@@ -129,7 +129,7 @@ public abstract class Tower : PoolableMono
             _rigidbody.isKinematic = true;
             _throwEffect.Stop();
             _isThrow = false;
-            Debug.Log(11);
+
             OnGroundTower?.Invoke();
             switch (_towerData.towerType)
             {
@@ -185,7 +185,6 @@ public abstract class Tower : PoolableMono
             Effect effect = PoolManager.Instance.Pop(_effectPrefab.name) as Effect;
             effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
             effect.StartAnim();
-            EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
         }
         ShakeObject(hit.point);
     }

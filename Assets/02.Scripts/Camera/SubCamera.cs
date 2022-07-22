@@ -7,10 +7,6 @@ using DG.Tweening;
 public class SubCamera : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _subCameraUI;
-    private void Start()
-    {
-        EventManager<Vector3>.StartListening(Constant.TOWER_BOOM, ShowSubCamUI);
-    }
      
     public void ShowSubCamUI(Vector3 targetPos)
     {

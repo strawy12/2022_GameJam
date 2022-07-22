@@ -18,8 +18,9 @@ public class MobileControl : MonoBehaviour, /*IDragHandler, IEndDragHandler,*/ I
     //}
     public void OnPointerDown(PointerEventData eventData)
     {
-        switch (GameManager.Inst.gameState)
+        if (GameManager.Inst.gameState == GameManager.GameState.Game)
         {
+            EventManager.TriggerEvent(Constant.CLICK_SCREEN);
             //case GameManager.GameState.Game:
             //case GameManager.GameState.UI:
             //    GameManager.Inst.MainCameraMove.StopImmediately();

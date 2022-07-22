@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 using Random = UnityEngine.Random;
+using UnityEngine.EventSystems;
 
 public class ThrowedTower : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class ThrowedTower : MonoBehaviour
     [SerializeField] private ThrowLine _throwLine = null;
     [SerializeField] private Transform _throwPos;
     [SerializeField] private Transform _armTransform;
-
+    [SerializeField] private Collider2D _eventBoundsCol;
 
     private float _force;
     private Camera _mainCam;
@@ -25,14 +26,13 @@ public class ThrowedTower : MonoBehaviour
     private Vector2 _startMousePos;
 
     private bool _isPressed = false;
-    private bool _isReloading;
+    private bool _isLoad;
     private bool _canThrow;
 
     private Tower _currentTower;
+    private Dictionary<string, Tower> _towerDict = new Dictionary<string, Tower>();
 
     private Animator _animator;
-
-    private List<Tower> _nextTowerList = new List<Tower>();
 
     private int _hashThrow = Animator.StringToHash("Throw");
 
@@ -45,9 +45,16 @@ public class ThrowedTower : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        GenerateTowers();
+        EventManager<string>.StartListening(Constant.CLICK_TOWER_BUTTON, LoadTower);
+    }
+
     private void Update()
     {
-        if (_isReloading) return;
+        if (!_isLoad) return;
+
         if (_isPressed)
         {
             _throwChargingDelay += Time.deltaTime;
@@ -93,8 +100,10 @@ public class ThrowedTower : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.IsPointerOverGameObject()) return;
+        if (Define.IsPointerOverUIObject()) return;
         if (GameManager.Inst.gameState != GameManager.GameState.Game) return;
-        if (_isReloading) return;
+        if (!_isLoad) return;
 
         _animator.speed = 0;
         _isPressed = true;
@@ -109,7 +118,7 @@ public class ThrowedTower : MonoBehaviour
         if (_throwChargingDelay < 0.1f) return;
         if (GameManager.Inst.gameState != GameManager.GameState.Game) return;
 
-        if (_isReloading) return;
+        if (!_isLoad) return;
         if (_isPressed == false) return;
 
         _isPressed = false;
@@ -122,13 +131,13 @@ public class ThrowedTower : MonoBehaviour
             return;
         }
 
-        _isReloading = true;
+        _isLoad = false;
         _throwChargingDelay = 0f;
         _animator.speed = 1;
         _animator.SetTrigger(_hashThrow);
-        OnThrowStart?.Invoke();
 
-        _currentTower.OnEndThrow += Release;
+        EventManager<string>.TriggerEvent(Constant.START_THROW_TOWER, _currentTower.Data.prefabName);
+
         StartCoroutine(StartThrowDelay());
     }
 
@@ -148,114 +157,99 @@ public class ThrowedTower : MonoBehaviour
         _currentTower.Rigid.velocity = (-_throwDir * _force);
         _force = 0f;
         _throwLine.ClearLine();
+
+        Release();
     }
 
     private void Release()
     {
-        _currentTower.OnEndThrow -= Release;
+        string key = _currentTower.Data.prefabName;
         _currentTower = null;
+        _towerDict[key] = GenerateTower(key);
 
-        StartCoroutine(ReleaseCoroutine());
-    }
-
-
-    private IEnumerator ReleaseCoroutine()
-    {
         _armTransform.DORotate(Vector3.zero, 0.3f);
-
-        yield return new WaitForSeconds(_reloadDelay);
-
-        GenerateTower();
-        _isReloading = false;
     }
 
-    public void DestroyTower()
+    public void ReleaseTower()
     {
         if (_currentTower != null)
             PoolManager.Instance.Push(_currentTower);
 
-        foreach (var tower in _nextTowerList)
-        {
-            PoolManager.Instance.Push(tower);
-        }
-        _nextTowerList.Clear();
         _currentTower = null;
     }
 
-    public void GenerateTower()
+    public void LoadTower(string key)
     {
-        _currentTower = GetTower();
+        if (_currentTower != null && _currentTower.gameObject.activeSelf)
+        {
+            _currentTower.gameObject.SetActive(false);
 
-        _currentTower.transform.SetParent(_throwPos);
-        _currentTower.transform.localPosition = Vector3.zero;
-        _currentTower.transform.localRotation = Quaternion.identity;
-        _isReloading = false;
+            if (_currentTower.Data.prefabName.Equals(key))
+            {
+                _isLoad = false;
+                return;
+            }
+        }
 
-        _currentTower.Reset();
-
+        _currentTower = GenerateTower(key);
         _currentTower.gameObject.SetActive(true);
+
+        _isLoad = true;
     }
 
-    private Tower GetTower()
+    public void UnLoadTower()
     {
-        if (_nextTowerList.Count <= 5)
-            SetNextTowerList();
+        _currentTower.gameObject.SetActive(false);
 
-        Tower tower = _nextTowerList[0];
-        _nextTowerList.RemoveAt(0);
+    }
 
-        SettingNextTowerUI();
+    private void GenerateTowers()
+    {
+        foreach (var data in DataManager.Inst.CurrentPlayer.towerDataList)
+        {
+            GenerateTower(data.prefabName);
+        }
+    }
+
+    private Tower GenerateTower(string key)
+    {
+        Tower tower = null;
+
+        if (_towerDict.TryGetValue(key, out tower))
+        {
+            if (tower == null)
+            {
+                tower = PoolManager.Instance.Pop(key) as Tower;
+            }
+            else
+            {
+                return tower;
+            }
+        }
+
+        else
+        {
+            tower = PoolManager.Instance.Pop(key) as Tower;
+            _towerDict.Add(key, tower);
+        }
+
+        tower.transform.SetParent(_throwPos);
+        tower.transform.localPosition = Vector3.zero;
+        tower.transform.localRotation = Quaternion.identity;
+        tower.Reset();
+
+        tower.gameObject.SetActive(false);
 
         return tower;
     }
 
-    private void SettingNextTowerUI()
+    public void OnDestroy()
     {
-        Sprite[] sprites = new Sprite[4];
-        for (int i = 0; i < 4; i++)
-        {
-            sprites[i] = _nextTowerList[i].Data.itemSprite;
-        }
-        UIManager.Inst.SetNextTowerPanels(sprites);
+        EventManager<string>.StopListening(Constant.CLICK_TOWER_BUTTON, LoadTower);
     }
 
-    public void ResetNextTowerList()
+    private void OnApplicationQuit()
     {
-        _nextTowerList.Clear();
-        SetNextTowerList();
-    }
-
-    private void SetNextTowerList()
-    {
-        List<string> towerList = new List<string>();
-        foreach (var data in DataManager.Inst.CurrentPlayer.towerDataList)
-        {
-            if (data.isLock)
-                continue;
-
-            string towerName = data.prefabName;
-            towerList.Add(towerName);
-        }
-
-        int cnt = 0;
-        while (_nextTowerList.Count < 6)
-        {
-
-            var rnd = new System.Random();
-            towerList = towerList.OrderBy(item => rnd.Next()).ToList();
-
-            for (int i = 0; i < towerList.Count; i++)
-            {
-                Tower tower = PoolManager.Instance.Pop(towerList[i]) as Tower;
-                tower.gameObject.SetActive(false);
-                _nextTowerList.Add(tower);
-            }
-
-            if (cnt++ > 100000)
-            {
-                Debug.LogError("모두 IsLock이 켜져있는거 같습니다");
-                return;
-            }
-        }
+        EventManager<string>.StopListening(Constant.CLICK_TOWER_BUTTON, LoadTower);
     }
 }

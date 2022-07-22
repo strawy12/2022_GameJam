@@ -38,7 +38,6 @@ public class ElfArrow : PoolableMono
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
             IHittable monsterHit = collision.GetComponent<IHittable>();
             monsterHit.GetHit(_damage, transform.gameObject);
             PoolManager.Instance.Push(this);
@@ -46,7 +45,6 @@ public class ElfArrow : PoolableMono
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
             _arrowRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             DeleteArrow();
         }
