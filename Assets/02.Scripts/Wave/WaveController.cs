@@ -41,7 +41,8 @@ public class WaveController : MonoBehaviour
             return WaveLevel * (WaveIndex + 1);
         }
     }
-    public GameObject nextUIPanel;
+    public GameObject nextUIButton;
+    public GameObject refeatRoundButton;
     public UnityEvent OnClearWave;
     public UnityEvent OnFailedWave;
 
@@ -83,7 +84,8 @@ public class WaveController : MonoBehaviour
     public void StartWave()
     {
         if (_isWave) return;
-        nextUIPanel.SetActive(false);
+        nextUIButton.SetActive(false);
+        refeatRoundButton.SetActive(false);
         _isWave = true;
         float delay = UIManager.Inst.ShowRoundUI(TotalWave);
         OnStartWave?.Invoke();
@@ -138,18 +140,6 @@ public class WaveController : MonoBehaviour
     {
         _isWave = false;
         GameManager.Inst.gameState = GameManager.GameState.UI;
-        if (TotalWave - 1 > 0)
-        {
-            if (WaveIndex - 1 < 0)
-            {
-                WaveLevel--;
-                WaveIndex = waves.Count - 1;
-            }
-            else
-            {
-                WaveIndex--;
-            }
-        }
         OnFailedWave?.Invoke();
         EndWave();
     }
@@ -157,7 +147,8 @@ public class WaveController : MonoBehaviour
     public void EndWave()
     {
         OnEndWave?.Invoke();
-        nextUIPanel.SetActive(true);
+        nextUIButton.SetActive(true);
+        refeatRoundButton.SetActive(false);
     }
 
     public void ClearWave()
@@ -187,7 +178,8 @@ public class WaveController : MonoBehaviour
     {
         if (_isWave) return;
 
-        nextUIPanel.SetActive(false);
+        nextUIButton.SetActive(false);
+        refeatRoundButton.SetActive(false);
         _isWave = true;
         _isRefeat = true;
         int level = WaveLevel;

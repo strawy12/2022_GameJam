@@ -4246,7 +4246,8 @@ MonoBehaviour:
   - {fileID: 3479278817573744511, guid: a8097bff2d8b62249bff27557998139e, type: 3}
   - {fileID: 6669565832180154374, guid: d923e884bd5577d469fabb61363f8732, type: 3}
   _randomWaveBase: {fileID: 11400000, guid: 7cebed0878dd05848bf4a34fd7a8e461, type: 2}
-  nextUIPanel: {fileID: 1693684643}
+  nextUIButton: {fileID: 1693684643}
+  refeatRoundButton: {fileID: 1760446504}
   OnClearWave:
     m_PersistentCalls:
       m_Calls:

@@ -22,7 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
         new PoolManager(transform);
         CreatePool();
 
-        gameState = GameState.Game;
+        gameState = GameState.UI;
     }
 
     private void Start()
