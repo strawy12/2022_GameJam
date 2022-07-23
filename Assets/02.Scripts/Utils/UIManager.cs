@@ -19,6 +19,8 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameObject _quitPanel;
     [SerializeField] private GameObject _settingPanel;
 
+    [SerializeField] private InventorySystem _inventorySystem;
+
     private List<NextTowerPanel> _nextTowerPanelList = new List<NextTowerPanel>();
     private List<UpgradePanel> _upgradePanelList = new List<UpgradePanel>();
 
@@ -49,25 +51,6 @@ public class UIManager : MonoSingleton<UIManager>
     public void AddUpgradePanel(UpgradePanel panel)
     {
         _upgradePanelList.Add(panel);
-    }
-
-    public void AddNextTowerPanel(NextTowerPanel panel)
-    {
-        _nextTowerPanelList.Add(panel);
-    }
-
-    public void SetNextTowerPanels(Sprite[] sprites)
-    {
-        int cnt = Mathf.Max(_nextTowerPanelList.Count, sprites.Length);
-        for (int i = 0; i < cnt; i++)
-        {
-            _nextTowerPanelList[i].SetSprite(sprites[i]);
-        }
-    }
-
-    public void SetNextTowerPanel(int idx, Sprite towerSprite)
-    {
-        _nextTowerPanelList[idx].SetSprite(towerSprite);
     }
 
     public void GoldEvent()
@@ -147,4 +130,15 @@ public class UIManager : MonoSingleton<UIManager>
             OnUI();
         }
     }
+
+    public void EquipTower(TowerData data)
+    {
+        _inventorySystem.EquipTower(data);
+    }
+
+    public void EmptyInventoryPanel(string key)
+    {
+        _inventorySystem.EmptyPanel(key);
+    }
+
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TowerPanel : UpgradePanel
 {
+    [SerializeField] private TowerIcon _towerIcon;
     [SerializeField] private Image _backgroundImage;
 
     private TowerData _towerData;
@@ -49,6 +50,7 @@ public class TowerPanel : UpgradePanel
         _itemImage.color = Color.black;
         _infoText.text = "";
         _backgroundImage.color = Color.gray;
+        _towerIcon.interactable = false;
 
         SetUpgradeButton();
     }
@@ -56,6 +58,7 @@ public class TowerPanel : UpgradePanel
     {
         _itemImage.color = Color.white;
         _backgroundImage.color = Color.white;
+        _towerIcon.interactable = true;
         base.SetUI();
         
         _infoText.text = string.Format("Atk : {0:N2}", _towerData.damage);
@@ -80,4 +83,18 @@ public class TowerPanel : UpgradePanel
     {
         _towerData.damage *= 1.1f;
     }
+
+    public void ClickTowerIcon(bool isOn)
+    {
+        if(isOn)
+        {
+            UIManager.Inst.EquipTower(_towerData);
+        }
+
+        else
+        {
+            UIManager.Inst.EmptyInventoryPanel(_towerData.prefabName);
+        }
+    }
+
 }

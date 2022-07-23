@@ -15,7 +15,11 @@ public abstract class Tower : PoolableMono
     [SerializeField] protected Vector2 _groundCheckOverlapOffestVec;  
     [SerializeField] protected Vector2 _groundCheckOverlapSize;
     [SerializeField] protected LayerMask _isWhatGround;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> OIF
     protected TowerData _towerData;
 
     protected Rigidbody2D _rigidbody;
@@ -27,6 +31,10 @@ public abstract class Tower : PoolableMono
     public TowerData Data => _towerData;
     public Rigidbody2D Rigid => _rigidbody;
     public Collider2D Collider => _collider;
+<<<<<<< HEAD
+=======
+    protected bool _isGround;
+>>>>>>> OIF
     public Action OnEndThrow;
     public UnityEvent OnGroundTower;
 
@@ -129,6 +137,12 @@ public abstract class Tower : PoolableMono
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             _rigidbody.isKinematic = true;
             _throwEffect.Stop();
+<<<<<<< HEAD
+=======
+            _isThrow = false;
+
+            OnGroundTower?.Invoke();
+>>>>>>> OIF
             switch (_towerData.towerType)
             {
                 case ETowerType.PassiveType:
@@ -172,7 +186,6 @@ public abstract class Tower : PoolableMono
             Effect effect = PoolManager.Instance.Pop(_effectPrefab.name) as Effect;
             effect.transform.SetPositionAndRotation(hit.point, Quaternion.identity);
             effect.StartAnim();
-            EventManager<Vector3>.TriggerEvent(Constant.TOWER_BOOM, transform.position);
         }
         ShakeObject(hit.point);
     }
