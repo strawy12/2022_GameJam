@@ -10,7 +10,7 @@ public class InventorySystem : MonoBehaviour
 
     private List<InventoryPanel> _inventoryPanelList;
 
-    private void Awake()
+    private void Start()
     {
         _inventoryPanelList = new List<InventoryPanel>();
         Generate();
@@ -28,15 +28,28 @@ public class InventorySystem : MonoBehaviour
             _inventoryPanelList.Add(panel);
 
             panel.Init();
+
+            int towerID = DataManager.Inst.CurrentPlayer.equipTowerIdArr[i];
+
+            if (towerID == -1)
+            {
+                panel.EmptyTowerData();
+            }
+            else
+            {
+                TowerData data = DataManager.Inst.CurrentPlayer.GetTowerData(towerID);
+                panel.SetTowerData(data);
+            }
+
             panel.gameObject.SetActive(true);
         }
     }
 
     public void EquipTower(TowerData data)
     {
-        foreach(var panel in _inventoryPanelList)
+        foreach (var panel in _inventoryPanelList)
         {
-            if(panel.IsEmpty)
+            if (panel.IsEmpty)
             {
                 panel.SetTowerData(data);
                 return;
@@ -46,10 +59,10 @@ public class InventorySystem : MonoBehaviour
 
     public void EmptyPanel(string key)
     {
-        for(int i = 0; i < _inventoryPanelList.Count; i++)
+        for (int i = 0; i < _inventoryPanelList.Count; i++)
         {
-            if(_inventoryPanelList[i].ContainKey(key))
-            {
+            if (_inventoryPanelList[i].ContainKey(key))
+            { 
                 _inventoryPanelList[i].EmptyTowerData();
                 return;
             }

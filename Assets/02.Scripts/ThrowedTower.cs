@@ -17,7 +17,6 @@ public class ThrowedTower : MonoBehaviour
     [SerializeField] private ThrowLine _throwLine = null;
     [SerializeField] private Transform _throwPos;
     [SerializeField] private Transform _armTransform;
-    [SerializeField] private Collider2D _eventBoundsCol;
 
     private float _force;
     private Camera _mainCam;
@@ -136,6 +135,8 @@ public class ThrowedTower : MonoBehaviour
         _animator.speed = 1;
         _animator.SetTrigger(_hashThrow);
 
+
+
         EventManager<string>.TriggerEvent(Constant.START_THROW_TOWER, _currentTower.Data.prefabName);
 
         StartCoroutine(StartThrowDelay());
@@ -165,6 +166,7 @@ public class ThrowedTower : MonoBehaviour
     {
         string key = _currentTower.Data.prefabName;
         _currentTower = null;
+        _towerDict[key] = null;
         _towerDict[key] = GenerateTower(key);
 
         _armTransform.DORotate(Vector3.zero, 0.3f);
@@ -229,10 +231,6 @@ public class ThrowedTower : MonoBehaviour
 
         else
         {
-<<<<<<< HEAD
-            var rnd = new System.Random();
-            towerList = towerList.OrderBy(item => rnd.Next()).ToList();
-=======
             tower = PoolManager.Instance.Pop(key) as Tower;
             _towerDict.Add(key, tower);
         }
@@ -241,7 +239,6 @@ public class ThrowedTower : MonoBehaviour
         tower.transform.localPosition = Vector3.zero;
         tower.transform.localRotation = Quaternion.identity;
         tower.Reset();
->>>>>>> OIF
 
         tower.gameObject.SetActive(false);
 

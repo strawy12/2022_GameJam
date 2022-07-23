@@ -15,11 +15,6 @@ public abstract class Tower : PoolableMono
     [SerializeField] protected Vector2 _groundCheckOverlapOffestVec;  
     [SerializeField] protected Vector2 _groundCheckOverlapSize;
     [SerializeField] protected LayerMask _isWhatGround;
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> OIF
     protected TowerData _towerData;
 
     protected Rigidbody2D _rigidbody;
@@ -31,10 +26,8 @@ public abstract class Tower : PoolableMono
     public TowerData Data => _towerData;
     public Rigidbody2D Rigid => _rigidbody;
     public Collider2D Collider => _collider;
-<<<<<<< HEAD
-=======
     protected bool _isGround;
->>>>>>> OIF
+
     public Action OnEndThrow;
     public UnityEvent OnGroundTower;
 
@@ -60,7 +53,7 @@ public abstract class Tower : PoolableMono
 
     private void StartInit()
     {
-        _isStop = false;
+        _isStop = true;
         _rigidbody.constraints = 0;
         Collider.enabled = false;
         _spriteRenderer.enabled = true;
@@ -92,11 +85,14 @@ public abstract class Tower : PoolableMono
     public virtual void DestroyTower()
     {
         CancelInvoke();
+        _spriteRenderer.enabled = false;
+
         if (_destroyParticle != null)
         {
             PoolParticle particle = PoolManager.Instance.Pop(_destroyParticle.gameObject.name) as PoolParticle;
-            particle.OnEnableParticle(transform.position);
+            particle.OnEnableParticle(transform.position + Vector3.up * 2f);
         }
+
         Invoke("PushTower", 3f);
     }
     public void PushTower()
@@ -111,6 +107,7 @@ public abstract class Tower : PoolableMono
     {
         transform.SetParent(null);
         _throwEffect.Play();
+        _isStop = false;
         OnThrowTower();
     }
 
@@ -137,12 +134,9 @@ public abstract class Tower : PoolableMono
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             _rigidbody.isKinematic = true;
             _throwEffect.Stop();
-<<<<<<< HEAD
-=======
-            _isThrow = false;
 
             OnGroundTower?.Invoke();
->>>>>>> OIF
+
             switch (_towerData.towerType)
             {
                 case ETowerType.PassiveType:
@@ -156,7 +150,6 @@ public abstract class Tower : PoolableMono
                     break;
             }
             Define.MainCam.DOShakePosition(0.5f, 1.5f, 10);
-            GameManager.Inst.gameState = GameManager.GameState.Game;
             OnEndThrow?.Invoke();
             SpawnEffect();
         }

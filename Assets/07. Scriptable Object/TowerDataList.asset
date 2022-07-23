@@ -22,7 +22,7 @@ MonoBehaviour:
       \uC900\uB2E4"
     prefabName: StoneTower
     damage: 6
-    cooltime: 0
+    cooltime: 3
     knockbackPower: 3
     isLock: 0
     towerType: 1
@@ -49,7 +49,7 @@ MonoBehaviour:
       \uC804\uD22C\uC758\uC9C0\uB97C \uC783\uACE0 \uAC00\uB9CC\uD788 \uC11C\uC788\uB294\uB2E4."
     prefabName: PeaceMakerTower
     damage: 4
-    cooltime: 0
+    cooltime: 3
     knockbackPower: 0
     isLock: 0
     towerType: 2
@@ -62,7 +62,7 @@ MonoBehaviour:
       \uD5A5\uD574 \uC218\uC9C1\uC73C\uB85C \uD654\uC0B4\uC744 \uC3DC\uB2E4."
     prefabName: ElfTower
     damage: 3
-    cooltime: 0
+    cooltime: 3
     knockbackPower: 0
     isLock: 0
     towerType: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
       \uB2A6\uCD98\uB2E4."
     prefabName: PyramidTower
     damage: 8
-    cooltime: 0
+    cooltime: 3
     knockbackPower: 0
     isLock: 0
     towerType: 1

@@ -21,23 +21,24 @@ public class InventoryPanel : MonoBehaviour, IPointerClickHandler
     /// </summary>
     private float _coolTimer;
     private bool _interactable;
+    private bool _isEmpty;
     private int _currentIndex;
 
     public int Index => _currentIndex;
 
-    public bool IsEmpty => _currentTowerData == null;
+    public bool IsEmpty => _isEmpty;
 
 
     public void Init()
     {
-        _towerImage    ??= transform.Find("TowerImage").GetComponent<Image>();
+        _towerImage ??= transform.Find("TowerImage").GetComponent<Image>();
         _cooltimeImage ??= transform.Find("CooltimeImage").GetComponent<Image>();
 
         _currentIndex = transform.GetSiblingIndex() - 1;
 
         _coolTimer = 0f;
-
-        EmptyTowerData();
+        _isEmpty = true;
+        _currentTowerData = null;
 
         EventManager<string>.StartListening(Constant.START_THROW_TOWER, UseTower);
 
@@ -47,17 +48,27 @@ public class InventoryPanel : MonoBehaviour, IPointerClickHandler
     {
         if (data != null)
         {
+            DataManager.Inst.CurrentPlayer.equipTowerIdArr[_currentIndex] = data.itemNum;
+
             _currentTowerData = data;
             _towerImage.enabled = true;
             _cooltimeImage.enabled = true;
             _interactable = true;
+            _isEmpty = false;
 
             _towerImage.sprite = _currentTowerData.itemSprite;
+
             SetCoolTimeImage();
         }
     }
     public void EmptyTowerData()
     {
+        if (DataManager.Inst.CurrentPlayer.equipTowerIdArr[_currentIndex] != -1)
+        {
+            DataManager.Inst.CurrentPlayer.equipTowerIdArr[_currentIndex] = -1;
+        }
+
+        _isEmpty = true;
         _currentTowerData = null;
         _towerImage.enabled = false;
         _cooltimeImage.enabled = false;
@@ -90,7 +101,7 @@ public class InventoryPanel : MonoBehaviour, IPointerClickHandler
     private IEnumerator CoolTimerCoroutine()
     {
         WaitForEndOfFrame waitEndFrame = new WaitForEndOfFrame();
-        while(_coolTimer >= 0f && !_interactable)
+        while (_coolTimer >= 0f && !_interactable)
         {
             _coolTimer -= Time.deltaTime;
             SetCoolTimeImage();
@@ -102,7 +113,7 @@ public class InventoryPanel : MonoBehaviour, IPointerClickHandler
 
     public bool ContainKey(string key)
     {
-        if (_currentTowerData == null)
+        if (_isEmpty)
             return false;
 
         return _currentTowerData.prefabName.Equals(key);

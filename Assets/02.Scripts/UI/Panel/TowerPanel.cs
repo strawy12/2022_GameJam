@@ -14,6 +14,12 @@ public class TowerPanel : UpgradePanel
     {
         _towerData = data as TowerData;
 
+        if(DataManager.Inst.CurrentPlayer.EqualArrValue(_towerData.itemNum))
+        {
+            _towerIcon.isOn = true;
+            _towerIcon.onValueChanged.AddListener(ClickTowerIcon);
+        }
+
         base.Init(data);
 
     }
